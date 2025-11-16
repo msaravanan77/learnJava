@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1400" height="1600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Title -->
+  <text x="700" y="40" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#2C3E50">
+    Phase 1: Java OOP Mastery - Core Concepts
+  </text>
+  <text x="700" y="70" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#7F8C8D">
+    From C Structs to Java Classes: A Visual Guide
+  </text>
+
+  <!-- Divider Line -->
+  <line x1="100" y1="85" x2="1300" y2="85" stroke="#BDC3C7" stroke-width="2"/>
+
+  <!-- ========== SECTION 1: ENCAPSULATION ========== -->
+  <g id="encapsulation-section">
+    <!-- Section Header -->
+    <rect x="50" y="110" width="650" height="50" fill="#3498DB" rx="5"/>
+    <text x="375" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      1. Encapsulation - Data Hiding
+    </text>
+
+    <!-- C Struct Example -->
+    <g id="c-struct">
+      <rect x="70" y="180" width="280" height="240" fill="#ECF0F1" stroke="#95A5A6" stroke-width="2" rx="5"/>
+      <text x="210" y="205" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle" fill="#E74C3C">
+        ❌ C Approach (No Encapsulation)
+      </text>
+
+      <!-- Code Box -->
+      <rect x="85" y="220" width="250" height="180" fill="#2C3E50" rx="3"/>
+      <text x="95" y="240" font-family="monospace" font-size="12" fill="#E67E22">// C struct</text>
+      <text x="95" y="258" font-family="monospace" font-size="12" fill="#ECF0F1">struct BankAccount {</text>
+      <text x="110" y="276" font-family="monospace" font-size="12" fill="#3498DB">int</text>
+      <text x="145" y="276" font-family="monospace" font-size="12" fill="#ECF0F1"> accountNumber;</text>
+      <text x="110" y="294" font-family="monospace" font-size="12" fill="#3498DB">double</text>
+      <text x="162" y="294" font-family="monospace" font-size="12" fill="#ECF0F1"> balance;</text>
+      <text x="95" y="312" font-family="monospace" font-size="12" fill="#ECF0F1">};</text>
+
+      <text x="95" y="340" font-family="monospace" font-size="12" fill="#E67E22">// Problem:</text>
+      <text x="95" y="358" font-family="monospace" font-size="12" fill="#ECF0F1">account.balance = -500;</text>
+      <text x="95" y="376" font-family="monospace" font-size="12" fill="#E74C3C">// No protection!</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 360,290 L 400,290" stroke="#2ECC71" stroke-width="3" fill="none" marker-end="url(#arrowgreen)"/>
+    <text x="370" y="280" font-family="Arial, sans-serif" font-size="14" fill="#2ECC71" font-weight="bold">Evolves to</text>
+
+    <!-- Java Class Example -->
+    <g id="java-class">
+      <rect x="410" y="180" width="280" height="240" fill="#E8F8F5" stroke="#27AE60" stroke-width="3" rx="5"/>
+      <text x="550" y="205" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle" fill="#27AE60">
+        ✅ Java Approach (Encapsulation)
+      </text>
+
+      <!-- Code Box -->
+      <rect x="425" y="220" width="250" height="180" fill="#2C3E50" rx="3"/>
+      <text x="435" y="240" font-family="monospace" font-size="12" fill="#E67E22">// Java class</text>
+      <text x="435" y="258" font-family="monospace" font-size="12" fill="#9B59B6">public class</text>
+      <text x="540" y="258" font-family="monospace" font-size="12" fill="#ECF0F1"> BankAccount {</text>
+      <text x="450" y="276" font-family="monospace" font-size="12" fill="#E74C3C">private</text>
+      <text x="500" y="276" font-family="monospace" font-size="12" fill="#3498DB"> int</text>
+      <text x="530" y="276" font-family="monospace" font-size="12" fill="#ECF0F1"> accountNumber;</text>
+      <text x="450" y="294" font-family="monospace" font-size="12" fill="#E74C3C">private</text>
+      <text x="500" y="294" font-family="monospace" font-size="12" fill="#3498DB"> double</text>
+      <text x="552" y="294" font-family="monospace" font-size="12" fill="#ECF0F1"> balance;</text>
+
+      <text x="450" y="322" font-family="monospace" font-size="12" fill="#9B59B6">public void</text>
+      <text x="535" y="322" font-family="monospace" font-size="12" fill="#ECF0F1"> deposit(</text>
+      <text x="615" y="322" font-family="monospace" font-size="12" fill="#3498DB">double</text>
+      <text x="655" y="322" font-family="monospace" font-size="12" fill="#ECF0F1"> amt) {</text>
+      <text x="465" y="340" font-family="monospace" font-size="12" fill="#95A5A6">if</text>
+      <text x="485" y="340" font-family="monospace" font-size="12" fill="#ECF0F1"> (amt &gt; 0)</text>
+      <text x="480" y="358" font-family="monospace" font-size="12" fill="#ECF0F1">balance += amt;</text>
+      <text x="450" y="376" font-family="monospace" font-size="12" fill="#ECF0F1">}</text>
+    </g>
+
+    <!-- Key Points Box -->
+    <rect x="70" y="440" width="620" height="80" fill="#FEF9E7" stroke="#F39C12" stroke-width="2" rx="5"/>
+    <text x="80" y="462" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D68910">🔑 Key Concept:</text>
+    <text x="100" y="482" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• <tspan font-weight="bold">private</tspan> fields prevent direct access</text>
+    <text x="100" y="500" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• <tspan font-weight="bold">public</tspan> methods provide controlled access (getters/setters)</text>
+  </g>
+
+  <!-- ========== SECTION 2: CONSTRUCTORS & THIS KEYWORD ========== -->
+  <g id="constructor-section">
+    <!-- Section Header -->
+    <rect x="750" y="110" width="600" height="50" fill="#9B59B6" rx="5"/>
+    <text x="1050" y="142" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      2. Constructors &amp; this Keyword
+    </text>
+
+    <!-- Constructor Box -->
+    <rect x="770" y="180" width="560" height="340" fill="#F4ECF7" stroke="#7D3C98" stroke-width="2" rx="5"/>
+
+    <!-- Constructor Code -->
+    <rect x="790" y="200" width="520" height="280" fill="#2C3E50" rx="3"/>
+    <text x="800" y="220" font-family="monospace" font-size="12" fill="#E67E22">// Constructor - Initializes object state</text>
+    <text x="800" y="238" font-family="monospace" font-size="12" fill="#9B59B6">public class</text>
+    <text x="905" y="238" font-family="monospace" font-size="12" fill="#ECF0F1"> BankAccount {</text>
+    <text x="815" y="256" font-family="monospace" font-size="12" fill="#E74C3C">private</text>
+    <text x="865" y="256" font-family="monospace" font-size="12" fill="#3498DB"> int</text>
+    <text x="895" y="256" font-family="monospace" font-size="12" fill="#ECF0F1"> accountNumber;</text>
+    <text x="815" y="274" font-family="monospace" font-size="12" fill="#E74C3C">private</text>
+    <text x="865" y="274" font-family="monospace" font-size="12" fill="#3498DB"> double</text>
+    <text x="917" y="274" font-family="monospace" font-size="12" fill="#ECF0F1"> balance;</text>
+
+    <text x="815" y="302" font-family="monospace" font-size="12" fill="#E67E22">// Constructor with parameters</text>
+    <text x="815" y="320" font-family="monospace" font-size="12" fill="#9B59B6">public</text>
+    <text x="868" y="320" font-family="monospace" font-size="12" fill="#F1C40F"> BankAccount</text>
+    <text x="995" y="320" font-family="monospace" font-size="12" fill="#ECF0F1">(</text>
+    <text x="1003" y="320" font-family="monospace" font-size="12" fill="#3498DB">int</text>
+    <text x="1028" y="320" font-family="monospace" font-size="12" fill="#ECF0F1"> accountNumber,</text>
+    <text x="925" y="338" font-family="monospace" font-size="12" fill="#3498DB">double</text>
+    <text x="977" y="338" font-family="monospace" font-size="12" fill="#ECF0F1"> balance) {</text>
+
+    <!-- this keyword highlighting -->
+    <rect x="830" y="348" width="390" height="18" fill="#F39C12" opacity="0.3" rx="2"/>
+    <text x="845" y="360" font-family="monospace" font-size="12" fill="#F39C12" font-weight="bold">this</text>
+    <text x="875" y="360" font-family="monospace" font-size="12" fill="#ECF0F1">.accountNumber = accountNumber;</text>
+
+    <rect x="830" y="366" width="280" height="18" fill="#F39C12" opacity="0.3" rx="2"/>
+    <text x="845" y="378" font-family="monospace" font-size="12" fill="#F39C12" font-weight="bold">this</text>
+    <text x="875" y="378" font-family="monospace" font-size="12" fill="#ECF0F1">.balance = balance;</text>
+
+    <text x="815" y="396" font-family="monospace" font-size="12" fill="#ECF0F1">}</text>
+
+    <text x="815" y="424" font-family="monospace" font-size="12" fill="#E67E22">// Overloaded constructor</text>
+    <text x="815" y="442" font-family="monospace" font-size="12" fill="#9B59B6">public</text>
+    <text x="868" y="442" font-family="monospace" font-size="12" fill="#F1C40F"> BankAccount</text>
+    <text x="995" y="442" font-family="monospace" font-size="12" fill="#ECF0F1">(</text>
+    <text x="1003" y="442" font-family="monospace" font-size="12" fill="#3498DB">int</text>
+    <text x="1028" y="442" font-family="monospace" font-size="12" fill="#ECF0F1"> accountNumber) {</text>
+    <text x="845" y="460" font-family="monospace" font-size="12" fill="#F39C12" font-weight="bold">this</text>
+    <text x="875" y="460" font-family="monospace" font-size="12" fill="#ECF0F1">(accountNumber, 0.0);</text>
+    <text x="1050" y="460" font-family="monospace" font-size="12" fill="#95A5A6">// Calls other constructor</text>
+    <text x="815" y="478" font-family="monospace" font-size="12" fill="#ECF0F1">}</text>
+
+    <!-- Key Points Box -->
+    <rect x="770" y="540" width="560" height="90" fill="#FEF9E7" stroke="#F39C12" stroke-width="2" rx="5"/>
+    <text x="780" y="562" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D68910">🔑 Key Concepts:</text>
+    <text x="800" y="582" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• <tspan font-weight="bold">Constructor</tspan> has same name as class, no return type</text>
+    <text x="800" y="600" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• <tspan font-weight="bold" fill="#F39C12">this</tspan> refers to current object (distinguishes field from parameter)</text>
+    <text x="800" y="618" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• <tspan font-weight="bold">Constructor overloading</tspan>: Multiple constructors with different parameters</text>
+  </g>
+
+  <!-- ========== SECTION 3: INHERITANCE ========== -->
+  <g id="inheritance-section">
+    <!-- Section Header -->
+    <rect x="50" y="670" width="650" height="50" fill="#E74C3C" rx="5"/>
+    <text x="375" y="702" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      3. Inheritance - Code Reuse
+    </text>
+
+    <!-- Parent Class -->
+    <rect x="200" y="750" width="350" height="140" fill="#3498DB" stroke="#2C3E50" stroke-width="3" rx="5"/>
+    <text x="375" y="775" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">
+      BankAccount (Parent)
+    </text>
+    <line x1="210" y1="785" x2="540" y2="785" stroke="white" stroke-width="2"/>
+    <text x="220" y="808" font-family="monospace" font-size="12" fill="white">- accountNumber: int</text>
+    <text x="220" y="828" font-family="monospace" font-size="12" fill="white">- balance: double</text>
+    <line x1="210" y1="840" x2="540" y2="840" stroke="white" stroke-width="1"/>
+    <text x="220" y="860" font-family="monospace" font-size="12" fill="white">+ deposit(amount: double): void</text>
+    <text x="220" y="880" font-family="monospace" font-size="12" fill="white">+ withdraw(amount: double): boolean</text>
+
+    <!-- Inheritance Arrow -->
+    <path d="M 375,900 L 375,950" stroke="#2C3E50" stroke-width="3" fill="none"/>
+    <polygon points="375,900 365,915 385,915" fill="white" stroke="#2C3E50" stroke-width="2"/>
+    <text x="390" y="930" font-family="Arial, sans-serif" font-size="14" fill="#E74C3C" font-weight="bold">extends</text>
+
+    <!-- Child Class -->
+    <rect x="200" y="960" width="350" height="140" fill="#2ECC71" stroke="#2C3E50" stroke-width="3" rx="5"/>
+    <text x="375" y="985" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">
+      SavingsAccount (Child)
+    </text>
+    <line x1="210" y1="995" x2="540" y2="995" stroke="white" stroke-width="2"/>
+    <text x="220" y="1018" font-family="monospace" font-size="12" fill="white">- interestRate: double</text>
+    <text x="220" y="1038" font-family="monospace" font-size="12" fill="#95A5A6">(inherits all parent fields)</text>
+    <line x1="210" y1="1050" x2="540" y2="1050" stroke="white" stroke-width="1"/>
+    <text x="220" y="1070" font-family="monospace" font-size="12" fill="white">+ applyInterest(): void</text>
+    <text x="220" y="1090" font-family="monospace" font-size="12" fill="white">+ withdraw(amount: double): boolean</text>
+    <text x="500" y="1090" font-family="monospace" font-size="11" fill="#F39C12">@Override</text>
+
+    <!-- Key Points -->
+    <rect x="70" y="1120" width="610" height="70" fill="#FEF9E7" stroke="#F39C12" stroke-width="2" rx="5"/>
+    <text x="80" y="1142" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D68910">🔑 Key Concept:</text>
+    <text x="100" y="1162" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• Child class inherits all fields and methods from parent</text>
+    <text x="100" y="1180" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• Use <tspan font-weight="bold">super</tspan> to call parent constructor or methods</text>
+  </g>
+
+  <!-- ========== SECTION 4: POLYMORPHISM ========== -->
+  <g id="polymorphism-section">
+    <!-- Section Header -->
+    <rect x="750" y="670" width="600" height="50" fill="#16A085" rx="5"/>
+    <text x="1050" y="702" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      4. Polymorphism - Many Forms
+    </text>
+
+    <!-- Polymorphism Example -->
+    <rect x="770" y="750" width="560" height="280" fill="#E8F8F5" stroke="#16A085" stroke-width="2" rx="5"/>
+
+    <!-- Code Box -->
+    <rect x="790" y="770" width="520" height="240" fill="#2C3E50" rx="3"/>
+    <text x="800" y="790" font-family="monospace" font-size="12" fill="#E67E22">// Parent reference, different behaviors</text>
+    <text x="800" y="808" font-family="monospace" font-size="12" fill="#3498DB">BankAccount</text>
+    <text x="895" y="808" font-family="monospace" font-size="12" fill="#ECF0F1">[] accounts = {</text>
+    <text x="815" y="826" font-family="monospace" font-size="12" fill="#9B59B6">new</text>
+    <text x="850" y="826" font-family="monospace" font-size="12" fill="#ECF0F1"> BankAccount(1001, 1000),</text>
+    <text x="815" y="844" font-family="monospace" font-size="12" fill="#9B59B6">new</text>
+    <text x="850" y="844" font-family="monospace" font-size="12" fill="#ECF0F1"> SavingsAccount(1002, 5000, 0.05)</text>
+    <text x="800" y="862" font-family="monospace" font-size="12" fill="#ECF0F1">};</text>
+
+    <text x="800" y="890" font-family="monospace" font-size="12" fill="#95A5A6">for</text>
+    <text x="833" y="890" font-family="monospace" font-size="12" fill="#ECF0F1"> (</text>
+    <text x="845" y="890" font-family="monospace" font-size="12" fill="#3498DB">BankAccount</text>
+    <text x="940" y="890" font-family="monospace" font-size="12" fill="#ECF0F1"> acc : accounts) {</text>
+    <text x="815" y="908" font-family="monospace" font-size="12" fill="#ECF0F1">acc.withdraw(100);</text>
+    <text x="950" y="908" font-family="monospace" font-size="12" fill="#2ECC71">// Calls correct method!</text>
+    <text x="800" y="926" font-family="monospace" font-size="12" fill="#ECF0F1">}</text>
+
+    <text x="800" y="954" font-family="monospace" font-size="12" fill="#E67E22">// Runtime decides which withdraw() to call:</text>
+    <text x="800" y="972" font-family="monospace" font-size="12" fill="#ECF0F1">// - BankAccount.withdraw() for first</text>
+    <text x="800" y="990" font-family="monospace" font-size="12" fill="#ECF0F1">// - SavingsAccount.withdraw() for second</text>
+
+    <!-- Key Points -->
+    <rect x="770" y="1050" width="560" height="70" fill="#FEF9E7" stroke="#F39C12" stroke-width="2" rx="5"/>
+    <text x="780" y="1072" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#D68910">🔑 Key Concept:</text>
+    <text x="800" y="1092" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• Same method name, different implementations</text>
+    <text x="800" y="1110" font-family="Arial, sans-serif" font-size="12" fill="#2C3E50">• Runtime determines which method to call (dynamic dispatch)</text>
+  </g>
+
+  <!-- ========== SECTION 5: INTERFACES VS ABSTRACT CLASSES ========== -->
+  <g id="interfaces-section">
+    <!-- Section Header -->
+    <rect x="50" y="1230" width="1300" height="50" fill="#8E44AD" rx="5"/>
+    <text x="700" y="1262" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      5. Interfaces vs Abstract Classes - Design Contracts
+    </text>
+
+    <!-- Interface -->
+    <g id="interface-box">
+      <rect x="100" y="1310" width="380" height="200" fill="#FDEDEC" stroke="#E74C3C" stroke-width="3" rx="5" stroke-dasharray="5,5"/>
+      <text x="290" y="1335" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#C0392B">
+        &lt;&lt;interface&gt;&gt;
+      </text>
+      <text x="290" y="1360" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#E74C3C">
+        Drawable
+      </text>
+      <line x1="115" y1="1370" x2="465" y2="1370" stroke="#E74C3C" stroke-width="2"/>
+      <text x="125" y="1395" font-family="monospace" font-size="12" fill="#2C3E50">+ draw(): void</text>
+      <text x="125" y="1415" font-family="monospace" font-size="12" fill="#2C3E50">+ resize(scale: double): void</text>
+
+      <rect x="115" y="1435" width="350" height="60" fill="#FEF5E7" rx="3"/>
+      <text x="125" y="1453" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#D68910">Characteristics:</text>
+      <text x="135" y="1470" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">✓ No implementation (contract only)</text>
+      <text x="135" y="1485" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">✓ Can implement multiple interfaces</text>
+    </g>
+
+    <!-- Abstract Class -->
+    <g id="abstract-box">
+      <rect x="520" y="1310" width="380" height="200" fill="#EBF5FB" stroke="#3498DB" stroke-width="3" rx="5"/>
+      <text x="710" y="1335" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#21618C">
+        &lt;&lt;abstract&gt;&gt;
+      </text>
+      <text x="710" y="1360" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#3498DB">
+        Shape
+      </text>
+      <line x1="535" y1="1370" x2="885" y2="1370" stroke="#3498DB" stroke-width="2"/>
+      <text x="545" y="1395" font-family="monospace" font-size="12" fill="#2C3E50">+ calculateArea(): double</text>
+      <text x="780" y="1395" font-family="monospace" font-size="11" fill="#E74C3C">{abstract}</text>
+      <text x="545" y="1415" font-family="monospace" font-size="12" fill="#2C3E50">+ printInfo(): void</text>
+      <text x="680" y="1415" font-family="monospace" font-size="11" fill="#27AE60">{implemented}</text>
+
+      <rect x="535" y="1435" width="350" height="60" fill="#FEF5E7" rx="3"/>
+      <text x="545" y="1453" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#D68910">Characteristics:</text>
+      <text x="555" y="1470" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">✓ Mix of abstract &amp; concrete methods</text>
+      <text x="555" y="1485" font-family="Arial, sans-serif" font-size="10" fill="#2C3E50">✓ Can only extend one abstract class</text>
+    </g>
+
+    <!-- Comparison -->
+    <g id="comparison-box">
+      <rect x="940" y="1310" width="380" height="200" fill="#F4ECF7" stroke="#8E44AD" stroke-width="3" rx="5"/>
+      <text x="1130" y="1335" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#6C3483">
+        When to Use?
+      </text>
+      <line x1="955" y1="1345" x2="1305" y2="1345" stroke="#8E44AD" stroke-width="2"/>
+
+      <text x="960" y="1370" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#E74C3C">Interface:</text>
+      <text x="970" y="1390" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Define capabilities/contracts</text>
+      <text x="970" y="1408" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Unrelated classes sharing behavior</text>
+      <text x="970" y="1426" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Example: Serializable, Comparable</text>
+
+      <line x1="955" y1="1440" x2="1305" y2="1440" stroke="#8E44AD" stroke-width="1"/>
+
+      <text x="960" y="1460" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#3498DB">Abstract Class:</text>
+      <text x="970" y="1480" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Shared code among related classes</text>
+      <text x="970" y="1498" font-family="Arial, sans-serif" font-size="11" fill="#2C3E50">• Example: Animal, Shape, Vehicle</text>
+    </g>
+  </g>
+
+  <!-- ========== SECTION 6: COMPOSITION OVER INHERITANCE ========== -->
+  <g id="composition-section">
+    <!-- Section Header -->
+    <rect x="50" y="1550" width="1300" height="50" fill="#D35400" rx="5"/>
+    <text x="700" y="1582" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">
+      6. Composition Over Inheritance - Flexible Design
+    </text>
+
+    <!-- Bad: Deep Inheritance -->
+    <g id="bad-inheritance">
+      <rect x="100" y="1630" width="300" height="280" fill="#FADBD8" stroke="#E74C3C" stroke-width="3" rx="5"/>
+      <text x="250" y="1655" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#C0392B">
+        ❌ Deep Inheritance (Rigid)
+      </text>
+
+      <!-- Inheritance Chain -->
+      <rect x="180" y="1680" width="140" height="40" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="3"/>
+      <text x="250" y="1705" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Entity</text>
+
+      <path d="M 250,1720 L 250,1740" stroke="#C0392B" stroke-width="2"/>
+      <polygon points="250,1740 245,1730 255,1730" fill="#C0392B"/>
+
+      <rect x="180" y="1745" width="140" height="40" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="3"/>
+      <text x="250" y="1770" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white" font-weight="bold">MovableEntity</text>
+
+      <path d="M 250,1785 L 250,1805" stroke="#C0392B" stroke-width="2"/>
+      <polygon points="250,1805 245,1795 255,1795" fill="#C0392B"/>
+
+      <rect x="180" y="1810" width="140" height="40" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="3"/>
+      <text x="250" y="1835" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white" font-weight="bold">Player</text>
+
+      <text x="120" y="1880" font-family="Arial, sans-serif" font-size="10" fill="#C0392B">Problem: Hard to add new behaviors!</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 410,1770 L 470,1770" stroke="#2ECC71" stroke-width="4" fill="none" marker-end="url(#arrowgreen)"/>
+    <text x="420" y="1760" font-family="Arial, sans-serif" font-size="14" fill="#27AE60" font-weight="bold">Better</text>
+
+    <!-- Good: Composition -->
+    <g id="good-composition">
+      <rect x="480" y="1630" width="840" height="280" fill="#D5F4E6" stroke="#27AE60" stroke-width="3" rx="5"/>
+      <text x="900" y="1655" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1E8449">
+        ✅ Composition (Flexible)
+      </text>
+
+      <!-- Main Entity -->
+      <rect x="740" y="1680" width="320" height="160" fill="#27AE60" stroke="#1E8449" stroke-width="2" rx="3"/>
+      <text x="900" y="1705" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">Player</text>
+      <line x1="755" y1="1715" x2="1045" y2="1715" stroke="white" stroke-width="1"/>
+      <text x="765" y="1735" font-family="monospace" font-size="11" fill="white">- position: Position</text>
+      <text x="765" y="1755" font-family="monospace" font-size="11" fill="white">- movement: MovementComponent</text>
+      <text x="765" y="1775" font-family="monospace" font-size="11" fill="white">- health: HealthComponent</text>
+      <text x="765" y="1795" font-family="monospace" font-size="11" fill="white">- inventory: InventoryComponent</text>
+      <text x="765" y="1820" font-family="Arial, sans-serif" font-size="10" fill="#F39C12" font-style="italic">Mix and match components!</text>
+
+      <!-- Components -->
+      <rect x="500" y="1700" width="180" height="50" fill="#85C1E9" stroke="#2874A6" stroke-width="2" rx="3"/>
+      <text x="590" y="1730" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#1B4F72" font-weight="bold">MovementComponent</text>
+
+      <rect x="1120" y="1700" width="180" height="50" fill="#85C1E9" stroke="#2874A6" stroke-width="2" rx="3"/>
+      <text x="1210" y="1730" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#1B4F72" font-weight="bold">HealthComponent</text>
+
+      <rect x="500" y="1770" width="180" height="50" fill="#85C1E9" stroke="#2874A6" stroke-width="2" rx="3"/>
+      <text x="590" y="1800" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#1B4F72" font-weight="bold">InventoryComponent</text>
+
+      <rect x="1120" y="1770" width="180" height="50" fill="#85C1E9" stroke="#2874A6" stroke-width="2" rx="3"/>
+      <text x="1210" y="1800" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#1B4F72" font-weight="bold">Position</text>
+
+      <!-- Composition lines -->
+      <path d="M 680,1725 L 740,1725" stroke="#2874A6" stroke-width="2" fill="none"/>
+      <circle cx="740" cy="1725" r="4" fill="#2874A6"/>
+
+      <path d="M 1060,1725 L 1120,1725" stroke="#2874A6" stroke-width="2" fill="none"/>
+      <circle cx="1060" cy="1725" r="4" fill="#2874A6"/>
+
+      <path d="M 680,1795 L 740,1755" stroke="#2874A6" stroke-width="2" fill="none"/>
+      <circle cx="740" cy="1755" r="4" fill="#2874A6"/>
+
+      <path d="M 1120,1795 L 1060,1755" stroke="#2874A6" stroke-width="2" fill="none"/>
+      <circle cx="1060" cy="1755" r="4" fill="#2874A6"/>
+
+      <text x="500" y="1875" font-family="Arial, sans-serif" font-size="11" fill="#1E8449" font-weight="bold">Benefit: Easy to add/remove/swap components at runtime!</text>
+    </g>
+  </g>
+
+  <!-- Arrow Markers -->
+  <defs>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2ECC71" />
+    </marker>
+  </defs>
+
+  <!-- Footer -->
+  <rect x="50" y="1920" width="1300" height="60" fill="#34495E" rx="5"/>
+  <text x="700" y="1945" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="bold">
+    💡 Master these 6 concepts in Phase 1 through hands-on mini-projects!
+  </text>
+  <text x="700" y="1965" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#BDC3C7">
+    From C structs to Java OOP mastery - Your journey from procedural to object-oriented programming
+  </text>
+</svg>
