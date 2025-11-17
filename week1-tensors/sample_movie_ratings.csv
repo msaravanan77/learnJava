@@ -1,0 +1,51 @@
+movie_id,title,genre,year,runtime_minutes,rating,num_reviews
+1,The Quantum Paradox,Sci-Fi,2023,142,4.7,2845
+2,Laugh Out Loud,Comedy,2022,98,3.9,1234
+3,Midnight Shadows,Horror,2021,105,3.2,567
+4,City of Dreams,Drama,2023,156,4.9,4521
+5,Thunder Strike,Action,2022,118,4.1,3102
+6,Love in Paris,Drama,2020,124,4.5,2103
+7,Space Odyssey 2099,Sci-Fi,2023,165,4.8,5234
+8,The Last Detective,Drama,2019,138,4.3,1876
+9,Ninja Warriors,Action,2021,95,3.7,1542
+10,Alien Invasion,Sci-Fi,2022,128,4.2,2987
+11,Wedding Crashers 2,Comedy,2023,103,3.8,1098
+12,Haunted Manor,Horror,2020,92,3.4,876
+13,Mountain Rescue,Action,2022,112,4.4,2345
+14,Time Travelers,Sci-Fi,2021,148,4.6,3456
+15,Family Reunion,Comedy,2023,107,4.0,1654
+16,The Dark Forest,Horror,2022,101,3.6,1123
+17,Heartbreak Hotel,Drama,2023,131,4.7,2876
+18,Combat Zone,Action,2021,108,3.9,1987
+19,Robot Revolution,Sci-Fi,2023,137,4.5,4123
+20,Funny Business,Comedy,2020,96,3.5,987
+21,Vampire Chronicles,Horror,2021,115,3.8,1456
+22,Life's Journey,Drama,2022,145,4.8,3654
+23,Street Fighter,Action,2023,102,4.0,2234
+24,Galaxy Quest 2,Sci-Fi,2022,152,4.4,3987
+25,Silly Situations,Comedy,2021,91,3.3,765
+26,The Curse,Horror,2023,99,3.7,1234
+27,Golden Sunset,Drama,2020,129,4.6,2567
+28,Explosive Action,Action,2022,116,4.2,2876
+29,Mars Colony,Sci-Fi,2023,159,4.9,5123
+30,Weekend Getaway,Comedy,2021,105,3.9,1345
+31,Zombie Apocalypse,Horror,2022,107,3.5,1098
+32,The Immigrant,Drama,2023,142,4.7,3456
+33,Desert Storm,Action,2020,123,4.1,2345
+34,Interstellar Voyage,Sci-Fi,2021,168,4.8,4876
+35,Laugh Factory,Comedy,2023,94,3.7,876
+36,The Exorcism,Horror,2022,110,3.9,1567
+37,Winter's Tale,Drama,2021,135,4.5,2987
+38,High Speed Chase,Action,2023,98,3.8,1765
+39,Android Awakening,Sci-Fi,2022,145,4.6,3876
+40,Comic Relief,Comedy,2020,88,3.4,654
+41,Nightmare on Elm St Remake,Horror,2021,103,3.6,1876
+42,The Professor,Drama,2023,128,4.4,2654
+43,Mission Critical,Action,2022,121,4.3,3123
+44,Wormhole,Sci-Fi,2023,158,4.7,4567
+45,Gag Reel,Comedy,2021,92,3.2,543
+46,The Possession,Horror,2022,98,3.8,1234
+47,Silent Witness,Drama,2020,139,4.6,2876
+48,Ultimate Fighter,Action,2023,109,4.0,2234
+49,Cyberpunk 2084,Sci-Fi,2022,147,4.5,3987
+50,Prank Wars,Comedy,2023,97,3.6,987

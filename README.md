@@ -1,16 +1,16 @@
-# AI/ML Fundamentals: A Hands-On Journey for Experienced Programmers
+# AI/ML Fundamentals: A Hands-On Journey for Programmers
 
-> **For C Programmers Who Want to Understand AI - Not Just Use It**
+> **For Developers Who Want to Understand AI - Not Just Use It**
 
 ## 🎯 What This Is
 
-This is a **practical, hands-on learning path** designed specifically for experienced programmers (like you, with 20 years of C experience) who want to:
+This is a **practical, hands-on learning path** designed for experienced programmers who want to:
 
 - Understand what AI/ML really is and what problems it solves
 - Learn PyTorch, tensors, and neural networks from first principles
 - Build real-world projects (not toy examples)
-- See the connection between traditional programming and AI/ML
-- Understand tools you're already using (Claude, Copilot, etc.)
+- Move from traditional programming to data-driven learning
+- Understand tools you're already using (Claude, Copilot, ChatGPT, etc.)
 
 ## 📋 Prerequisites
 
@@ -42,38 +42,38 @@ python3 day1_tensor_basics.py
 
 | Day | Topic | Project | Time |
 |-----|-------|---------|------|
-| 1 | C Arrays → Tensors | Security log analyzer | 2 hrs |
-| 2 | Tensor operations | Password strength analyzer | 2 hrs |
+| 1 | Arrays → Tensors | E-commerce sales analyzer | 2 hrs |
+| 2 | Tensor operations | Movie ratings analyzer | 2 hrs |
 | 3 | Multi-dimensional tensors | Image processing basics | 2 hrs |
 
 **What You'll Learn**:
-- Tensors are just multi-dimensional arrays
+- Tensors are multi-dimensional arrays optimized for parallel processing
 - They run on GPUs for massive parallelization
 - No loops needed - vectorized operations are 10-100x faster
-- Real security applications using just tensors
+- Real applications: recommendations, analytics, pattern detection
 
 ### Week 2: PyTorch Basics
 **Goal**: Build and train your first neural network
 
 | Day | Topic | Project | Time |
 |-----|-------|---------|------|
-| 5-7 | Neural networks | Login anomaly detector | 3 hrs |
-| 8-10 | Training models | Train the detector | 3 hrs |
+| 5-7 | Neural networks | Customer churn predictor | 3 hrs |
+| 8-10 | Training models | Train & evaluate the model | 3 hrs |
 
 **What You'll Learn**:
-- Neural networks are pattern matchers
-- Training = adjusting weights to fit data
+- Neural networks are pattern matchers that learn from data
+- Training = adjusting weights to fit patterns
 - Forward pass (prediction) vs backward pass (learning)
-- How to evaluate model performance
+- How to evaluate model performance with real metrics
 
 ### Week 3: Real-World Project
 **Goal**: Build a production-ready ML system
 
-**Project**: PAM Privilege Escalation Detector
-- Use real access logs (or synthetic data)
-- Train a model to detect suspicious patterns
-- Deploy it as a monitoring tool
-- See actual value in your domain
+**Project**: Product Recommendation Engine
+- Use real sales/rating data (or provided sample data)
+- Train a model to recommend products to users
+- Deploy it as a REST API
+- See measurable business impact
 
 ### Week 4: Advanced Topics
 **Goal**: Understand modern AI applications
@@ -138,24 +138,27 @@ You should see output analyzing failed login patterns. **Congratulations - you j
 
 ### Step 4: Next Example (30 min)
 ```bash
-python3 day2_password_analysis.py
+python3 day2_movie_ratings.py
 ```
 
-## 🎓 For C Programmers: Translation Guide
+Analyze movie ratings and build a recommendation system!
 
-| C Concept | ML/PyTorch Equivalent | Why |
-|-----------|----------------------|-----|
-| `int arr[100]` | `torch.tensor([...])` | Same idea, runs on GPU |
-| `for` loops | Vectorized ops | 10-100x faster |
-| `if/else` rules | Trained model | Learns patterns automatically |
-| `malloc/free` | Automatic memory mgmt | PyTorch handles it |
-| Pointers | Tensor views/slicing | No copies, efficient |
-| `gdb` debugging | `model.eval()`, `print()` | Different tools, same goal |
+## 🎓 For Programmers: Concept Translation Guide
 
-**Key Insight**: Your C knowledge is an advantage! You understand:
-- Memory layout (important for tensor shapes)
-- Performance optimization (critical for ML)
-- Systems thinking (essential for production ML)
+| Traditional Programming | ML/PyTorch | Why the Change |
+|------------------------|------------|----------------|
+| Arrays/Lists | `torch.tensor([...])` | GPU-optimized, automatic gradients |
+| `for` loops | Vectorized operations | 10-100x faster, parallelizable |
+| `if/else` rules | Trained model | Learns patterns from data automatically |
+| Manual memory mgmt | Automatic (PyTorch) | Framework handles efficiency |
+| Data structures | Tensors | Multi-dimensional, GPU-ready |
+| Debugging (print, logs) | `model.eval()`, visualization | Different tools, same goal |
+
+**Your Programming Experience is an Advantage!**
+- **Data structures** → Understanding tensor shapes
+- **Performance optimization** → Critical for production ML
+- **Systems thinking** → Essential for ML pipelines
+- **Debugging skills** → Transfer directly to ML
 
 ## 📖 Key Resources
 

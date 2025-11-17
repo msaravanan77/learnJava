@@ -1,157 +1,177 @@
 """
-Day 1: From C Arrays to PyTorch Tensors
-A hands-on introduction for C programmers
+Day 1: From Arrays to PyTorch Tensors
+A hands-on introduction for programmers
 
 This demonstrates:
-1. How tensors are like C arrays but more powerful
+1. How tensors are like multi-dimensional arrays but more powerful
 2. Basic tensor operations
-3. Real-world security log analysis example
+3. Real-world sales data analysis example
 """
 
 import torch
 import numpy as np
 
-def c_style_thinking():
+def basic_tensors():
     """
-    Compare C-style programming with PyTorch tensors
+    Introduction to tensors - think of them as arrays on steroids
     """
     print("="*60)
-    print("PART 1: C Arrays vs PyTorch Tensors")
+    print("PART 1: Creating and Using Tensors")
     print("="*60)
 
-    # In C, you would write:
-    # int temperatures[7] = {72, 75, 68, 70, 73, 71, 69};
+    # Creating a 1D tensor (like a simple array/list)
+    daily_sales = torch.tensor([120, 135, 98, 156, 189, 210, 145])
+    print(f"Daily sales (units): {daily_sales}")
+    print(f"Data type: {daily_sales.dtype}")
+    print(f"Shape: {daily_sales.shape}")  # How many elements
+    print(f"Device: {daily_sales.device}")  # cpu or cuda (GPU)
 
-    # In PyTorch:
-    temperatures = torch.tensor([72, 75, 68, 70, 73, 71, 69])
-    print(f"Temperatures tensor: {temperatures}")
-    print(f"Type: {temperatures.dtype}")
-    print(f"Shape: {temperatures.shape}")  # Like sizeof, but smarter
-    print(f"Device: {temperatures.device}")  # cpu or cuda (GPU)
+    # Basic operations (no loops needed!)
+    avg_sales = daily_sales.float().mean()
+    total_sales = daily_sales.sum()
+    max_sales = daily_sales.max()
 
-    # In C: Calculate average with a loop
-    # float sum = 0;
-    # for(int i = 0; i < 7; i++) { sum += temperatures[i]; }
-    # float avg = sum / 7;
+    print(f"\nWeekly Statistics:")
+    print(f"  Average daily sales: {avg_sales:.2f} units")
+    print(f"  Total weekly sales: {total_sales} units")
+    print(f"  Best day: {max_sales} units")
 
-    # In PyTorch: No loop needed!
-    avg = temperatures.float().mean()
-    print(f"\nAverage temperature: {avg:.2f}°F")
-
-    # Find values above average (in C: another loop!)
-    above_avg = temperatures[temperatures > avg]
-    print(f"Days above average: {above_avg}")
+    # Finding specific values (boolean indexing - powerful!)
+    above_avg = daily_sales[daily_sales > avg_sales]
+    print(f"\nDays above average: {above_avg}")
+    print(f"Number of above-average days: {len(above_avg)}")
     print()
 
 
-def multidimensional_arrays():
+def multidimensional_tensors():
     """
-    2D and 3D tensors - like C arrays but easier to work with
+    2D and 3D tensors - working with tables and cubes of data
     """
     print("="*60)
     print("PART 2: Multi-dimensional Tensors")
     print("="*60)
 
-    # In C: int login_attempts[24][7];  // hours x days
-    # In PyTorch:
-    login_attempts = torch.randint(0, 20, (24, 7))  # Random data for demo
+    # 2D tensor: Sales data for 4 products over 7 days
+    # Rows = Products, Columns = Days (Mon-Sun)
+    sales_data = torch.tensor([
+        [45, 52, 38, 61, 73, 89, 67],   # Product A
+        [32, 28, 35, 42, 48, 55, 41],   # Product B
+        [78, 82, 71, 88, 95, 102, 86],  # Product C
+        [12, 15, 11, 18, 22, 28, 19]    # Product D
+    ])
 
-    print(f"Login attempts (24 hours x 7 days):\n{login_attempts}\n")
-    print(f"Shape: {login_attempts.shape}")
+    print(f"Sales data shape: {sales_data.shape}")
+    print(f"(4 products × 7 days)\n")
+    print("Sales matrix:")
+    print(sales_data)
+    print()
 
-    # Aggregate data (in C: nested loops!)
-    total_by_hour = login_attempts.sum(dim=1)  # Sum across days
-    total_by_day = login_attempts.sum(dim=0)   # Sum across hours
+    # Aggregate operations
+    total_by_product = sales_data.sum(dim=1)  # Sum across days
+    total_by_day = sales_data.sum(dim=0)      # Sum across products
 
-    print(f"\nTotal logins by hour (24 values): {total_by_hour}")
-    print(f"Total logins by day (7 values): {total_by_day}")
+    products = ['Product A', 'Product B', 'Product C', 'Product D']
+    days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
-    # Find suspicious hours (>100 total attempts)
-    suspicious_hours = torch.where(total_by_hour > 100)[0]
-    if len(suspicious_hours) > 0:
-        print(f"\nSuspicious hours detected: {suspicious_hours.tolist()}")
-    else:
-        print(f"\nNo suspicious hours detected (threshold: 100)")
+    print("Total sales by product:")
+    for product, total in zip(products, total_by_product):
+        print(f"  {product}: {total} units")
+
+    print("\nTotal sales by day:")
+    for day, total in zip(days, total_by_day):
+        print(f"  {day}: {total} units")
+
+    # Find best performing product
+    best_product_idx = total_by_product.argmax()
+    print(f"\nBest performing product: {products[best_product_idx]} ({total_by_product[best_product_idx]} units)")
+
+    # Weekend analysis
+    weekend_sales = sales_data[:, 5:7]  # Slicing: all products, Sat-Sun only
+    weekend_total = weekend_sales.sum()
+    weekday_total = sales_data[:, 0:5].sum()
+
+    print(f"\nWeekend vs Weekday:")
+    print(f"  Weekend total: {weekend_total} units")
+    print(f"  Weekday total: {weekday_total} units")
+    print(f"  Weekend is {weekend_total / weekday_total * 100:.1f}% of weekday sales")
     print()
 
 
-def real_world_security_analysis():
+def real_world_analysis():
     """
-    Practical example: Analyze failed login patterns
-    This is something you'd actually use in PAM systems
+    Practical example: Analyzing e-commerce sales patterns
     """
     print("="*60)
-    print("PART 3: Real-World Security Log Analysis")
+    print("PART 3: Real-World E-Commerce Analysis")
     print("="*60)
 
-    # Simulate failed login data: [hour][day]
-    # In a real system, you'd load this from logs
-    failed_logins = torch.tensor([
-        # Mon, Tue, Wed, Thu, Fri, Sat, Sun
-        [  5,   3,   2,   1,   2,   8,  12],  # 00:00 - midnight
-        [  2,   1,   1,   0,   1,   3,   5],  # 01:00
-        [  1,   0,   0,   1,   0,   2,   4],  # 02:00 - suspicious hour
-        [  0,   1,   0,   0,   1,   5,   8],  # 03:00 - suspicious hour
-        [  1,   0,   1,   0,   0,   3,   6],  # 04:00
-        [  2,   1,   2,   1,   2,   4,   5],  # 05:00
-        [  5,   4,   6,   5,   7,   3,   2],  # 06:00 - business hours start
-        [ 10,  12,  11,  13,  14,   5,   3],  # 07:00
-        [ 15,  18,  16,  17,  19,   8,   4],  # 08:00
-        [ 20,  22,  21,  23,  24,  10,   6],  # 09:00
-        [ 12,  14,  13,  15,  16,   8,   5],  # 10:00
-        [  8,   9,   8,  10,  11,   6,   4],  # 11:00
-        [  6,   7,   6,   8,   9,   5,   3],  # 12:00
-        [  7,   8,   7,   9,  10,   6,   4],  # 13:00
-        [  9,  10,   9,  11,  12,   7,   5],  # 14:00
-        [ 11,  12,  11,  13,  14,   8,   6],  # 15:00
-        [ 13,  14,  13,  15,  16,   9,   7],  # 16:00
-        [ 10,  11,  10,  12,  13,   8,   6],  # 17:00
-        [  8,   9,   8,  10,  11,   7,   5],  # 18:00
-        [  6,   7,   6,   8,   9,   6,   4],  # 19:00
-        [  5,   6,   5,   7,   8,   5,   3],  # 20:00
-        [  4,   5,   4,   6,   7,   4,   2],  # 21:00
-        [  3,   4,   3,   5,   6,   6,   8],  # 22:00
-        [  4,   5,   4,   6,   7,  10,  15],  # 23:00
-    ])
+    # Simulate hourly sales data for a week (24 hours × 7 days)
+    # This is what you might get from your database/API
+    np.random.seed(42)  # For reproducible results
 
-    print(f"Failed login data shape: {failed_logins.shape}")
-    print(f"Total failed logins this week: {failed_logins.sum()}\n")
+    # Create realistic hourly sales pattern
+    hours = 24
+    days = 7
+    hourly_sales = torch.zeros(hours, days)
 
-    # Analysis 1: Find suspicious hours (high average failures)
-    avg_by_hour = failed_logins.float().mean(dim=1)
-    overall_avg = avg_by_hour.mean()
+    for day in range(days):
+        for hour in range(hours):
+            # Business logic: Sales peak during day hours (9-21)
+            if 9 <= hour <= 21:
+                base_sales = 50 + np.random.randint(-10, 20)
+            else:
+                base_sales = 10 + np.random.randint(-5, 10)
 
-    suspicious_hours = torch.where(avg_by_hour < overall_avg * 0.3)[0]
-    print(f"Overall average failures per hour: {overall_avg:.2f}")
-    print(f"Low-activity hours (potential bot attacks): {suspicious_hours.tolist()}")
+            # Weekend boost
+            if day >= 5:  # Saturday, Sunday
+                base_sales = int(base_sales * 1.3)
 
-    # Analysis 2: Find anomalous days
-    total_by_day = failed_logins.sum(dim=0)
-    day_names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            hourly_sales[hour, day] = base_sales
 
-    print(f"\nFailed logins by day:")
-    for i, (day, total) in enumerate(zip(day_names, total_by_day)):
-        status = "🚨 HIGH" if total > 200 else "✅ Normal"
-        print(f"  {day}: {total:3d} {status}")
+    print(f"Hourly sales data shape: {hourly_sales.shape}")
+    print(f"Total sales this week: ${hourly_sales.sum():.0f}\n")
 
-    # Analysis 3: Weekend pattern detection
-    weekday_avg = failed_logins[:, 0:5].float().mean()  # Mon-Fri
-    weekend_avg = failed_logins[:, 5:7].float().mean()  # Sat-Sun
+    # Analysis 1: Find peak hours
+    avg_by_hour = hourly_sales.mean(dim=1)  # Average across days
+    peak_hour = avg_by_hour.argmax()
 
-    print(f"\nPattern Analysis:")
-    print(f"  Weekday average: {weekday_avg:.2f}")
-    print(f"  Weekend average: {weekend_avg:.2f}")
+    print(f"Analysis: Peak Sales Hours")
+    print(f"  Peak hour: {peak_hour}:00 (${avg_by_hour[peak_hour]:.2f} avg)")
 
-    if weekend_avg > weekday_avg * 1.5:
-        print("  ⚠️  WARNING: Suspicious weekend activity detected!")
-        print("      Recommendation: Review weekend access policies")
+    # Find all hours above 50% of peak
+    threshold = avg_by_hour[peak_hour] * 0.5
+    high_sales_hours = torch.where(avg_by_hour > threshold)[0]
+    print(f"  High-traffic hours (>{threshold:.0f} avg): {high_sales_hours.tolist()}")
 
-    # Analysis 4: Find specific suspicious time windows
-    # Late night on weekends
-    late_night_weekend = failed_logins[0:6, 5:7]  # Midnight-6AM, Sat-Sun
-    if late_night_weekend.sum() > 50:
-        print(f"\n  🚨 ALERT: High late-night weekend activity: {late_night_weekend.sum()} failures")
-        print(f"      This is {late_night_weekend.sum() / failed_logins.sum() * 100:.1f}% of all failures")
+    # Analysis 2: Day of week patterns
+    total_by_day = hourly_sales.sum(dim=0)
+    days_names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+    print(f"\nAnalysis: Daily Revenue")
+    for i, (day, total) in enumerate(zip(days_names, total_by_day)):
+        bar = '█' * int(total / 50)
+        print(f"  {day}: ${total:6.0f} {bar}")
+
+    # Analysis 3: Weekend vs Weekday comparison
+    weekday_avg = hourly_sales[:, 0:5].mean()
+    weekend_avg = hourly_sales[:, 5:7].mean()
+
+    print(f"\nAnalysis: Weekend Impact")
+    print(f"  Weekday average: ${weekday_avg:.2f}/hour")
+    print(f"  Weekend average: ${weekend_avg:.2f}/hour")
+    print(f"  Weekend lift: {((weekend_avg / weekday_avg - 1) * 100):.1f}%")
+
+    # Analysis 4: Identify unusual patterns
+    # Hours with very low sales during typically busy times
+    busy_hours = torch.arange(9, 22)  # 9 AM to 9 PM
+    low_sales_threshold = 30
+
+    print(f"\nAnalysis: Anomaly Detection")
+    for day_idx, day_name in enumerate(days_names):
+        day_sales = hourly_sales[busy_hours, day_idx]
+        low_hours = busy_hours[day_sales < low_sales_threshold]
+        if len(low_hours) > 0:
+            print(f"  ⚠️  {day_name}: Unusually low sales at hours {low_hours.tolist()}")
 
     print()
 
@@ -164,72 +184,79 @@ def tensor_operations_cheatsheet():
     print("PART 4: Tensor Operations Cheat Sheet")
     print("="*60)
 
-    # Create tensors
-    a = torch.tensor([1, 2, 3, 4, 5])
-    b = torch.tensor([10, 20, 30, 40, 50])
+    # Create sample data
+    prices = torch.tensor([29.99, 49.99, 19.99, 89.99, 34.99])
+    quantities = torch.tensor([3, 1, 5, 2, 4])
 
-    print("Basic Operations:")
-    print(f"  a = {a}")
-    print(f"  b = {b}")
-    print(f"  a + b = {a + b}")
-    print(f"  a * b = {a * b} (element-wise)")
-    print(f"  a * 2 = {a * 2} (scalar multiply)")
+    print("Sample Data:")
+    print(f"  Prices: {prices}")
+    print(f"  Quantities: {quantities}")
+
+    # Element-wise operations
+    print(f"\nBasic Operations:")
+    print(f"  Total cost per item: {prices * quantities}")
+    print(f"  Grand total: ${(prices * quantities).sum():.2f}")
+    print(f"  Average price: ${prices.mean():.2f}")
 
     # Reductions
-    print(f"\nReductions:")
-    print(f"  sum: {a.sum()}")
-    print(f"  mean: {a.float().mean():.2f}")
-    print(f"  max: {a.max()}")
-    print(f"  min: {a.min()}")
+    print(f"\nReductions (aggregate operations):")
+    print(f"  sum: {quantities.sum()}")
+    print(f"  mean: {prices.mean():.2f}")
+    print(f"  max: {prices.max():.2f}")
+    print(f"  min: {prices.min():.2f}")
 
     # Reshaping
     print(f"\nReshaping:")
-    matrix = a.reshape(5, 1)
-    print(f"  Original shape: {a.shape}")
+    matrix = prices.reshape(5, 1)  # Convert to column vector
+    print(f"  Original shape: {prices.shape}")
     print(f"  Reshaped to column: {matrix.shape}")
-    print(f"  {matrix.T}")  # Transpose
 
-    # Slicing (like C arrays)
-    print(f"\nSlicing (0-indexed like C):")
-    print(f"  a[0] = {a[0]}")
-    print(f"  a[1:4] = {a[1:4]}")
-    print(f"  a[-1] = {a[-1]} (last element)")
+    # Slicing (0-indexed)
+    print(f"\nSlicing:")
+    print(f"  First item: ${prices[0]:.2f}")
+    print(f"  Items 1-3: ${prices[1:4]}")
+    print(f"  Last item: ${prices[-1]:.2f}")
 
-    # Boolean indexing (powerful!)
+    # Boolean indexing (super powerful!)
     print(f"\nBoolean Indexing:")
-    mask = a > 3
-    print(f"  a > 3: {mask}")
-    print(f"  a[a > 3] = {a[mask]}")
+    expensive = prices > 40
+    print(f"  Prices > $40: {expensive}")
+    print(f"  Expensive items: ${prices[expensive]}")
+    print(f"  Number of expensive items: {expensive.sum()}")
+
+    # Combining conditions
+    mid_range = (prices > 20) & (prices < 50)
+    print(f"  Mid-range items ($20-$50): ${prices[mid_range]}")
 
     print()
 
 
 def performance_comparison():
     """
-    Show why tensors are faster than Python loops
+    Show why tensors are faster than loops
     """
     print("="*60)
     print("PART 5: Performance - Why Use Tensors?")
     print("="*60)
 
-    # Create large array
+    import time
+
+    # Large dataset
     size = 1000000
     data = torch.randn(size)
 
-    # Time tensor operation
-    import time
-
+    # Tensor operation (vectorized)
     start = time.time()
-    result_tensor = (data * 2).sum()
+    result_tensor = (data * 2 + 5).sum()
     tensor_time = time.time() - start
 
-    # Time Python loop (on smaller data to not wait forever)
+    # Python loop (on smaller data)
     small_data = data[:10000].tolist()
     start = time.time()
-    result_loop = sum([x * 2 for x in small_data])
+    result_loop = sum([x * 2 + 5 for x in small_data])
     loop_time = time.time() - start
 
-    # Extrapolate
+    # Extrapolate to full size
     extrapolated_loop_time = loop_time * (size / 10000)
 
     print(f"Processing {size:,} numbers:")
@@ -237,7 +264,8 @@ def performance_comparison():
     print(f"  Python loop (extrapolated): {extrapolated_loop_time*1000:.2f} ms")
     print(f"  Speedup: {extrapolated_loop_time/tensor_time:.0f}x faster!")
 
-    print(f"\n  💡 This is on CPU. On GPU, it's 100-1000x faster!")
+    print(f"\n  💡 This is on CPU. On GPU, it can be 100-1000x faster!")
+    print(f"  💡 This is why AI/ML uses tensors - they scale!")
     print()
 
 
@@ -247,13 +275,13 @@ def main():
     """
     print("\n")
     print("🚀 " + "="*56 + " 🚀")
-    print("   Welcome to PyTorch Tensors for C Programmers!")
+    print("   Welcome to PyTorch Tensors for Programmers!")
     print("🚀 " + "="*56 + " 🚀")
     print()
 
-    c_style_thinking()
-    multidimensional_arrays()
-    real_world_security_analysis()
+    basic_tensors()
+    multidimensional_tensors()
+    real_world_analysis()
     tensor_operations_cheatsheet()
     performance_comparison()
 
@@ -261,14 +289,14 @@ def main():
     print("✅ Day 1 Complete!")
     print("="*60)
     print("\nKey Takeaways:")
-    print("  1. Tensors are like C arrays, but run on GPUs")
-    print("  2. No loops needed - vectorized operations are faster")
-    print("  3. Perfect for analyzing large datasets (logs, metrics, etc.)")
-    print("  4. You can do real security analysis with just basic tensors!")
+    print("  1. Tensors are multi-dimensional arrays that run on GPUs")
+    print("  2. No loops needed - vectorized operations are 10-100x faster")
+    print("  3. Perfect for analyzing large datasets (sales, logs, metrics)")
+    print("  4. Boolean indexing lets you filter data instantly")
     print("\nNext Steps:")
-    print("  • Try modifying the failed_logins data with your own patterns")
-    print("  • Experiment with different thresholds")
-    print("  • Run: python day2_tensor_operations.py")
+    print("  • Try modifying the sales data with your own numbers")
+    print("  • Experiment with different analyses")
+    print("  • Run: python day2_movie_ratings.py")
     print()
 
 
