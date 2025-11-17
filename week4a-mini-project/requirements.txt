@@ -1,0 +1,19 @@
+# Week 4a Mini Project: Question Answering System
+# ================================================
+
+# Core deep learning
+torch>=2.0.0
+
+# Web framework (for step 6)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart>=0.0.6
+
+# Utilities
+numpy>=1.24.0
+
+# Optional: For production use
+# transformers>=4.30.0  # Hugging Face transformers (pre-trained BERT)
+# sentence-transformers>=2.2.0  # For dense retrieval
+# faiss-cpu>=1.7.4  # Vector database for semantic search
+# datasets>=2.12.0  # For SQuAD dataset fine-tuning

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000">
+  <rect fill="#fafafa" width="1200" height="1000"/>
+
+  <!-- Title -->
+  <text x="600" y="40" style="font: bold 30px sans-serif; fill: #1a1a1a;" text-anchor="middle">Question Answering Pipeline - Data Flow</text>
+  <text x="600" y="70" style="font: 15px sans-serif; fill: #666;" text-anchor="middle">From raw question to final answer - step by step</text>
+
+  <!-- Step 1: Question Input -->
+  <g transform="translate(100, 110)">
+    <rect fill="#e3f2fd" x="0" y="0" width="400" height="100" rx="8" stroke="#2196f3" stroke-width="3"/>
+    <text x="200" y="30" style="font: bold 16px sans-serif; fill: #1976d2;" text-anchor="middle">STEP 1: Question Input</text>
+    <text x="20" y="55" style="font: 12px sans-serif;">User Question:</text>
+    <text x="20" y="75" style="font: 11px monospace; fill: #0d47a1;">"What is the attention mechanism in transformers?"</text>
+  </g>
+
+  <!-- Step 2: Document Retrieval -->
+  <g transform="translate(100, 240)">
+    <rect fill="#fff3e0" x="0" y="0" width="400" height="120" rx="8" stroke="#f9a825" stroke-width="3"/>
+    <text x="200" y="30" style="font: bold 16px sans-serif; fill: #f57f17;" text-anchor="middle">STEP 2: Document Retrieval</text>
+    <text x="20" y="55" style="font: 11px sans-serif;">Search knowledge base for relevant docs:</text>
+    <text x="30" y="75" style="font: 10px sans-serif;">✓ transformer_basics.txt (score: 0.92)</text>
+    <text x="30" y="92" style="font: 10px sans-serif;">✓ attention_explained.txt (score: 0.88)</text>
+    <text x="30" y="109" style="font: 10px sans-serif;">✓ neural_networks.txt (score: 0.45)</text>
+  </g>
+
+  <!-- Step 3: Chunking -->
+  <g transform="translate(100, 390)">
+    <rect fill="#e8f5e9" x="0" y="0" width="400" height="110" rx="8" stroke="#4caf50" stroke-width="3"/>
+    <text x="200" y="30" style="font: bold 16px sans-serif; fill: #2e7d32;" text-anchor="middle">STEP 3: Text Chunking</text>
+    <text x="20" y="55" style="font: 11px sans-serif;">Split documents into manageable chunks:</text>
+    <text x="30" y="75" style="font: 10px sans-serif;">• Max length: 512 tokens</text>
+    <text x="30" y="92" style="font: 10px sans-serif;">• Overlap: 50 tokens (for continuity)</text>
+    <text x="200" y="107" style="font: 9px sans-serif; fill: #2e7d32;" text-anchor="middle">Result: 5 relevant chunks</text>
+  </g>
+
+  <!-- Step 4: Tokenization -->
+  <g transform="translate(100, 530)">
+    <rect fill="#f3e5f5" x="0" y="0" width="400" height="130" rx="8" stroke="#9c27b0" stroke-width="3"/>
+    <text x="200" y="30" style="font: bold 16px sans-serif; fill: #7b1fa2;" text-anchor="middle">STEP 4: Tokenization</text>
+    <text x="20" y="55" style="font: 11px sans-serif;">Create input for encoder:</text>
+    <rect fill="#fff" x="20" y="65" width="360" height="55" rx="4" stroke="#ce93d8"/>
+    <text x="30" y="85" style="font: 9px monospace;">[CLS] what is the attention mechanism</text>
+    <text x="30" y="100" style="font: 9px monospace;">[SEP] attention allows models to focus</text>
+    <text x="30" y="115" style="font: 9px monospace;">on relevant parts... [SEP]</text>
+  </g>
+
+  <!-- Right side: Model Processing -->
+  <g transform="translate(550, 110)">
+    <rect fill="#fff9c4" x="0" y="0" width="550" height="550" rx="8" stroke="#f9a825" stroke-width="3"/>
+    <text x="275" y="35" style="font: bold 18px sans-serif; fill: #f57f17;" text-anchor="middle">STEP 5: Transformer Encoder Processing</text>
+
+    <!-- Embedding -->
+    <g transform="translate(50, 60)">
+      <rect fill="#e3f2fd" x="0" y="0" width="450" height="70" rx="6" stroke="#2196f3" stroke-width="2"/>
+      <text x="225" y="25" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Token + Position + Segment Embeddings</text>
+      <text x="20" y="45" style="font: 10px monospace;">[CLS]: [0.21, -0.45, 0.83, ..., 0.12] (768-dim)</text>
+      <text x="20" y="60" style="font: 10px monospace;">what:   [0.67, 0.23, -0.11, ..., 0.91]</text>
+    </g>
+
+    <!-- Encoder Blocks -->
+    <g transform="translate(50, 150)">
+      <rect fill="#e8f5e9" x="0" y="0" width="450" height="280" rx="6" stroke="#4caf50" stroke-width="2"/>
+      <text x="225" y="25" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">12 Transformer Encoder Blocks</text>
+
+      <!-- Block 1 -->
+      <g transform="translate(20, 40)">
+        <rect fill="#c8e6c9" x="0" y="0" width="410" height="50" rx="4" stroke="#66bb6a"/>
+        <text x="205" y="20" style="font: 11px sans-serif;" text-anchor="middle">Block 1: Multi-Head Attention (12 heads)</text>
+        <text x="205" y="38" style="font: 9px sans-serif; fill: #2e7d32;" text-anchor="middle">Learning: Which words relate to "attention"?</text>
+      </g>
+
+      <!-- Block 6 -->
+      <g transform="translate(20, 100)">
+        <rect fill="#c8e6c9" x="0" y="0" width="410" height="50" rx="4" stroke="#66bb6a"/>
+        <text x="205" y="20" style="font: 11px sans-serif;" text-anchor="middle">Block 6: Mid-layer processing</text>
+        <text x="205" y="38" style="font: 9px sans-serif; fill: #2e7d32;" text-anchor="middle">Learning: Semantic relationships</text>
+      </g>
+
+      <!-- Block 12 -->
+      <g transform="translate(20, 160)">
+        <rect fill="#c8e6c9" x="0" y="0" width="410" height="50" rx="4" stroke="#66bb6a"/>
+        <text x="205" y="20" style="font: 11px sans-serif;" text-anchor="middle">Block 12: Final encoding</text>
+        <text x="205" y="38" style="font: 9px sans-serif; fill: #2e7d32;" text-anchor="middle">Learning: High-level understanding</text>
+      </g>
+
+      <text x="225" y="240" style="font: 10px sans-serif; fill: #1976d2;" text-anchor="middle">Each block refines the representation</text>
+      <text x="225" y="258" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Output: Contextualized embeddings (batch, seq_len, 768)</text>
+    </g>
+
+    <!-- Answer Span Detection -->
+    <g transform="translate(50, 450)">
+      <rect fill="#ffebee" x="0" y="0" width="450" height="80" rx="6" stroke="#f44336" stroke-width="2"/>
+      <text x="225" y="25" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Answer Span Detection</text>
+      <text x="20" y="48" style="font: 10px sans-serif;">Start position logits: [0.1, 0.05, ..., 8.2, 0.3, ...]</text>
+      <text x="20" y="65" style="font: 10px sans-serif;">End position logits:   [0.2, 0.1, ..., 0.4, 9.1, ...]</text>
+    </g>
+  </g>
+
+  <!-- Step 6: Post-processing -->
+  <g transform="translate(100, 690)">
+    <rect fill="#fce4ec" x="0" y="0" width="400" height="100" rx="8" stroke="#e91e63" stroke-width="3"/>
+    <text x="200" y="30" style="font: bold 16px sans-serif; fill: #c2185b;" text-anchor="middle">STEP 6: Post-Processing</text>
+    <text x="20" y="55" style="font: 11px sans-serif;">Extract answer span:</text>
+    <text x="30" y="75" style="font: 10px sans-serif;">Start token: 15, End token: 23</text>
+    <text x="30" y="92" style="font: 10px sans-serif;">Confidence: 94.3%</text>
+  </g>
+
+  <!-- Step 7: Final Answer -->
+  <g transform="translate(100, 820)">
+    <rect fill="#c8e6c9" x="0" y="0" width="1000" height="100" rx="8" stroke="#4caf50" stroke-width="3"/>
+    <text x="500" y="30" style="font: bold 18px sans-serif; fill: #2e7d32;" text-anchor="middle">STEP 7: Final Answer</text>
+    <rect fill="#fff" x="120" y="45" width="860" height="40" rx="4" stroke="#66bb6a" stroke-width="2"/>
+    <text x="140" y="70" style="font: 13px sans-serif; fill: #1976d2;">"Attention allows models to focus on relevant parts of the input when processing."</text>
+  </g>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <path d="M 300 210 L 300 240" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 300 360 L 300 390" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 300 500 L 300 530" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 500 530 L 650 530 L 650 520" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 775 660 L 775 740 L 500 740" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 300 790 L 300 820" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Performance metrics -->
+  <rect fill="#fff" x="550" y="690" width="550" height="110" rx="6" stroke="#666" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="825" y="715" style="font: 13px sans-serif; font-weight: bold; fill: #333;" text-anchor="middle">⚡ PERFORMANCE METRICS</text>
+  <text x="570" y="740" style="font: 10px sans-serif;">Inference time: ~150ms per question</text>
+  <text x="570" y="758" style="font: 10px sans-serif;">Accuracy: 87% on test set (SQuAD benchmark)</text>
+  <text x="570" y="776" style="font: 10px sans-serif;">Memory: ~450MB (model + embeddings)</text>
+  <text x="570" y="794" style="font: 10px sans-serif;">Throughput: 6-7 questions/second (single GPU)</text>
+</svg>
