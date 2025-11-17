@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <!-- Title -->
+  <text x="600" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Workspace Intelligence System - High-Level Architecture
+  </text>
+
+  <!-- Client Layer -->
+  <rect x="50" y="80" width="1100" height="120" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="5"/>
+  <text x="600" y="110" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Client Layer</text>
+
+  <!-- IDE Extensions -->
+  <rect x="100" y="130" width="150" height="50" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="175" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">VSCode Extension</text>
+
+  <rect x="280" y="130" width="150" height="50" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="355" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">IntelliJ Plugin</text>
+
+  <rect x="460" y="130" width="150" height="50" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="535" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">Web IDE</text>
+
+  <rect x="640" y="130" width="150" height="50" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="715" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">CLI Tools</text>
+
+  <rect x="820" y="130" width="150" height="50" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="895" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white">LSP Server</text>
+
+  <!-- Connection lines -->
+  <path d="M 600 200 L 600 240" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- API Gateway Layer -->
+  <rect x="50" y="240" width="1100" height="100" fill="#f8e8e8" stroke="#e74c3c" stroke-width="2" rx="5"/>
+  <text x="600" y="270" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">API Gateway Layer</text>
+
+  <rect x="200" y="285" width="200" height="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="300" y="310" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Authentication/Authorization</text>
+
+  <rect x="450" y="285" width="150" height="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="525" y="310" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Rate Limiting</text>
+
+  <rect x="650" y="285" width="150" height="40" fill="#e74c3c" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="725" y="310" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Load Balancer</text>
+
+  <!-- Connection lines -->
+  <path d="M 300 340 L 200 380" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 400 340 L 400 380" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 600 340 L 600 380" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 700 340 L 800 380" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Service Layer -->
+  <rect x="50" y="380" width="1100" height="150" fill="#e8f8e8" stroke="#27ae60" stroke-width="2" rx="5"/>
+  <text x="600" y="410" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Service Layer (Microservices)</text>
+
+  <rect x="80" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="150" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Indexing</text>
+  <text x="150" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Service</text>
+
+  <rect x="250" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="320" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Embedding</text>
+  <text x="320" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Service</text>
+
+  <rect x="420" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="490" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Search</text>
+  <text x="490" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Service</text>
+
+  <rect x="590" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="660" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Context</text>
+  <text x="660" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Engine</text>
+
+  <rect x="760" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="830" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">LLM</text>
+  <text x="830" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Service</text>
+
+  <rect x="930" y="430" width="140" height="50" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1000" y="450" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Analytics</text>
+  <text x="1000" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Service</text>
+
+  <!-- Connection lines -->
+  <path d="M 150 480 L 150 560" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 320 480 L 320 560" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 490 480 L 490 560" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 660 480 L 660 560" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 830 480 L 830 560" stroke="#2c3e50" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Data Layer -->
+  <rect x="50" y="560" width="1100" height="120" fill="#f8f0e8" stroke="#f39c12" stroke-width="2" rx="5"/>
+  <text x="600" y="590" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Data Layer</text>
+
+  <rect x="150" y="610" width="160" height="50" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="230" y="630" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Qdrant</text>
+  <text x="230" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">(Vector DB)</text>
+
+  <rect x="350" y="610" width="160" height="50" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="430" y="630" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">PostgreSQL</text>
+  <text x="430" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">(Metadata)</text>
+
+  <rect x="550" y="610" width="160" height="50" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="630" y="630" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Redis</text>
+  <text x="630" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">(Cache)</text>
+
+  <rect x="750" y="610" width="160" height="50" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="830" y="630" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">Elasticsearch</text>
+  <text x="830" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">(Keyword Search)</text>
+
+  <!-- External Services -->
+  <rect x="50" y="710" width="1100" height="70" fill="#e8e8f8" stroke="#9b59b6" stroke-width="2" rx="5"/>
+  <text x="600" y="735" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">External AI Services</text>
+
+  <rect x="300" y="745" width="120" height="25" fill="#9b59b6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="360" y="762" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">OpenAI API</text>
+
+  <rect x="450" y="745" width="140" height="25" fill="#9b59b6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="520" y="762" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Anthropic Claude</text>
+
+  <rect x="620" y="745" width="130" height="25" fill="#9b59b6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="685" y="762" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Local Models</text>
+
+  <!-- Connection from LLM Service to External AI -->
+  <path d="M 830 480 L 830 710" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <g transform="translate(920, 540)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2c3e50">Legend:</text>
+    <line x1="0" y1="10" x2="30" y2="10" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="35" y="14" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Sync Flow</text>
+    <line x1="0" y1="25" x2="30" y2="25" stroke="#9b59b6" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="35" y="29" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Async Flow</text>
+  </g>
+</svg>

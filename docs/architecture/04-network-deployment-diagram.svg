@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <!-- Title -->
+  <text x="800" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Network &amp; Deployment Architecture - Kubernetes
+  </text>
+  <text x="800" y="55" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7f8c8d">
+    Production Deployment on AWS/GCP/Azure with High Availability
+  </text>
+
+  <!-- Internet/Public Zone -->
+  <rect x="50" y="100" width="1500" height="150" fill="#e8f4f8" stroke="#3498db" stroke-width="3" rx="5"/>
+  <text x="100" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">🌐 Internet / Public Zone</text>
+
+  <!-- CDN -->
+  <rect x="100" y="150" width="200" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="200" y="175" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">CloudFront / CDN</text>
+  <text x="200" y="195" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Static Assets</text>
+  <text x="200" y="210" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Global Distribution</text>
+  <text x="200" y="225" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Edge Caching</text>
+
+  <!-- DNS -->
+  <rect x="340" y="150" width="200" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="440" y="175" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Route 53 / DNS</text>
+  <text x="440" y="195" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">DNS Routing</text>
+  <text x="440" y="210" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Health Checks</text>
+  <text x="440" y="225" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Failover</text>
+
+  <!-- WAF -->
+  <rect x="580" y="150" width="200" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="680" y="175" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">WAF / DDoS Protection</text>
+  <text x="680" y="195" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">AWS Shield</text>
+  <text x="680" y="210" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Rate Limiting</text>
+  <text x="680" y="225" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">SQL Injection Protection</text>
+
+  <!-- Certificate Manager -->
+  <rect x="820" y="150" width="200" height="80" fill="#3498db" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="920" y="175" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Certificate Manager</text>
+  <text x="920" y="195" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">SSL/TLS Certificates</text>
+  <text x="920" y="210" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Auto Renewal</text>
+  <text x="920" y="225" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">api.yourcompany.com</text>
+
+  <!-- Connection arrows -->
+  <path d="M 440 230 L 440 280" stroke="#2c3e50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Load Balancer Zone -->
+  <rect x="50" y="280" width="1500" height="100" fill="#fef5e7" stroke="#f39c12" stroke-width="3" rx="5"/>
+  <text x="100" y="310" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">⚖️ Load Balancer / DMZ</text>
+
+  <rect x="200" y="320" width="1200" height="50" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="800" y="340" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Application Load Balancer (ALB) - Multi-AZ</text>
+  <text x="800" y="358" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">HTTPS (443) • WebSocket (WSS) • Health Checks • Sticky Sessions • SSL Termination</text>
+
+  <!-- Connection arrows -->
+  <path d="M 800 370 L 800 420" stroke="#2c3e50" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- VPC / Kubernetes Cluster -->
+  <rect x="50" y="420" width="1500" height="530" fill="#e8f8f0" stroke="#27ae60" stroke-width="3" rx="5"/>
+  <text x="100" y="450" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">☸️ Kubernetes Cluster (EKS/GKE/AKS) - VPC: 10.0.0.0/16</text>
+
+  <!-- Availability Zone 1 -->
+  <rect x="100" y="480" width="680" height="440" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
+  <text x="130" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27ae60">Availability Zone A (us-east-1a)</text>
+  <text x="130" y="530" font-family="Arial, sans-serif" font-size="11" fill="#27ae60">Subnet: 10.0.1.0/24 (Private)</text>
+
+  <!-- Namespace: Application -->
+  <rect x="120" y="550" width="640" height="170" fill="#ffffff" stroke="#3498db" stroke-width="2" rx="5"/>
+  <text x="150" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#3498db">Namespace: workspace-intelligence</text>
+
+  <!-- Pods in AZ-A -->
+  <rect x="140" y="590" width="140" height="110" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="210" y="610" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">API Gateway</text>
+  <text x="210" y="630" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 3 replicas</text>
+  <text x="210" y="645" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 1 core</text>
+  <text x="210" y="660" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">RAM: 2 GB</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8080</text>
+  <text x="210" y="690" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Service: ClusterIP</text>
+
+  <rect x="300" y="590" width="140" height="110" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="370" y="610" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Search Service</text>
+  <text x="370" y="630" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 3 replicas</text>
+  <text x="370" y="645" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 2 cores</text>
+  <text x="370" y="660" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">RAM: 4 GB</text>
+  <text x="370" y="675" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8001</text>
+  <text x="370" y="690" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">HPA: 3-10 pods</text>
+
+  <rect x="460" y="590" width="140" height="110" fill="#16a085" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="530" y="610" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Context Engine</text>
+  <text x="530" y="630" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 2 replicas</text>
+  <text x="530" y="645" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 1 core</text>
+  <text x="530" y="660" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">RAM: 2 GB</text>
+  <text x="530" y="675" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8003</text>
+  <text x="530" y="690" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Service: ClusterIP</text>
+
+  <rect x="620" y="590" width="120" height="110" fill="#e67e22" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="680" y="610" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">LLM Service</text>
+  <text x="680" y="630" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 2</text>
+  <text x="680" y="645" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 2</text>
+  <text x="680" y="660" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">RAM: 4 GB</text>
+  <text x="680" y="675" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8004</text>
+  <text x="680" y="690" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">ClusterIP</text>
+
+  <!-- Namespace: ML/GPU -->
+  <rect x="120" y="740" width="640" height="160" fill="#ffffff" stroke="#9b59b6" stroke-width="2" rx="5"/>
+  <text x="150" y="765" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#9b59b6">Namespace: ml-services (GPU Node Pool)</text>
+
+  <rect x="140" y="780" width="180" height="100" fill="#9b59b6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="230" y="800" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Embedding Service</text>
+  <text x="230" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 2 replicas</text>
+  <text x="230" y="835" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">GPU: 1x NVIDIA T4</text>
+  <text x="230" y="850" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 4 cores, RAM: 8 GB</text>
+  <text x="230" y="865" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8002</text>
+
+  <rect x="340" y="780" width="180" height="100" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="430" y="800" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Indexing Service</text>
+  <text x="430" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 2 replicas</text>
+  <text x="430" y="835" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 2 cores</text>
+  <text x="430" y="850" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">RAM: 4 GB</text>
+  <text x="430" y="865" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Port: 8000</text>
+
+  <rect x="540" y="780" width="200" height="100" fill="#95a5a6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="640" y="800" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Worker Pods (Celery)</text>
+  <text x="640" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Background job processing</text>
+  <text x="640" y="835" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Pod: 5 replicas</text>
+  <text x="640" y="850" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">CPU: 1 core, RAM: 2 GB</text>
+  <text x="640" y="865" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Auto-scaling based on queue</text>
+
+  <!-- Availability Zone 2 -->
+  <rect x="820" y="480" width="680" height="440" fill="#d5f4e6" stroke="#27ae60" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
+  <text x="850" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#27ae60">Availability Zone B (us-east-1b) - Replica</text>
+  <text x="850" y="530" font-family="Arial, sans-serif" font-size="11" fill="#27ae60">Subnet: 10.0.2.0/24 (Private)</text>
+
+  <!-- Same services replicated in AZ-B -->
+  <rect x="840" y="550" width="640" height="170" fill="#ffffff" stroke="#3498db" stroke-width="2" rx="5"/>
+  <text x="870" y="575" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#3498db">Namespace: workspace-intelligence</text>
+
+  <rect x="860" y="590" width="120" height="110" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="920" y="620" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">API Gateway</text>
+  <text x="920" y="640" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="920" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="1000" y="590" width="120" height="110" fill="#27ae60" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1060" y="620" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Search</text>
+  <text x="1060" y="640" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="1060" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="1140" y="590" width="120" height="110" fill="#16a085" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1200" y="620" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Context</text>
+  <text x="1200" y="640" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="1200" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="1280" y="590" width="120" height="110" fill="#e67e22" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1340" y="620" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">LLM</text>
+  <text x="1340" y="640" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="1340" y="655" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="840" y="740" width="640" height="160" fill="#ffffff" stroke="#9b59b6" stroke-width="2" rx="5"/>
+  <text x="870" y="765" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#9b59b6">Namespace: ml-services (GPU Node Pool)</text>
+
+  <rect x="860" y="780" width="140" height="100" fill="#9b59b6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="930" y="820" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Embedding</text>
+  <text x="930" y="840" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="930" y="855" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="1020" y="780" width="140" height="100" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1090" y="820" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Indexing</text>
+  <text x="1090" y="840" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods</text>
+  <text x="1090" y="855" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">(HA setup)</text>
+
+  <rect x="1180" y="780" width="280" height="100" fill="#95a5a6" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1320" y="820" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="white">Worker Pods (Celery)</text>
+  <text x="1320" y="840" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="white">Replica pods (HA setup)</text>
+
+  <!-- Data Layer -->
+  <rect x="50" y="980" width="1500" height="100" fill="#fef5e7" stroke="#f39c12" stroke-width="3" rx="5"/>
+  <text x="100" y="1010" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#2c3e50">💾 Data Layer - Managed Services (Multi-AZ)</text>
+
+  <rect x="100" y="1025" width="230" height="45" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="215" y="1045" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">RDS PostgreSQL (Multi-AZ)</text>
+  <text x="215" y="1060" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">db.r5.large • Primary + Standby</text>
+
+  <rect x="360" y="1025" width="230" height="45" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="475" y="1045" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">ElastiCache Redis (Cluster)</text>
+  <text x="475" y="1060" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">cache.r5.large • 3 nodes</text>
+
+  <rect x="620" y="1025" width="230" height="45" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="735" y="1045" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Qdrant Cloud (Managed)</text>
+  <text x="735" y="1060" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">100M vectors • HA cluster</text>
+
+  <rect x="880" y="1025" width="230" height="45" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="995" y="1045" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">S3 / Object Storage</text>
+  <text x="995" y="1060" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Files • Models • Backups</text>
+
+  <rect x="1140" y="1025" width="230" height="45" fill="#f39c12" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1255" y="1045" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Elasticsearch (OpenSearch)</text>
+  <text x="1255" y="1060" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">3-node cluster • Logs</text>
+
+  <!-- Security Group Labels -->
+  <text x="1400" y="1025" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#e74c3c">🔒 Security</text>
+  <text x="1400" y="1042" font-family="Arial, sans-serif" font-size="8" fill="#e74c3c">• VPC Isolation</text>
+  <text x="1400" y="1057" font-family="Arial, sans-serif" font-size="8" fill="#e74c3c">• Security Groups</text>
+  <text x="1400" y="1072" font-family="Arial, sans-serif" font-size="8" fill="#e74c3c">• Private Subnets</text>
+
+  <!-- Connection lines -->
+  <path d="M 440 550 L 215 1025" stroke="#9b59b6" stroke-width="2" stroke-dasharray="3,3" fill="none"/>
+  <path d="M 440 550 L 475 1025" stroke="#9b59b6" stroke-width="2" stroke-dasharray="3,3" fill="none"/>
+  <path d="M 440 550 L 735 1025" stroke="#9b59b6" stroke-width="2" stroke-dasharray="3,3" fill="none"/>
+
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2c3e50" />
+    </marker>
+  </defs>
+</svg>
