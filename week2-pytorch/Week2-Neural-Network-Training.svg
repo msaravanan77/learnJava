@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title { font: bold 28px sans-serif; fill: #1a1a1a; }
+      .subtitle { font: bold 16px sans-serif; fill: #2c3e50; }
+      .heading { font: bold 14px sans-serif; fill: #34495e; }
+      .text { font: 13px sans-serif; fill: #555; }
+      .small-text { font: 11px sans-serif; fill: #666; }
+      .tiny-text { font: 10px sans-serif; fill: #777; }
+      .code { font: 12px 'Courier New', monospace; fill: #e74c3c; }
+      .box { fill: #fff; stroke: #3498db; stroke-width: 2; }
+      .box-step { fill: #e8f4f8; stroke: #3498db; stroke-width: 2; }
+      .box-code { fill: #f8f9fa; stroke: #95a5a6; stroke-width: 1; }
+      .box-data { fill: #ebf5fb; stroke: #5dade2; stroke-width: 2; }
+      .box-model { fill: #fef5e7; stroke: #f39c12; stroke-width: 2; }
+      .box-train { fill: #fdecea; stroke: #e74c3c; stroke-width: 2; }
+      .box-eval { fill: #e8f6f3; stroke: #16a085; stroke-width: 2; }
+      .arrow { fill: none; stroke: #7f8c8d; stroke-width: 2; marker-end: url(#arrowhead); }
+      .arrow-cycle { fill: none; stroke: #e74c3c; stroke-width: 3; marker-end: url(#arrowhead-red); stroke-dasharray: 5,5; }
+      .gradient-bg { fill: url(#grad1); }
+    </style>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="gradient-bg" width="1400" height="900" />
+
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">Week 2: Training Neural Networks - Complete Process</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">From Raw Data to Trained Model</text>
+
+  <!-- Step 1: Prepare Data -->
+  <rect class="box-data" x="50" y="80" width="300" height="180" rx="8" />
+  <text x="200" y="105" class="heading" text-anchor="middle">STEP 1: PREPARE DATA</text>
+
+  <rect class="box-code" x="70" y="115" width="260" height="135" rx="4" />
+  <text x="80" y="135" class="code">df = pd.read_csv('customers.csv')</text>
+  <text x="80" y="155" class="code">X = df[features].values</text>
+  <text x="80" y="175" class="code">y = df['churned'].values</text>
+  <text x="80" y="200" class="small-text">Split into:</text>
+  <text x="80" y="217" class="tiny-text">• Train (70%) - Learn patterns</text>
+  <text x="80" y="232" class="tiny-text">• Val (15%) - Tune model</text>
+  <text x="80" y="247" class="tiny-text">• Test (15%) - Final evaluation</text>
+
+  <!-- Arrow to Step 2 -->
+  <path class="arrow" d="M 355 170 L 395 170" />
+
+  <!-- Step 2: Build Model -->
+  <rect class="box-model" x="400" y="80" width="300" height="180" rx="8" />
+  <text x="550" y="105" class="heading" text-anchor="middle">STEP 2: BUILD MODEL</text>
+
+  <rect class="box-code" x="420" y="115" width="260" height="135" rx="4" />
+  <text x="430" y="135" class="code">model = nn.Sequential(</text>
+  <text x="430" y="155" class="code">  nn.Linear(9, 16),  # Input</text>
+  <text x="430" y="175" class="code">  nn.ReLU(),</text>
+  <text x="430" y="195" class="code">  nn.Linear(16, 8),  # Hidden</text>
+  <text x="430" y="215" class="code">  nn.Linear(8, 1),   # Output</text>
+  <text x="430" y="235" class="code">  nn.Sigmoid()</text>
+  <text x="430" y="255" class="code">)</text>
+
+  <!-- Arrow to Step 3 -->
+  <path class="arrow" d="M 705 170 L 745 170" />
+
+  <!-- Step 3: Setup Training -->
+  <rect class="box-train" x="750" y="80" width="300" height="180" rx="8" />
+  <text x="900" y="105" class="heading" text-anchor="middle">STEP 3: SETUP TRAINING</text>
+
+  <rect class="box-code" x="770" y="115" width="260" height="135" rx="4" />
+  <text x="780" y="135" class="code">criterion = nn.BCELoss()</text>
+  <text x="780" y="155" class="code">optimizer = optim.Adam(</text>
+  <text x="780" y="175" class="code">  model.parameters(),</text>
+  <text x="780" y="195" class="code">  lr=0.001</text>
+  <text x="780" y="215" class="code">)</text>
+  <text x="780" y="240" class="small-text">Ready to train!</text>
+
+  <!-- Arrow down to training loop -->
+  <path class="arrow" d="M 900 265 L 900 295" />
+
+  <!-- THE TRAINING LOOP (Main Section) -->
+  <rect class="box" x="100" y="300" width="1200" height="400" rx="10" stroke="#e74c3c" stroke-width="3" />
+  <text x="700" y="330" class="heading" text-anchor="middle" fill="#e74c3c">THE TRAINING LOOP (Repeats Many Times)</text>
+
+  <!-- Loop iteration indicator -->
+  <text x="120" y="360" class="text" font-weight="bold">for epoch in range(100):</text>
+
+  <!-- Sub-step A: Forward Pass -->
+  <rect class="box-step" x="130" y="380" width="260" height="140" rx="6" />
+  <text x="260" y="405" class="heading" text-anchor="middle">A. FORWARD PASS</text>
+  <text x="150" y="430" class="small-text">Make predictions:</text>
+  <rect class="box-code" x="150" y="440" width="220" height="70" rx="4" />
+  <text x="160" y="458" class="code">predictions = model(X)</text>
+  <text x="160" y="480" class="tiny-text">Input → Layers → Output</text>
+  <text x="160" y="497" class="tiny-text">Example: 0.73 (73% churn)</text>
+
+  <!-- Arrow to Loss -->
+  <path class="arrow" d="M 395 450 L 435 450" />
+
+  <!-- Sub-step B: Calculate Loss -->
+  <rect class="box-step" x="440" y="380" width="260" height="140" rx="6" />
+  <text x="570" y="405" class="heading" text-anchor="middle">B. CALCULATE LOSS</text>
+  <text x="460" y="430" class="small-text">Measure error:</text>
+  <rect class="box-code" x="460" y="440" width="220" height="70" rx="4" />
+  <text x="470" y="458" class="code">loss = criterion(</text>
+  <text x="470" y="476" class="code">  predictions, labels</text>
+  <text x="470" y="494" class="code">)</text>
+  <text x="470" y="512" class="tiny-text">High loss = bad predictions</text>
+
+  <!-- Arrow to Backward -->
+  <path class="arrow" d="M 705 450 L 745 450" />
+
+  <!-- Sub-step C: Backward Pass -->
+  <rect class="box-step" x="750" y="380" width="260" height="140" rx="6" />
+  <text x="880" y="405" class="heading" text-anchor="middle">C. BACKWARD PASS</text>
+  <text x="770" y="430" class="small-text">Compute gradients:</text>
+  <rect class="box-code" x="770" y="440" width="220" height="70" rx="4" />
+  <text x="780" y="458" class="code">optimizer.zero_grad()</text>
+  <text x="780" y="476" class="code">loss.backward()</text>
+  <text x="780" y="497" class="tiny-text">PyTorch magic: auto-diff!</text>
+
+  <!-- Arrow to Update -->
+  <path class="arrow" d="M 1015 450 L 1055 450" />
+
+  <!-- Sub-step D: Update Weights -->
+  <rect class="box-step" x="1060" y="380" width="220" height="140" rx="6" />
+  <text x="1170" y="405" class="heading" text-anchor="middle">D. UPDATE</text>
+  <text x="1080" y="430" class="small-text">Improve model:</text>
+  <rect class="box-code" x="1080" y="440" width="180" height="70" rx="4" />
+  <text x="1090" y="458" class="code">optimizer.step()</text>
+  <text x="1090" y="480" class="tiny-text">W = W - lr * grad</text>
+  <text x="1090" y="497" class="tiny-text">Adjust weights!</text>
+
+  <!-- Validation Step -->
+  <rect class="box-eval" x="130" y="550" width="550" height="120" rx="6" />
+  <text x="405" y="575" class="heading" text-anchor="middle">E. VALIDATE (Check Progress)</text>
+  <rect class="box-code" x="150" y="590" width="510" height="70" rx="4" />
+  <text x="160" y="608" class="code">with torch.no_grad():</text>
+  <text x="160" y="626" class="code">    val_loss = criterion(model(X_val), y_val)</text>
+  <text x="160" y="644" class="code">print(f"Epoch {epoch}: Train={train_loss:.4f}, Val={val_loss:.4f}")</text>
+
+  <!-- Loop back arrow -->
+  <path class="arrow-cycle" d="M 1170 525 Q 1170 670, 260 670 Q 260 360, 260 370" />
+  <text x="680" y="690" class="small-text" fill="#e74c3c" font-weight="bold">Repeat 100 times (or until loss is low enough)</text>
+
+  <!-- After Training -->
+  <text x="700" y="740" class="heading" text-anchor="middle">AFTER TRAINING COMPLETES</text>
+
+  <!-- Final Evaluation -->
+  <rect class="box-eval" x="100" y="760" width="400" height="120" rx="6" />
+  <text x="300" y="785" class="heading" text-anchor="middle">STEP 4: EVALUATE</text>
+  <rect class="box-code" x="120" y="800" width="360" height="70" rx="4" />
+  <text x="130" y="818" class="code">test_preds = model(X_test)</text>
+  <text x="130" y="838" class="code">accuracy = calculate_accuracy(</text>
+  <text x="130" y="856" class="code">  test_preds, y_test)</text>
+
+  <!-- Arrow to Save -->
+  <path class="arrow" d="M 505 820 L 545 820" />
+
+  <!-- Save Model -->
+  <rect class="box-model" x="550" y="760" width="350" height="120" rx="6" />
+  <text x="725" y="785" class="heading" text-anchor="middle">STEP 5: SAVE MODEL</text>
+  <rect class="box-code" x="570" y="800" width="310" height="70" rx="4" />
+  <text x="580" y="818" class="code">torch.save(</text>
+  <text x="580" y="838" class="code">  model.state_dict(),</text>
+  <text x="580" y="856" class="code">  'churn_model.pth')</text>
+
+  <!-- Arrow to Use -->
+  <path class="arrow" d="M 905 820 L 945 820" />
+
+  <!-- Use Model -->
+  <rect class="box-eval" x="950" y="760" width="350" height="120" rx="6" />
+  <text x="1125" y="785" class="heading" text-anchor="middle">STEP 6: USE MODEL</text>
+  <rect class="box-code" x="970" y="800" width="310" height="70" rx="4" />
+  <text x="980" y="818" class="code">new_customer = [45, 6, ...]</text>
+  <text x="980" y="838" class="code">risk = model(new_customer)</text>
+  <text x="980" y="856" class="code">print(f"Churn risk: {risk}")</text>
+
+  <!-- Footer -->
+  <text x="700" y="895" class="small-text" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+    Training = Repeatedly adjusting weights to minimize prediction errors
+  </text>
+</svg>
