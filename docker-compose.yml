@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: workspace-intel-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: workspace-intel-postgres
+    environment:
+      POSTGRES_DB: workspace_intelligence
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-admin123}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./libs/database-client/src/postgres/migrations:/docker-entrypoint-initdb.d
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: workspace-intel-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  # Embedding Service
+  embedding-service:
+    build:
+      context: ./services/embedding-service
+      dockerfile: Dockerfile
+    container_name: workspace-intel-embedding
+    environment:
+      - MODEL_NAME=microsoft/graphcodebert-base
+      - DEVICE=cpu  # Change to 'cuda' if GPU available
+      - REDIS_URL=redis://redis:6379
+    ports:
+      - "8002:8000"
+    volumes:
+      - model_cache:/root/.cache/huggingface
+    depends_on:
+      - redis
+
+  # Indexing Service
+  indexing-service:
+    build:
+      context: ./services/indexing-service
+      dockerfile: Dockerfile
+    container_name: workspace-intel-indexing
+    environment:
+      - DATABASE_URL=postgresql://admin:${DB_PASSWORD:-admin123}@postgres:5432/workspace_intelligence
+      - QDRANT_URL=http://qdrant:6333
+      - REDIS_URL=redis://redis:6379
+      - EMBEDDING_SERVICE_URL=http://embedding-service:8000
+    depends_on:
+      - postgres
+      - qdrant
+      - redis
+      - embedding-service
+
+  # Search Service
+  search-service:
+    build:
+      context: ./services/search-service
+      dockerfile: Dockerfile
+    container_name: workspace-intel-search
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - REDIS_URL=redis://redis:6379
+      - EMBEDDING_SERVICE_URL=http://embedding-service:8000
+    ports:
+      - "8001:8000"
+    depends_on:
+      - qdrant
+      - redis
+      - embedding-service
+
+volumes:
+  qdrant_data:
+  postgres_data:
+  redis_data:
+  model_cache:
+
+networks:
+  default:
+    name: workspace-intelligence

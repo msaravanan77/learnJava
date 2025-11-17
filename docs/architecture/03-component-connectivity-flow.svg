@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <!-- Title -->
+  <text x="800" y="30" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Component Connectivity &amp; Data Flow Diagram
+  </text>
+  <text x="800" y="55" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7f8c8d">
+    Real-time Data Flow Between Microservices
+  </text>
+
+  <!-- Legend -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="200" height="110" fill="#f8f9fa" stroke="#2c3e50" stroke-width="1" rx="3"/>
+    <text x="100" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2c3e50">Legend</text>
+
+    <line x1="10" y1="35" x2="50" y2="35" stroke="#27ae60" stroke-width="3" marker-end="url(#green-arrow)"/>
+    <text x="60" y="39" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Sync Request</text>
+
+    <line x1="10" y1="55" x2="50" y2="55" stroke="#3498db" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#blue-arrow)"/>
+    <text x="60" y="59" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Async Event</text>
+
+    <line x1="10" y1="75" x2="50" y2="75" stroke="#e74c3c" stroke-width="3" stroke-dasharray="2,2" marker-end="url(#red-arrow)"/>
+    <text x="60" y="79" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Message Queue</text>
+
+    <line x1="10" y1="95" x2="50" y2="95" stroke="#9b59b6" stroke-width="2"/>
+    <text x="60" y="99" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">Data Store</text>
+  </g>
+
+  <!-- Client Layer -->
+  <rect x="300" y="100" width="1000" height="100" fill="#ecf0f1" stroke="#34495e" stroke-width="2" rx="5"/>
+  <text x="800" y="125" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Client Layer</text>
+
+  <rect x="400" y="140" width="130" height="45" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="465" y="167" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">IDE Extension</text>
+
+  <rect x="570" y="140" width="130" height="45" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="635" y="167" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Web Client</text>
+
+  <rect x="740" y="140" width="130" height="45" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="805" y="167" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">CLI Tool</text>
+
+  <rect x="910" y="140" width="130" height="45" fill="#3498db" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="975" y="167" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">LSP Server</text>
+
+  <!-- API Gateway -->
+  <rect x="400" y="230" width="800" height="80" fill="#e74c3c" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="800" y="255" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">API Gateway</text>
+  <text x="800" y="275" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Kong / NGINX</text>
+  <text x="800" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Authentication • Rate Limiting • Load Balancing • Request Routing</text>
+
+  <!-- Connections from clients to API Gateway -->
+  <path d="M 465 185 L 465 230" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 635 185 L 635 230" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 805 185 L 805 230" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 975 185 L 975 230" stroke="#27ae60" stroke-width="3" fill="none" marker-end="url(#green-arrow)"/>
+
+  <!-- Service Layer -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">Microservices Layer</text>
+
+  <!-- Row 1: Indexing and Embedding -->
+  <rect x="300" y="370" width="180" height="120" fill="#3498db" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="390" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Indexing Service</text>
+  <text x="390" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8000</text>
+  <text x="390" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Parse files (Tree-sitter)</text>
+  <text x="390" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Extract elements</text>
+  <text x="390" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Build dependency graph</text>
+  <text x="390" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Queue for embedding</text>
+
+  <rect x="520" y="370" width="180" height="120" fill="#9b59b6" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="610" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Embedding Service</text>
+  <text x="610" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8002</text>
+  <text x="610" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• GraphCodeBERT model</text>
+  <text x="610" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Batch processing</text>
+  <text x="610" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• GPU acceleration</text>
+  <text x="610" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Generate 768D vectors</text>
+
+  <!-- Row 2: Search and Context -->
+  <rect x="740" y="370" width="180" height="120" fill="#27ae60" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="830" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Search Service</text>
+  <text x="830" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8001</text>
+  <text x="830" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Semantic search</text>
+  <text x="830" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Keyword search (BM25)</text>
+  <text x="830" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Hybrid search</text>
+  <text x="830" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Re-ranking</text>
+
+  <rect x="960" y="370" width="180" height="120" fill="#16a085" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1050" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Context Engine</text>
+  <text x="1050" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8003</text>
+  <text x="1050" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Gather relevant code</text>
+  <text x="1050" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Dependency traversal</text>
+  <text x="1050" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Token optimization</text>
+  <text x="1050" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Build prompt context</text>
+
+  <rect x="1180" y="370" width="180" height="120" fill="#e67e22" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1270" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">LLM Service</text>
+  <text x="1270" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8004</text>
+  <text x="1270" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Multi-provider support</text>
+  <text x="1270" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Streaming responses</text>
+  <text x="1270" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Cost tracking</text>
+  <text x="1270" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Response caching</text>
+
+  <!-- Analytics Service -->
+  <rect x="1400" y="370" width="150" height="120" fill="#95a5a6" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1475" y="395" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Analytics</text>
+  <text x="1475" y="415" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="white">Port: 8005</text>
+  <text x="1475" y="435" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Usage metrics</text>
+  <text x="1475" y="450" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Performance</text>
+  <text x="1475" y="465" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Dashboards</text>
+  <text x="1475" y="480" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">• Alerts</text>
+
+  <!-- Connections from API Gateway to services -->
+  <path d="M 500 310 L 390 370" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 610 310 L 610 370" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 750 310 L 830 370" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 850 310 L 1050 370" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <path d="M 1000 310 L 1270 370" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+
+  <!-- Service to Service Connections -->
+
+  <!-- Indexing -> Embedding (async) -->
+  <path d="M 480 430 L 520 430" stroke="#e74c3c" stroke-width="2" stroke-dasharray="2,2" fill="none" marker-end="url(#red-arrow)"/>
+  <text x="500" y="420" font-family="Arial, sans-serif" font-size="9" fill="#e74c3c" text-anchor="middle">Queue</text>
+
+  <!-- Embedding -> Vector DB -->
+  <path d="M 610 490 L 610 540" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <text x="625" y="515" font-family="Arial, sans-serif" font-size="9" fill="#9b59b6">Store</text>
+
+  <!-- Search -> Embedding (for query) -->
+  <path d="M 740 420 L 700 420" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <text x="720" y="410" font-family="Arial, sans-serif" font-size="9" fill="#27ae60" text-anchor="middle">Embed Query</text>
+
+  <!-- Search -> Vector DB -->
+  <path d="M 800 490 L 720 540" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <text x="760" y="520" font-family="Arial, sans-serif" font-size="9" fill="#9b59b6" text-anchor="middle">Query</text>
+
+  <!-- Context -> Search -->
+  <path d="M 960 420 L 920 420" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <text x="940" y="410" font-family="Arial, sans-serif" font-size="9" fill="#27ae60" text-anchor="middle">Find Code</text>
+
+  <!-- Context -> PostgreSQL -->
+  <path d="M 1020 490 L 950 540" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <text x="985" y="520" font-family="Arial, sans-serif" font-size="9" fill="#9b59b6" text-anchor="middle">Graph</text>
+
+  <!-- LLM -> Context -->
+  <path d="M 1180 420 L 1140 420" stroke="#27ae60" stroke-width="2" fill="none" marker-end="url(#green-arrow)"/>
+  <text x="1160" y="410" font-family="Arial, sans-serif" font-size="9" fill="#27ae60" text-anchor="middle">Get Context</text>
+
+  <!-- LLM -> External AI -->
+  <path d="M 1270 490 L 1270 700" stroke="#3498db" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#blue-arrow)"/>
+  <text x="1285" y="590" font-family="Arial, sans-serif" font-size="9" fill="#3498db">API Call</text>
+
+  <!-- LLM -> Redis Cache -->
+  <path d="M 1210 490 L 1180 540" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <text x="1195" y="520" font-family="Arial, sans-serif" font-size="9" fill="#9b59b6" text-anchor="middle">Cache</text>
+
+  <!-- All services -> Analytics (async events) -->
+  <path d="M 390 490 L 1400 440" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 610 490 L 1400 440" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 830 490 L 1400 440" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 1050 490 L 1400 440" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 1270 490 L 1400 440" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+
+  <!-- Data Layer -->
+  <text x="300" y="570" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2c3e50">Data Layer</text>
+
+  <rect x="300" y="590" width="180" height="90" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="390" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Message Queue</text>
+  <text x="390" y="635" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Redis / RabbitMQ</text>
+  <text x="390" y="655" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Indexing jobs</text>
+  <text x="390" y="670" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Async processing</text>
+
+  <rect x="520" y="590" width="180" height="90" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="610" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Vector Database</text>
+  <text x="610" y="635" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Qdrant</text>
+  <text x="610" y="655" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Code embeddings (768D)</text>
+  <text x="610" y="670" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">HNSW similarity search</text>
+
+  <rect x="740" y="590" width="180" height="90" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="830" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">PostgreSQL</text>
+  <text x="830" y="635" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Relational DB</text>
+  <text x="830" y="655" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Metadata, relationships</text>
+  <text x="830" y="670" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Dependency graphs</text>
+
+  <rect x="960" y="590" width="180" height="90" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1050" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Redis Cache</text>
+  <text x="1050" y="635" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">In-Memory Cache</text>
+  <text x="1050" y="655" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Query results</text>
+  <text x="1050" y="670" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Session data, rate limits</text>
+
+  <rect x="1180" y="590" width="180" height="90" fill="#f39c12" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1270" y="615" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Object Storage</text>
+  <text x="1270" y="635" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">S3 / MinIO</text>
+  <text x="1270" y="655" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Source files</text>
+  <text x="1270" y="670" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Model weights, backups</text>
+
+  <!-- Connections to data stores from services -->
+  <path d="M 390 490 L 390 590" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <path d="M 480 430 L 350 590" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+  <path d="M 390 490 L 750 590" stroke="#9b59b6" stroke-width="2" fill="none" marker-end="url(#purple-arrow)"/>
+
+  <!-- External Services -->
+  <rect x="1180" y="730" width="370" height="120" fill="#9b59b6" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="1365" y="755" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">External AI Services</text>
+
+  <rect x="1200" y="770" width="100" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1250" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">OpenAI</text>
+
+  <rect x="1320" y="770" width="100" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1370" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Anthropic</text>
+
+  <rect x="1440" y="770" width="100" height="40" fill="#8e44ad" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1490" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">Local vLLM</text>
+
+  <!-- Monitoring & Observability -->
+  <rect x="300" y="730" width="830" height="120" fill="#34495e" stroke="#2c3e50" stroke-width="2" rx="5"/>
+  <text x="715" y="755" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="white">Monitoring & Observability Layer</text>
+
+  <rect x="330" y="770" width="150" height="60" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="405" y="790" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Prometheus</text>
+  <text x="405" y="805" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Metrics Collection</text>
+  <text x="405" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Time-series DB</text>
+
+  <rect x="500" y="770" width="150" height="60" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="575" y="790" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Grafana</text>
+  <text x="575" y="805" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Dashboards</text>
+  <text x="575" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Visualization</text>
+
+  <rect x="670" y="770" width="150" height="60" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="745" y="790" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Jaeger</text>
+  <text x="745" y="805" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Distributed Tracing</text>
+  <text x="745" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Request tracking</text>
+
+  <rect x="840" y="770" width="150" height="60" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="915" y="790" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">ELK Stack</text>
+  <text x="915" y="805" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Log Aggregation</text>
+  <text x="915" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Search & Analysis</text>
+
+  <rect x="1010" y="770" width="110" height="60" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="1065" y="790" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Sentry</text>
+  <text x="1065" y="805" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Error Tracking</text>
+  <text x="1065" y="820" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="white">Alerts</text>
+
+  <!-- Connections from all services to monitoring -->
+  <path d="M 390 490 L 405 730" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 610 490 L 575 730" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 830 490 L 745 730" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 1050 490 L 915 730" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+  <path d="M 1270 490 L 1065 730" stroke="#3498db" stroke-width="1" stroke-dasharray="5,5" fill="none"/>
+
+  <!-- Message Flow Examples -->
+  <rect x="50" y="900" width="1500" height="80" fill="#f8f9fa" stroke="#2c3e50" stroke-width="1" rx="3"/>
+  <text x="800" y="920" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2c3e50">Key Data Flows</text>
+
+  <text x="100" y="945" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">1️⃣ Code Indexing: IDE → API Gateway → Indexing Service → Message Queue → Embedding Service → Qdrant</text>
+  <text x="100" y="965" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">2️⃣ Code Search: IDE → API Gateway → Search Service → Embedding Service (query) → Qdrant (similarity) → IDE</text>
+  <text x="900" y="945" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">3️⃣ AI Completion: IDE → API Gateway → Context Engine → Search + PostgreSQL → LLM Service → External AI → IDE</text>
+  <text x="900" y="965" font-family="Arial, sans-serif" font-size="10" fill="#2c3e50">4️⃣ Monitoring: All Services → Prometheus (metrics) + Jaeger (traces) + ELK (logs) → Grafana → Alerts</text>
+
+  <!-- Arrow markers definition -->
+  <defs>
+    <marker id="green-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#27ae60" />
+    </marker>
+    <marker id="blue-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db" />
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+    </marker>
+    <marker id="purple-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#9b59b6" />
+    </marker>
+  </defs>
+</svg>

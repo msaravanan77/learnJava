@@ -1,0 +1,708 @@
+openapi: 3.0.3
+info:
+  title: Workspace Intelligence API
+  description: |
+    REST API for the Workspace Intelligence System - AI-powered code search, understanding, and completion.
+
+    ## Features
+    - Semantic code search across workspaces
+    - AI-powered code completion
+    - Context-aware code understanding
+    - Real-time workspace indexing
+
+    ## Authentication
+    All endpoints require JWT authentication via `Authorization: Bearer <token>` header.
+
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: api@workspaceintelligence.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.workspaceintelligence.com/api/v1
+    description: Production server
+  - url: https://staging-api.workspaceintelligence.com/api/v1
+    description: Staging server
+  - url: http://localhost:8080/api/v1
+    description: Local development
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Workspaces
+    description: Workspace management operations
+  - name: Search
+    description: Code search endpoints
+  - name: Completion
+    description: AI code completion
+  - name: Context
+    description: Context retrieval
+  - name: Indexing
+    description: Code indexing operations
+
+paths:
+  /workspaces:
+    get:
+      tags:
+        - Workspaces
+      summary: List all workspaces
+      description: Returns a list of workspaces for the authenticated user
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspaces:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+                  total:
+                    type: integer
+                    example: 5
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags:
+        - Workspaces
+      summary: Create a new workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - root_path
+              properties:
+                name:
+                  type: string
+                  example: "my-project"
+                root_path:
+                  type: string
+                  example: "/home/user/projects/my-project"
+                repository_url:
+                  type: string
+                  example: "https://github.com/user/my-project"
+      responses:
+        '201':
+          description: Workspace created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /workspaces/{workspace_id}:
+    get:
+      tags:
+        - Workspaces
+      summary: Get workspace details
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags:
+        - Workspaces
+      summary: Delete a workspace
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Workspace deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /workspaces/{workspace_id}/index:
+    post:
+      tags:
+        - Indexing
+      summary: Trigger workspace indexing
+      description: Starts asynchronous indexing of workspace code
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                incremental:
+                  type: boolean
+                  default: true
+                  description: If true, only index changed files
+      responses:
+        '202':
+          description: Indexing started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum: [queued, processing]
+                  message:
+                    type: string
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /workspaces/{workspace_id}/status:
+    get:
+      tags:
+        - Indexing
+      summary: Get indexing status
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Indexing status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [idle, indexing, completed, error]
+                  progress:
+                    type: number
+                    format: float
+                    minimum: 0
+                    maximum: 100
+                    example: 75.5
+                  total_files:
+                    type: integer
+                  indexed_files:
+                    type: integer
+                  total_elements:
+                    type: integer
+                  last_indexed_at:
+                    type: string
+                    format: date-time
+
+  /search/semantic:
+    post:
+      tags:
+        - Search
+      summary: Semantic code search
+      description: Search for code using natural language or code snippets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              naturalLanguage:
+                summary: Natural language query
+                value:
+                  workspace_id: "550e8400-e29b-41d4-a716-446655440000"
+                  query: "function that handles user authentication"
+                  limit: 10
+              codeSnippet:
+                summary: Code snippet query
+                value:
+                  workspace_id: "550e8400-e29b-41d4-a716-446655440000"
+                  query: "public boolean authenticate(String username, String password)"
+                  filters:
+                    language: "java"
+                    element_type: "method"
+                  limit: 5
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /search/hybrid:
+    post:
+      tags:
+        - Search
+      summary: Hybrid search (semantic + keyword)
+      description: Combines semantic similarity with keyword matching for better results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+
+  /completion:
+    post:
+      tags:
+        - Completion
+      summary: Request AI code completion
+      description: Get AI-powered code completion suggestions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+            example:
+              workspace_id: "550e8400-e29b-41d4-a716-446655440000"
+              file_path: "src/main/java/Service.java"
+              cursor_position:
+                line: 45
+                character: 12
+              current_content: |
+                public class Service {
+                  public void processData(List<String> data) {
+                    // <cursor here>
+                  }
+                }
+              context_strategy: "smart"
+              stream: false
+      responses:
+        '200':
+          description: Completion result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /completion/stream:
+    post:
+      tags:
+        - Completion
+      summary: Stream AI code completion
+      description: Get streaming AI code completion (Server-Sent Events)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletionRequest'
+      responses:
+        '200':
+          description: Streaming completion
+          content:
+            text/event-stream:
+              schema:
+                type: string
+                example: |
+                  data: {"chunk": "for (String", "done": false}
+
+                  data: {"chunk": " item : data) {", "done": false}
+
+                  data: {"chunk": "\n    System.out.println(item);", "done": false}
+
+                  data: {"chunk": "\n}", "done": true}
+
+  /context:
+    post:
+      tags:
+        - Context
+      summary: Get relevant code context
+      description: Retrieve relevant code context for a given position
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workspace_id
+                - file_path
+                - cursor_position
+              properties:
+                workspace_id:
+                  type: string
+                  format: uuid
+                file_path:
+                  type: string
+                cursor_position:
+                  $ref: '#/components/schemas/Position'
+                current_content:
+                  type: string
+                context_strategy:
+                  type: string
+                  enum: [minimal, smart, extensive]
+                  default: smart
+      responses:
+        '200':
+          description: Context retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextResponse'
+
+  /chat:
+    post:
+      tags:
+        - Completion
+      summary: Chat with codebase
+      description: Ask questions about the codebase
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - workspace_id
+                - message
+              properties:
+                workspace_id:
+                  type: string
+                  format: uuid
+                message:
+                  type: string
+                  example: "Where is the user authentication logic implemented?"
+                conversation_id:
+                  type: string
+                  format: uuid
+                  description: For continuing a conversation
+      responses:
+        '200':
+          description: Chat response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversation_id:
+                    type: string
+                    format: uuid
+                  message:
+                    type: string
+                  sources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        file_path:
+                          type: string
+                        start_line:
+                          type: integer
+                        end_line:
+                          type: integer
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        root_path:
+          type: string
+        repository_url:
+          type: string
+        indexing_status:
+          type: string
+          enum: [idle, indexing, completed, error]
+        total_files:
+          type: integer
+        total_elements:
+          type: integer
+        last_indexed_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+
+    SearchRequest:
+      type: object
+      required:
+        - workspace_id
+        - query
+      properties:
+        workspace_id:
+          type: string
+          format: uuid
+        query:
+          type: string
+          minLength: 1
+          maxLength: 1000
+        filters:
+          type: object
+          properties:
+            language:
+              type: array
+              items:
+                type: string
+                enum: [java, python, javascript, typescript, go, rust, cpp]
+            element_type:
+              type: array
+              items:
+                type: string
+                enum: [function, method, class, interface, variable]
+            file_pattern:
+              type: string
+              example: "src/**/*.java"
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+        offset:
+          type: integer
+          minimum: 0
+          default: 0
+
+    SearchResponse:
+      type: object
+      properties:
+        query_id:
+          type: string
+          format: uuid
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeElement'
+        total:
+          type: integer
+        latency_ms:
+          type: integer
+
+    CodeElement:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        element_type:
+          type: string
+          enum: [function, method, class, interface, variable]
+        name:
+          type: string
+        qualified_name:
+          type: string
+        file_path:
+          type: string
+        start_line:
+          type: integer
+        end_line:
+          type: integer
+        language:
+          type: string
+        signature:
+          type: string
+        docstring:
+          type: string
+        content:
+          type: string
+
+    CompletionRequest:
+      type: object
+      required:
+        - workspace_id
+        - file_path
+        - cursor_position
+        - current_content
+      properties:
+        workspace_id:
+          type: string
+          format: uuid
+        file_path:
+          type: string
+        cursor_position:
+          $ref: '#/components/schemas/Position'
+        current_content:
+          type: string
+        context_strategy:
+          type: string
+          enum: [minimal, smart, extensive]
+          default: smart
+        max_tokens:
+          type: integer
+          minimum: 1
+          maximum: 2000
+          default: 500
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          default: 0.3
+        stream:
+          type: boolean
+          default: false
+
+    CompletionResponse:
+      type: object
+      properties:
+        completion:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        context_used:
+          type: object
+          properties:
+            total_tokens:
+              type: integer
+            sources:
+              type: integer
+        latency_ms:
+          type: integer
+
+    ContextResponse:
+      type: object
+      properties:
+        context:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                enum: [current_file, related_file, similar_code, documentation]
+              file_path:
+                type: string
+              content:
+                type: string
+              relevance_score:
+                type: number
+                format: float
+        total_tokens:
+          type: integer
+        sources:
+          type: integer
+
+    Position:
+      type: object
+      required:
+        - line
+        - character
+      properties:
+        line:
+          type: integer
+          minimum: 0
+        character:
+          type: integer
+          minimum: 0
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            details:
+              type: object
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: "BAD_REQUEST"
+              message: "Invalid request parameters"
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: "UNAUTHORIZED"
+              message: "Invalid or missing authentication token"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: "NOT_FOUND"
+              message: "Workspace not found"
+
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: "RATE_LIMIT_EXCEEDED"
+              message: "API rate limit exceeded. Please retry after 60 seconds"
