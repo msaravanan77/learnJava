@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .title { font: bold 32px sans-serif; fill: #1a1a1a; }
+      .subtitle { font: bold 20px sans-serif; fill: #2c3e50; }
+      .heading { font: bold 16px sans-serif; fill: #34495e; }
+      .text { font: 14px sans-serif; fill: #555; }
+      .small-text { font: 12px sans-serif; fill: #666; }
+      .code { font: 13px 'Courier New', monospace; fill: #e74c3c; }
+      .box { fill: #fff; stroke: #3498db; stroke-width: 2; }
+      .box-traditional { fill: #ecf0f1; stroke: #95a5a6; stroke-width: 2; }
+      .box-ai { fill: #e8f4f8; stroke: #3498db; stroke-width: 2; }
+      .box-tensor { fill: #fef5e7; stroke: #f39c12; stroke-width: 2; }
+      .box-framework { fill: #ebf5fb; stroke: #2980b9; stroke-width: 2; }
+      .box-app { fill: #e8f6f3; stroke: #16a085; stroke-width: 2; }
+      .arrow { fill: none; stroke: #7f8c8d; stroke-width: 2; marker-end: url(#arrowhead); }
+      .arrow-highlight { fill: none; stroke: #e74c3c; stroke-width: 3; marker-end: url(#arrowhead-highlight); }
+      .gradient-bg { fill: url(#grad1); }
+    </style>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowhead-highlight" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="gradient-bg" width="1400" height="1000" />
+
+  <!-- Title -->
+  <text x="700" y="40" class="title" text-anchor="middle">From Traditional Programming to AI: The Complete Picture</text>
+  <text x="700" y="65" class="subtitle" text-anchor="middle">Understanding What AI Really Is, What Problems It Solves, and Why It Matters</text>
+
+  <!-- Left Side: Traditional Programming (What You Know) -->
+  <rect class="box-traditional" x="50" y="100" width="380" height="320" rx="8" />
+  <text x="240" y="130" class="heading" text-anchor="middle">TRADITIONAL PROGRAMMING</text>
+  <text x="240" y="150" class="small-text" text-anchor="middle">(Your 20 Years of C Experience)</text>
+
+  <!-- Traditional approach details -->
+  <text x="70" y="180" class="text" font-weight="bold">You Write Rules:</text>
+  <rect fill="#fff" x="70" y="190" width="340" height="60" rx="4" stroke="#95a5a6" />
+  <text x="80" y="210" class="code">if (password_age &gt; 90) {</text>
+  <text x="80" y="228" class="code">  force_reset();</text>
+  <text x="80" y="246" class="code">}</text>
+
+  <text x="70" y="275" class="text" font-weight="bold">Data Structure (Arrays):</text>
+  <rect fill="#fff" x="70" y="285" width="340" height="40" rx="4" stroke="#95a5a6" />
+  <text x="80" y="305" class="code">int users[100]; // Simple 1D array</text>
+
+  <text x="70" y="345" class="text" font-weight="bold">Problem:</text>
+  <text x="70" y="365" class="small-text">• You must know ALL rules upfront</text>
+  <text x="70" y="383" class="small-text">• Can't adapt to new patterns</text>
+  <text x="70" y="401" class="small-text">• Doesn't learn from data</text>
+
+  <!-- Right Side: AI/ML Approach -->
+  <rect class="box-ai" x="970" y="100" width="380" height="320" rx="8" />
+  <text x="1160" y="130" class="heading" text-anchor="middle">AI / MACHINE LEARNING</text>
+  <text x="1160" y="150" class="small-text" text-anchor="middle">(Learning from Data)</text>
+
+  <!-- AI approach details -->
+  <text x="990" y="180" class="text" font-weight="bold">Model Learns Patterns:</text>
+  <rect fill="#fff" x="990" y="190" width="340" height="60" rx="4" stroke="#3498db" />
+  <text x="1000" y="210" class="small-text">Feed 100,000 examples of:</text>
+  <text x="1000" y="228" class="small-text">✓ Normal logins vs ✗ Suspicious logins</text>
+  <text x="1000" y="246" class="small-text">→ Model learns the patterns automatically</text>
+
+  <text x="990" y="275" class="text" font-weight="bold">Data Structure (Tensors):</text>
+  <rect fill="#fff" x="990" y="285" width="340" height="40" rx="4" stroke="#f39c12" />
+  <text x="1000" y="305" class="code">tensor[1000][50][20] // Multi-dim</text>
+
+  <text x="990" y="345" class="text" font-weight="bold">Advantage:</text>
+  <text x="990" y="365" class="small-text">• Discovers patterns you didn't know</text>
+  <text x="990" y="383" class="small-text">• Adapts as data changes</text>
+  <text x="990" y="401" class="small-text">• Improves with more examples</text>
+
+  <!-- Center: The Transition -->
+  <path class="arrow-highlight" d="M 440 260 L 960 260" />
+  <text x="700" y="250" class="text" text-anchor="middle" font-weight="bold" fill="#e74c3c">The Paradigm Shift</text>
+  <text x="700" y="280" class="small-text" text-anchor="middle">From "Writing Rules" → "Learning from Data"</text>
+
+  <!-- Middle Section: What is a Tensor? -->
+  <rect class="box-tensor" x="300" y="450" width="800" height="160" rx="8" />
+  <text x="700" y="480" class="heading" text-anchor="middle">WHAT IS A TENSOR? (Think: Supercharged Array)</text>
+
+  <g transform="translate(320, 500)">
+    <!-- 1D Array -->
+    <rect fill="#fff" x="0" y="0" width="180" height="80" rx="4" stroke="#f39c12" stroke-width="2" />
+    <text x="90" y="20" class="text" text-anchor="middle" font-weight="bold">1D Tensor (Vector)</text>
+    <text x="90" y="40" class="small-text" text-anchor="middle">int arr[5]</text>
+    <rect fill="#3498db" x="20" y="50" width="20" height="20" opacity="0.7" />
+    <rect fill="#3498db" x="45" y="50" width="20" height="20" opacity="0.7" />
+    <rect fill="#3498db" x="70" y="50" width="20" height="20" opacity="0.7" />
+    <rect fill="#3498db" x="95" y="50" width="20" height="20" opacity="0.7" />
+    <rect fill="#3498db" x="120" y="50" width="20" height="20" opacity="0.7" />
+    <text x="90" y="100" class="small-text" text-anchor="middle">Ex: [5, 2, 8, 1, 9]</text>
+  </g>
+
+  <g transform="translate(520, 500)">
+    <!-- 2D Array -->
+    <rect fill="#fff" x="0" y="0" width="180" height="80" rx="4" stroke="#f39c12" stroke-width="2" />
+    <text x="90" y="20" class="text" text-anchor="middle" font-weight="bold">2D Tensor (Matrix)</text>
+    <text x="90" y="40" class="small-text" text-anchor="middle">int matrix[3][3]</text>
+    <rect fill="#e74c3c" x="40" y="48" width="15" height="15" opacity="0.7" />
+    <rect fill="#e74c3c" x="58" y="48" width="15" height="15" opacity="0.7" />
+    <rect fill="#e74c3c" x="76" y="48" width="15" height="15" opacity="0.7" />
+    <rect fill="#e74c3c" x="40" y="66" width="15" height="15" opacity="0.7" />
+    <rect fill="#e74c3c" x="58" y="66" width="15" height="15" opacity="0.7" />
+    <rect fill="#e74c3c" x="76" y="66" width="15" height="15" opacity="0.7" />
+    <text x="90" y="100" class="small-text" text-anchor="middle">Ex: Image pixels</text>
+  </g>
+
+  <g transform="translate(720, 500)">
+    <!-- 3D Tensor -->
+    <rect fill="#fff" x="0" y="0" width="180" height="80" rx="4" stroke="#f39c12" stroke-width="2" />
+    <text x="90" y="20" class="text" text-anchor="middle" font-weight="bold">3D+ Tensor</text>
+    <text x="90" y="40" class="small-text" text-anchor="middle">tensor[H][W][RGB]</text>
+    <!-- 3D cube representation -->
+    <polygon points="50,55 70,45 90,55 70,65" fill="#16a085" opacity="0.6" />
+    <polygon points="50,55 50,70 70,80 70,65" fill="#16a085" opacity="0.8" />
+    <polygon points="70,65 70,80 90,70 90,55" fill="#16a085" opacity="0.7" />
+    <text x="90" y="100" class="small-text" text-anchor="middle">Ex: Video frames</text>
+  </g>
+
+  <text x="700" y="625" class="small-text" text-anchor="middle" font-weight="bold" fill="#d35400">
+    A Tensor is just a multi-dimensional array that can run on GPUs for parallel processing!
+  </text>
+
+  <!-- Bottom Section: The Stack -->
+  <text x="700" y="665" class="heading" text-anchor="middle">THE AI/ML STACK: How It All Connects</text>
+
+  <!-- Layer 1: Data -->
+  <rect class="box" x="200" y="680" width="200" height="80" rx="6" fill="#ecf0f1" stroke="#34495e" />
+  <text x="300" y="705" class="text" text-anchor="middle" font-weight="bold">1. RAW DATA</text>
+  <text x="300" y="725" class="small-text" text-anchor="middle">User logins, images,</text>
+  <text x="300" y="742" class="small-text" text-anchor="middle">text, sensor data</text>
+
+  <path class="arrow" d="M 405 720 L 480 720" />
+
+  <!-- Layer 2: Tensors -->
+  <rect class="box-tensor" x="485" y="680" width="200" height="80" rx="6" />
+  <text x="585" y="705" class="text" text-anchor="middle" font-weight="bold">2. TENSORS</text>
+  <text x="585" y="725" class="small-text" text-anchor="middle">Data converted to</text>
+  <text x="585" y="742" class="small-text" text-anchor="middle">multi-dim arrays</text>
+
+  <path class="arrow" d="M 690 720 L 765 720" />
+
+  <!-- Layer 3: PyTorch/Framework -->
+  <rect class="box-framework" x="770" y="680" width="200" height="80" rx="6" />
+  <text x="870" y="705" class="text" text-anchor="middle" font-weight="bold">3. PYTORCH</text>
+  <text x="870" y="725" class="small-text" text-anchor="middle">Framework to build</text>
+  <text x="870" y="742" class="small-text" text-anchor="middle">& train models</text>
+
+  <path class="arrow" d="M 975 720 L 1050 720" />
+
+  <!-- Layer 4: Model -->
+  <rect class="box-app" x="1055" y="680" width="200" height="80" rx="6" />
+  <text x="1155" y="705" class="text" text-anchor="middle" font-weight="bold">4. TRAINED MODEL</text>
+  <text x="1155" y="725" class="small-text" text-anchor="middle">Claude, GPT, or your</text>
+  <text x="1155" y="742" class="small-text" text-anchor="middle">custom PAM analyzer</text>
+
+  <!-- Real-world Examples -->
+  <rect class="box-app" x="50" y="800" width="300" height="180" rx="8" />
+  <text x="200" y="830" class="heading" text-anchor="middle">REAL-WORLD USE CASES</text>
+  <text x="70" y="855" class="text" font-weight="bold">Security (PAM):</text>
+  <text x="70" y="873" class="small-text">• Detect anomalous access patterns</text>
+  <text x="70" y="889" class="small-text">• Predict credential compromise</text>
+  <text x="70" y="905" class="small-text">• Auto-classify privilege escalation</text>
+
+  <text x="70" y="930" class="text" font-weight="bold">What You're Using Now:</text>
+  <text x="70" y="948" class="small-text">• Claude Code (LLM trained on code)</text>
+  <text x="70" y="964" class="small-text">• All built using these concepts!</text>
+
+  <!-- Why Learn This -->
+  <rect class="box-ai" x="380" y="800" width="640" height="180" rx="8" />
+  <text x="700" y="830" class="heading" text-anchor="middle">WHY LEARN THIS? (Your Journey)</text>
+
+  <g transform="translate(400, 845)">
+    <circle cx="8" cy="0" r="5" fill="#16a085" />
+    <text x="20" y="5" class="text" font-weight="bold">Understand Tools You Use:</text>
+    <text x="20" y="20" class="small-text">Claude, Copilot → Now you'll know how they work under the hood</text>
+  </g>
+
+  <g transform="translate(400, 880)">
+    <circle cx="8" cy="0" r="5" fill="#2980b9" />
+    <text x="20" y="5" class="text" font-weight="bold">Build Custom Solutions:</text>
+    <text x="20" y="20" class="small-text">PAM anomaly detector, smart log analyzer, auto-incident classifier</text>
+  </g>
+
+  <g transform="translate(400, 915)">
+    <circle cx="8" cy="0" r="5" fill="#8e44ad" />
+    <text x="20" y="5" class="text" font-weight="bold">Future-Proof Career:</text>
+    <text x="20" y="20" class="small-text">AI is transforming every domain - be the engineer who bridges both worlds</text>
+  </g>
+
+  <g transform="translate(400, 950)">
+    <circle cx="8" cy="0" r="5" fill="#c0392b" />
+    <text x="20" y="5" class="text" font-weight="bold">Practical MCP/RAG Projects:</text>
+    <text x="20" y="20" class="small-text">Create intelligent systems that understand YOUR company's data & workflows</text>
+  </g>
+
+  <!-- Your Next Steps -->
+  <rect class="box-framework" x="1050" y="800" width="300" height="180" rx="8" />
+  <text x="1200" y="830" class="heading" text-anchor="middle">YOUR NEXT STEPS</text>
+
+  <text x="1070" y="855" class="small-text" font-weight="bold">Week 1: Tensors Hands-on</text>
+  <text x="1070" y="871" class="small-text">Build a simple image filter (C → Python)</text>
+
+  <text x="1070" y="895" class="small-text" font-weight="bold">Week 2: PyTorch Basics</text>
+  <text x="1070" y="911" class="small-text">Train a model to classify login attempts</text>
+
+  <text x="1070" y="935" class="small-text" font-weight="bold">Week 3: Real Project</text>
+  <text x="1070" y="951" class="small-text">PAM log analyzer using embeddings</text>
+
+  <text x="1070" y="975" class="small-text" font-weight="bold">Week 4: MCP/RAG</text>
+  <text x="1070" y="991" class="small-text">Build custom Claude integration</text>
+
+  <!-- Footer -->
+  <text x="700" y="995" class="small-text" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+    "The best way to learn is to build. Start small, see results, understand deeply, then scale up."
+  </text>
+</svg>

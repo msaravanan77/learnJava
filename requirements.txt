@@ -1,0 +1,15 @@
+# AI/ML Fundamentals - Python Dependencies
+# Install all: pip install -r requirements.txt
+
+# Core ML framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Numerical computing
+numpy>=1.24.0
+
+# Advanced topics (Week 4)
+# Uncomment when you reach Week 4:
+# sentence-transformers>=2.2.0
+# anthropic>=0.18.0
+# mcp>=0.1.0
