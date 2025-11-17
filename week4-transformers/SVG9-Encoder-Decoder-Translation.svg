@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <rect fill="#fafafa" width="1400" height="1000"/>
+
+  <!-- Title -->
+  <text x="700" y="40" style="font: bold 30px sans-serif; fill: #1a1a1a;" text-anchor="middle">Encoder-Decoder Architecture (Translation)</text>
+  <text x="700" y="70" style="font: 17px sans-serif; fill: #666;" text-anchor="middle">How machine translation works: "Hello" → "Bonjour"</text>
+
+  <!-- ENCODER (Left side) -->
+  <rect fill="#e3f2fd" x="50" y="110" width="450" height="750" rx="10" stroke="#2196f3" stroke-width="3"/>
+  <text x="275" y="150" style="font: bold 18px sans-serif; fill: #1976d2;" text-anchor="middle">ENCODER (Source Language)</text>
+
+  <!-- Input -->
+  <rect fill="#fff" x="80" y="180" width="390" height="80" rx="6" stroke="#64b5f6"/>
+  <text x="275" y="205" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Input: Source Sentence</text>
+  <text x="100" y="230" style="font: 10px sans-serif;">"Hello, how are you?"</text>
+  <text x="100" y="250" style="font: 9px sans-serif; fill: #666;">Token + Position Embeddings</text>
+
+  <!-- Encoder Layers -->
+  <rect fill="#bbdefb" x="80" y="280" width="390" height="90" rx="6" stroke="#42a5f5" stroke-width="2"/>
+  <text x="275" y="310" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Encoder Layer 1</text>
+  <text x="100" y="335" style="font: 10px sans-serif;">Self-Attention (bidirectional)</text>
+  <text x="100" y="355" style="font: 9px sans-serif; fill: #555;">+ Feed-Forward + LayerNorm</text>
+
+  <rect fill="#90caf9" x="80" y="390" width="390" height="90" rx="6" stroke="#2196f3" stroke-width="2"/>
+  <text x="275" y="420" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Encoder Layer 2-5</text>
+  <text x="100" y="445" style="font: 10px sans-serif;">Refines source representations</text>
+  <text x="100" y="465" style="font: 9px sans-serif; fill: #555;">Each word sees ALL source words</text>
+
+  <rect fill="#64b5f6" x="80" y="500" width="390" height="90" rx="6" stroke="#1976d2" stroke-width="2"/>
+  <text x="275" y="530" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Final Encoder Layer 6</text>
+  <text x="100" y="555" style="font: 10px sans-serif;">Rich contextual understanding</text>
+
+  <!-- Encoder Output -->
+  <rect fill="#e8f5e9" x="80" y="610" width="390" height="100" rx="8" stroke="#4caf50" stroke-width="2"/>
+  <text x="275" y="640" style="font: 13px sans-serif; font-weight: bold; fill: #388e3c;" text-anchor="middle">Encoder Output</text>
+  <text x="100" y="665" style="font: 10px sans-serif;">Context vectors for each source word</text>
+  <text x="100" y="685" style="font: 9px sans-serif; fill: #666;">Shape: (src_len, d_model)</text>
+  <text x="100" y="700" style="font: 9px sans-serif; fill: #2196f3; font-weight: bold;">→ Passed to decoder for cross-attention</text>
+
+  <text x="275" y="750" style="font: 11px sans-serif; fill: #1976d2; font-weight: bold;" text-anchor="middle">Understands SOURCE language</text>
+  <text x="275" y="775" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Bidirectional attention</text>
+  <text x="275" y="795" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Sees entire input sentence</text>
+
+  <!-- DECODER (Right side) -->
+  <rect fill="#fce4ec" x="550" y="110" width="450" height="750" rx="10" stroke="#e91e63" stroke-width="3"/>
+  <text x="775" y="150" style="font: bold 18px sans-serif; fill: #c2185b;" text-anchor="middle">DECODER (Target Language)</text>
+
+  <!-- Decoder Input -->
+  <rect fill="#fff" x="580" y="180" width="390" height="80" rx="6" stroke="#f48fb1"/>
+  <text x="775" y="205" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Input: Target (shifted right)</text>
+  <text x="600" y="230" style="font: 10px sans-serif;">&lt;START&gt; "Bonjour, comment"</text>
+  <text x="600" y="250" style="font: 9px sans-serif; fill: #666;">Predicting: "Bonjour, comment allez-vous?"</text>
+
+  <!-- Decoder Layer 1 -->
+  <rect fill="#f8bbd0" x="580" y="280" width="390" height="120" rx="6" stroke="#ec407a" stroke-width="2"/>
+  <text x="775" y="310" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Decoder Layer 1</text>
+  <text x="600" y="335" style="font: 10px sans-serif; fill: #c2185b; font-weight: bold;">① Masked Self-Attention</text>
+  <text x="610" y="355" style="font: 9px sans-serif;">Target words attend to previous target words</text>
+  <text x="600" y="375" style="font: 10px sans-serif; fill: #c2185b; font-weight: bold;">② Cross-Attention (Encoder-Decoder)</text>
+  <text x="610" y="392" style="font: 9px sans-serif;">Query from decoder, Key+Value from encoder!</text>
+
+  <!-- Decoder Layers -->
+  <rect fill="#f48fb1" x="580" y="420" width="390" height="90" rx="6" stroke="#e91e63" stroke-width="2"/>
+  <text x="775" y="450" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Decoder Layers 2-5</text>
+  <text x="600" y="475" style="font: 10px sans-serif;">Self-Attention → Cross-Attention → FFN</text>
+  <text x="600" y="495" style="font: 9px sans-serif; fill: #555;">Combine target + source information</text>
+
+  <rect fill="#ec407a" x="580" y="530" width="390" height="80" rx="6" stroke="#d81b60" stroke-width="2"/>
+  <text x="775" y="560" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Final Decoder Layer 6</text>
+  <text x="600" y="585" style="font: 10px sans-serif;">Rich bilingual representations</text>
+
+  <!-- Decoder Output -->
+  <rect fill="#e8f5e9" x="580" y="630" width="390" height="130" rx="8" stroke="#4caf50" stroke-width="2"/>
+  <text x="775" y="660" style="font: 13px sans-serif; font-weight: bold; fill: #388e3c;" text-anchor="middle">Output Layer</text>
+  <text x="600" y="685" style="font: 10px sans-serif;">Linear → Softmax</text>
+  <text x="600" y="705" style="font: 10px sans-serif;">Predicts next French word</text>
+  <text x="600" y="725" style="font: 9px sans-serif; fill: #666;">Vocabulary: 30k tokens</text>
+  <text x="600" y="745" style="font: 9px sans-serif; fill: #e91e63; font-weight: bold;">Generates target one word at a time</text>
+
+  <text x="775" y="795" style="font: 11px sans-serif; fill: #c2185b; font-weight: bold;" text-anchor="middle">Generates TARGET language</text>
+  <text x="775" y="815" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Causal attention (can't see future)</text>
+  <text x="775" y="835" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Cross-attention to source</text>
+
+  <!-- Arrow connecting Encoder to Decoder -->
+  <path d="M 500 650 L 550 650" stroke="#4caf50" stroke-width="4" marker-end="url(#arrow-green)"/>
+  <text x="525" y="640" style="font: 10px sans-serif; fill: #2e7d32; font-weight: bold;" text-anchor="middle">Context</text>
+
+  <!-- Bottom explanation -->
+  <rect fill="#fff3e0" x="50" y="880" width="950" height="110" rx="8" stroke="#f9a825" stroke-width="2"/>
+  <text x="525" y="915" style="font: bold 14px sans-serif; fill: #f57f17;" text-anchor="middle">🔑 KEY: CROSS-ATTENTION</text>
+  <text x="70" y="945" style="font: 10px sans-serif;">Cross-Attention allows decoder to "look at" encoder output:</text>
+  <text x="90" y="965" style="font: 9px monospace;">Query (Q): From decoder (what am I generating?)</text>
+  <text x="90" y="983" style="font: 9px monospace;">Key (K) + Value (V): From encoder (what does source say?)</text>
+
+  <!-- Right side box -->
+  <rect fill="#e3f2fd" x="1030" y="110" width="320" height="880" rx="8" stroke="#2196f3" stroke-width="2"/>
+  <text x="1190" y="145" style="font: bold 14px sans-serif; fill: #1976d2;" text-anchor="middle">GENERATION PROCESS</text>
+
+  <g transform="translate(1050, 170)">
+    <text x="0" y="0" style="font: 11px sans-serif; font-weight: bold;">Step-by-step translation:</text>
+
+    <rect fill="#fff9c4" x="0" y="15" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="35" style="font: 9px sans-serif; font-weight: bold;">Step 1:</text>
+    <text x="10" y="52" style="font: 8px monospace;">Input: &lt;START&gt;</text>
+    <text x="10" y="67" style="font: 8px monospace;">Output: "Bonjour" (85%)</text>
+
+    <rect fill="#fff9c4" x="0" y="90" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="110" style="font: 9px sans-serif; font-weight: bold;">Step 2:</text>
+    <text x="10" y="127" style="font: 8px monospace;">Input: &lt;START&gt; Bonjour</text>
+    <text x="10" y="142" style="font: 8px monospace;">Output: "," (92%)</text>
+
+    <rect fill="#fff9c4" x="0" y="165" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="185" style="font: 9px sans-serif; font-weight: bold;">Step 3:</text>
+    <text x="10" y="202" style="font: 8px monospace;">Input: &lt;START&gt; Bonjour,</text>
+    <text x="10" y="217" style="font: 8px monospace;">Output: "comment" (78%)</text>
+
+    <rect fill="#fff9c4" x="0" y="240" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="260" style="font: 9px sans-serif; font-weight: bold;">Step 4:</text>
+    <text x="10" y="277" style="font: 8px monospace;">Input: ... Bonjour, comment</text>
+    <text x="10" y="292" style="font: 8px monospace;">Output: "allez-vous" (81%)</text>
+
+    <rect fill="#fff9c4" x="0" y="315" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="335" style="font: 9px sans-serif; font-weight: bold;">Step 5:</text>
+    <text x="10" y="352" style="font: 8px monospace;">Input: ... comment allez-vous</text>
+    <text x="10" y="367" style="font: 8px monospace;">Output: "?" (94%)</text>
+
+    <rect fill="#fff9c4" x="0" y="390" width="280" height="60" rx="4" stroke="#f9a825"/>
+    <text x="10" y="410" style="font: 9px sans-serif; font-weight: bold;">Step 6:</text>
+    <text x="10" y="427" style="font: 8px monospace;">Input: ... allez-vous?</text>
+    <text x="10" y="442" style="font: 8px monospace;">Output: &lt;END&gt; (96%)</text>
+  </g>
+
+  <text x="1190" y="605" style="font: 11px sans-serif; fill: #1976d2; font-weight: bold;" text-anchor="middle">USE CASES</text>
+  <text x="1060" y="630" style="font: 9px sans-serif;">• Machine Translation</text>
+  <text x="1060" y="650" style="font: 9px sans-serif;">• Text Summarization</text>
+  <text x="1060" y="670" style="font: 9px sans-serif;">• Question Answering</text>
+  <text x="1060" y="690" style="font: 9px sans-serif;">• Image Captioning</text>
+  <text x="1060" y="710" style="font: 9px sans-serif;">• Speech Recognition</text>
+
+  <rect fill="#e8f5e9" x="1050" y="735" width="280" height="135" rx="6" stroke="#4caf50" stroke-width="2"/>
+  <text x="1190" y="760" style="font: 11px sans-serif; fill: #2e7d32; font-weight: bold;" text-anchor="middle">WHY ENCODER-DECODER?</text>
+  <text x="1060" y="785" style="font: 9px sans-serif;">✓ Input ≠ Output length</text>
+  <text x="1060" y="805" style="font: 9px sans-serif;">✓ Different domains</text>
+  <text x="1060" y="825" style="font: 9px sans-serif;">✓ Bidirectional source</text>
+  <text x="1060" y="845" style="font: 9px sans-serif;">✓ Autoregressive target</text>
+  <text x="1060" y="865" style="font: 8px sans-serif; fill: #666;">Original Transformer (2017)</text>
+
+  <defs>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4caf50"/>
+    </marker>
+  </defs>
+
+  <text x="700" y="30" style="font: 10px sans-serif; fill: #999; font-style: italic;" text-anchor="middle">T5, BART, and original Transformer use this architecture</text>
+</svg>

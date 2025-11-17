@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .title { font: bold 32px sans-serif; fill: #1a1a1a; }
+      .subtitle { font: bold 18px sans-serif; fill: #2c3e50; }
+      .heading { font: bold 16px sans-serif; fill: #34495e; }
+      .text { font: 14px sans-serif; fill: #555; }
+      .small-text { font: 12px sans-serif; fill: #666; }
+      .tiny-text { font: 10px sans-serif; fill: #777; }
+      .code { font: 13px 'Courier New', monospace; fill: #e74c3c; }
+      .formula { font: 15px 'Times New Roman', serif; fill: #2c3e50; font-style: italic; }
+      .box-query { fill: #e3f2fd; stroke: #2196f3; stroke-width: 3; }
+      .box-key { fill: #fff3e0; stroke: #ff9800; stroke-width: 3; }
+      .box-value { fill: #e8f5e9; stroke: #4caf50; stroke-width: 3; }
+      .box-output { fill: #fce4ec; stroke: #e91e63; stroke-width: 3; }
+      .arrow { fill: none; stroke: #7f8c8d; stroke-width: 2.5; marker-end: url(#arrowhead); }
+      .arrow-blue { fill: none; stroke: #2196f3; stroke-width: 3; marker-end: url(#arrowhead-blue); }
+      .arrow-orange { fill: none; stroke: #ff9800; stroke-width: 3; marker-end: url(#arrowhead-orange); }
+      .arrow-green { fill: none; stroke: #4caf50; stroke-width: 3; marker-end: url(#arrowhead-green); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#2196f3" />
+    </marker>
+    <marker id="arrowhead-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#ff9800" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect fill="#fafafa" width="1400" height="1000"/>
+
+  <!-- Title -->
+  <text x="700" y="40" class="title" text-anchor="middle">Attention Mechanism: The Foundation of Transformers</text>
+  <text x="700" y="65" class="subtitle" text-anchor="middle">Understanding Query, Key, Value - The Core Idea</text>
+
+  <!-- Core Analogy -->
+  <rect fill="#fff9c4" x="50" y="90" width="600" height="180" rx="10" stroke="#fbc02d" stroke-width="2"/>
+  <text x="350" y="120" class="heading" text-anchor="middle" fill="#f57f17">📚 THE LIBRARY ANALOGY</text>
+
+  <text x="70" y="150" class="text" font-weight="bold">Imagine you're researching "quantum physics" in a library:</text>
+  <text x="90" y="175" class="small-text">• <tspan font-weight="bold" fill="#2196f3">Query:</tspan> Your research question: "What is quantum entanglement?"</text>
+  <text x="90" y="197" class="small-text">• <tspan font-weight="bold" fill="#ff9800">Keys:</tspan> Book titles/index cards (help you find relevant books)</text>
+  <text x="90" y="219" class="small-text">• <tspan font-weight="bold" fill="#4caf50">Values:</tspan> Actual book contents (information you extract)</text>
+  <text x="90" y="241" class="small-text">• <tspan font-weight="bold" fill="#e91e63">Output:</tspan> Summary combining relevant information from all books</text>
+
+  <text x="350" y="265" class="tiny-text" text-anchor="middle" fill="#666" font-style="italic">Attention works the same way: Query searches through Keys to retrieve Values!</text>
+
+  <!-- Real Example -->
+  <rect fill="#e1f5fe" x="680" y="90" width="670" height="180" rx="10" stroke="#0277bd" stroke-width="2"/>
+  <text x="1015" y="120" class="heading" text-anchor="middle" fill="#01579b">💬 REAL NLP EXAMPLE</text>
+
+  <text x="700" y="150" class="text" font-weight="bold">Sentence: "The animal didn't cross the street because <tspan fill="#e91e63">it</tspan> was too tired"</text>
+  <text x="720" y="180" class="small-text">Question: What does "<tspan fill="#e91e63">it</tspan>" refer to?</text>
+  <text x="720" y="210" class="small-text"><tspan font-weight="bold" fill="#2196f3">Query:</tspan> Representation of the word "it" asking "who am I?"</text>
+  <text x="720" y="235" class="small-text"><tspan font-weight="bold" fill="#ff9800">Keys:</tspan> Representations of all words: "animal", "street", "tired", etc.</text>
+  <text x="720" y="260" class="small-text"><tspan font-weight="bold" fill="#4caf50">Values:</tspan> Semantic information of each word</text>
+
+  <!-- Mathematical Formulation -->
+  <rect fill="#fff" x="50" y="300" width="650" height="320" rx="10" stroke="#424242" stroke-width="3"/>
+  <text x="375" y="335" class="heading" text-anchor="middle">THE ATTENTION FORMULA</text>
+
+  <!-- Formula Box -->
+  <rect fill="#f5f5f5" x="80" y="355" width="590" height="80" rx="6" stroke="#9e9e9e" stroke-width="2"/>
+  <text x="375" y="390" class="formula" text-anchor="middle" font-size="20">Attention(Q, K, V) = softmax(</text>
+  <text x="375" y="420" class="formula" text-anchor="middle" font-size="20">QK<tspan baseline-shift="super" font-size="14">T</tspan> / √d<tspan baseline-shift="sub" font-size="14">k</tspan>) V</text>
+
+  <!-- Step-by-step breakdown -->
+  <text x="80" y="465" class="text" font-weight="bold">Step-by-Step Breakdown:</text>
+
+  <!-- Step 1 -->
+  <rect fill="#e3f2fd" x="90" y="475" width="260" height="50" rx="4"/>
+  <text x="100" y="495" class="small-text" font-weight="bold" fill="#1976d2">1. Compute Scores</text>
+  <text x="100" y="515" class="tiny-text">QK<tspan baseline-shift="super" font-size="8">T</tspan> = How similar is Q to each K?</text>
+
+  <!-- Step 2 -->
+  <rect fill="#fff3e0" x="370" y="475" width="280" height="50" rx="4"/>
+  <text x="380" y="495" class="small-text" font-weight="bold" fill="#f57c00">2. Scale</text>
+  <text x="380" y="515" class="tiny-text">Divide by √d<tspan baseline-shift="sub" font-size="8">k</tspan> to prevent large values</text>
+
+  <!-- Step 3 -->
+  <rect fill="#e8f5e9" x="90" y="540" width="260" height="50" rx="4"/>
+  <text x="100" y="560" class="small-text" font-weight="bold" fill="#388e3c">3. Apply Softmax</text>
+  <text x="100" y="580" class="tiny-text">Convert to probabilities (sum = 1)</text>
+
+  <!-- Step 4 -->
+  <rect fill="#fce4ec" x="370" y="540" width="280" height="50" rx="4"/>
+  <text x="380" y="560" class="small-text" font-weight="bold" fill="#c2185b">4. Weighted Sum</text>
+  <text x="380" y="580" class="tiny-text">Multiply by V to get final output</text>
+
+  <!-- Why it works -->
+  <rect fill="#fff9c4" x="80" y="605" width="590" height="60" rx="6" stroke="#f9a825" stroke-width="2"/>
+  <text x="100" y="630" class="small-text" font-weight="bold" fill="#f57f17">💡 Why This Works:</text>
+  <text x="100" y="650" class="tiny-text">Words that are contextually relevant get high attention scores → more influence on output</text>
+
+  <!-- Visual Representation -->
+  <rect fill="#fff" x="730" y="300" width="620" height="320" rx="10" stroke="#424242" stroke-width="3"/>
+  <text x="1040" y="335" class="heading" text-anchor="middle">VISUAL REPRESENTATION</text>
+
+  <!-- Input word -->
+  <rect class="box-query" x="760" y="360" width="120" height="60" rx="6"/>
+  <text x="820" y="385" class="text" text-anchor="middle" font-weight="bold">Word: "it"</text>
+  <text x="820" y="405" class="tiny-text" text-anchor="middle">Embedding vector</text>
+
+  <!-- Transform to Q, K, V -->
+  <path class="arrow-blue" d="M 880 390 L 950 370"/>
+  <rect class="box-query" x="955" y="345" width="80" height="50" rx="4"/>
+  <text x="995" y="365" class="small-text" text-anchor="middle" font-weight="bold">Query</text>
+  <text x="995" y="382" class="tiny-text" text-anchor="middle">"Who?"</text>
+
+  <path class="arrow-orange" d="M 880 390 L 950 390"/>
+  <rect class="box-key" x="955" y="365" width="80" height="50" rx="4"/>
+  <text x="995" y="385" class="small-text" text-anchor="middle" font-weight="bold">Key</text>
+  <text x="995" y="402" class="tiny-text" text-anchor="middle">Searchable</text>
+
+  <path class="arrow-green" d="M 880 390 L 950 410"/>
+  <rect class="box-value" x="955" y="385" width="80" height="50" rx="4"/>
+  <text x="995" y="405" class="small-text" text-anchor="middle" font-weight="bold">Value</text>
+  <text x="995" y="422" class="tiny-text" text-anchor="middle">Info</text>
+
+  <!-- All words -->
+  <text x="1055" y="375" class="tiny-text">× All words in sentence</text>
+  <rect fill="#f5f5f5" x="1120" y="355" width="200" height="80" rx="4" stroke="#9e9e9e"/>
+  <text x="1130" y="375" class="tiny-text">K: "animal", "street", "tired"...</text>
+  <text x="1130" y="395" class="tiny-text">V: [semantic vectors]</text>
+  <text x="1130" y="415" class="tiny-text">Attention compares Q to all K</text>
+
+  <!-- Attention scores -->
+  <rect fill="#e3f2fd" x="760" y="460" width="560" height="70" rx="6" stroke="#2196f3" stroke-width="2"/>
+  <text x="770" y="485" class="small-text" font-weight="bold" fill="#1565c0">Attention Scores (example):</text>
+  <text x="780" y="510" class="tiny-text">"animal": 0.65 (high!), "street": 0.05, "cross": 0.02, "tired": 0.20, others: 0.08</text>
+  <text x="780" y="528" class="tiny-text" font-style="italic">Softmax ensures scores sum to 1.0</text>
+
+  <!-- Final output -->
+  <rect class="box-output" x="760" y="550" width="560" height="60" rx="6"/>
+  <text x="1040" y="575" class="text" text-anchor="middle" font-weight="bold">Output: Contextual representation of "it"</text>
+  <text x="1040" y="595" class="tiny-text" text-anchor="middle">65% "animal" info + 20% "tired" info + 15% others = "it" ≈ "the tired animal"</text>
+
+  <!-- Bottom: Key Insights -->
+  <rect fill="#e8f5e9" x="50" y="650" width="1300" height="150" rx="10" stroke="#388e3c" stroke-width="3"/>
+  <text x="700" y="685" class="heading" text-anchor="middle" fill="#2e7d32">KEY INSIGHTS</text>
+
+  <g transform="translate(80, 705)">
+    <circle cx="0" cy="0" r="8" fill="#2196f3"/>
+    <text x="20" y="5" class="text" font-weight="bold">Self-Attention:</text>
+    <text x="20" y="25" class="small-text">Each word computes Q, K, V and attends to ALL other words in the sentence</text>
+  </g>
+
+  <g transform="translate(80, 760)">
+    <circle cx="0" cy="0" r="8" fill="#ff9800"/>
+    <text x="20" y="5" class="text" font-weight="bold">Parallelization:</text>
+    <text x="20" y="25" class="small-text">All words processed simultaneously (unlike RNNs which process sequentially)</text>
+  </g>
+
+  <g transform="translate(720, 705)">
+    <circle cx="0" cy="0" r="8" fill="#4caf50"/>
+    <text x="20" y="5" class="text" font-weight="bold">Long-Range Dependencies:</text>
+    <text x="20" y="25" class="small-text">Can connect "it" to "animal" regardless of distance in sentence</text>
+  </g>
+
+  <g transform="translate(720, 760)">
+    <circle cx="0" cy="0" r="8" fill="#e91e63"/>
+    <text x="20" y="5" class="text" font-weight="bold">Learned Representations:</text>
+    <text x="20" y="25" class="small-text">Q, K, V are learned weight matrices - model learns what to attend to!</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="700" y="830" class="text" text-anchor="middle" fill="#666" font-style="italic">
+    "Attention is all you need" - This simple mechanism powers GPT, BERT, and all modern AI
+  </text>
+
+  <text x="700" y="855" class="tiny-text" text-anchor="middle" fill="#999">
+    Next: SVG2 will show the complete mathematical calculation step-by-step with actual numbers
+  </text>
+</svg>

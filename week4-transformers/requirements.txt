@@ -1,0 +1,26 @@
+# Week 4: Transformers & Attention
+# ================================
+# Requirements for all transformer implementations
+
+# Core deep learning
+torch>=2.0.0
+torchvision>=0.15.0  # For vision transformers (optional)
+
+# Numerical computing
+numpy>=1.24.0
+
+# Utilities
+tqdm>=4.65.0  # Progress bars for training
+
+# Optional: For advanced features
+# transformers>=4.30.0  # Hugging Face transformers (for comparison)
+# tokenizers>=0.13.0    # Fast tokenizers
+# datasets>=2.12.0      # Hugging Face datasets
+
+# Optional: For visualization
+# matplotlib>=3.7.0
+# seaborn>=0.12.0
+
+# Optional: For model serving
+# fastapi>=0.100.0
+# uvicorn>=0.23.0
