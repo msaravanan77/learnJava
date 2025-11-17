@@ -1,0 +1,18 @@
+# Week 3: Production ML System Requirements
+
+# Core ML
+torch>=2.0.0
+numpy>=1.24.0
+
+# Data Processing  
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# API Server
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+
+# Utilities
+python-multipart>=0.0.6
+requests>=2.31.0

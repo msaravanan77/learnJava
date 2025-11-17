@@ -1,0 +1,11 @@
+product_id,name,category,price,description,stock,rating_avg,num_reviews
+1,Wireless Headphones,Electronics,79.99,Premium noise-canceling headphones,150,4.5,342
+2,Running Shoes,Sports,89.99,Lightweight running shoes,80,4.7,521
+3,Coffee Maker,Home & Kitchen,45.99,12-cup programmable coffee maker,200,4.3,187
+4,Yoga Mat,Sports,24.99,Non-slip exercise mat,300,4.6,412
+5,Laptop Stand,Electronics,34.99,Adjustable aluminum stand,120,4.4,234
+6,Backpack,Clothing,59.99,Water-resistant travel backpack,90,4.5,298
+7,Blender,Home & Kitchen,79.99,High-speed smoothie blender,110,4.2,145
+8,Dumbbell Set,Sports,149.99,Adjustable weight set,45,4.8,387
+9,LED Desk Lamp,Electronics,29.99,Dimmable LED lamp,180,4.1,89
+10,Water Bottle,Sports,19.99,Insulated stainless steel,250,4.6,678
