@@ -1,0 +1,247 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1000">
+  <defs>
+    <style>
+      .title { font: bold 32px sans-serif; fill: #1a1a1a; }
+      .subtitle { font: bold 18px sans-serif; fill: #2c3e50; }
+      .heading { font: bold 16px sans-serif; fill: #34495e; }
+      .text { font: 14px sans-serif; fill: #555; }
+      .small-text { font: 12px sans-serif; fill: #666; }
+      .tiny-text { font: 10px sans-serif; fill: #777; }
+      .code { font: 12px 'Courier New', monospace; fill: #e74c3c; }
+      .box { fill: #fff; stroke: #3498db; stroke-width: 2; }
+      .neuron { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .neuron-active { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .neuron-input { fill: #95a5a6; stroke: #7f8c8d; stroke-width: 2; }
+      .neuron-output { fill: #27ae60; stroke: #229954; stroke-width: 2; }
+      .arrow { fill: none; stroke: #7f8c8d; stroke-width: 2; marker-end: url(#arrowhead); }
+      .arrow-highlight { fill: none; stroke: #e74c3c; stroke-width: 3; marker-end: url(#arrowhead-highlight); }
+      .arrow-data { fill: none; stroke: #3498db; stroke-width: 2; marker-end: url(#arrowhead-data); }
+      .gradient-bg { fill: url(#grad1); }
+      .box-step { fill: #ecf0f1; stroke: #95a5a6; stroke-width: 2; }
+      .box-forward { fill: #e8f4f8; stroke: #3498db; stroke-width: 2; }
+      .box-backward { fill: #fdecea; stroke: #e74c3c; stroke-width: 2; }
+      .box-update { fill: #e8f6f3; stroke: #16a085; stroke-width: 2; }
+    </style>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowhead-highlight" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+    </marker>
+    <marker id="arrowhead-data" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#3498db" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="gradient-bg" width="1400" height="1000" />
+
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">How Neural Networks Actually Learn</text>
+  <text x="700" y="58" class="subtitle" text-anchor="middle">Understanding Forward Pass, Backward Pass, and Weight Updates</text>
+
+  <!-- Section 1: Simple Neural Network Visualization -->
+  <text x="700" y="95" class="heading" text-anchor="middle">PART 1: A SIMPLE NEURAL NETWORK</text>
+  <text x="700" y="112" class="small-text" text-anchor="middle">Example: Detecting Suspicious Login Attempts</text>
+
+  <!-- Input Layer -->
+  <g id="input-layer">
+    <text x="120" y="145" class="text" font-weight="bold">Input Features</text>
+
+    <!-- Input neurons -->
+    <circle class="neuron-input" cx="150" cy="170" r="20" />
+    <text x="150" y="175" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">X₁</text>
+    <text x="230" y="175" class="tiny-text">Hour (0-23)</text>
+
+    <circle class="neuron-input" cx="150" cy="220" r="20" />
+    <text x="150" y="225" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">X₂</text>
+    <text x="230" y="225" class="tiny-text">Distance (km)</text>
+
+    <circle class="neuron-input" cx="150" cy="270" r="20" />
+    <text x="150" y="275" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">X₃</text>
+    <text x="230" y="275" class="tiny-text">New device (0/1)</text>
+
+    <circle class="neuron-input" cx="150" cy="320" r="20" />
+    <text x="150" y="325" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">X₄</text>
+    <text x="230" y="325" class="tiny-text">Failed attempts</text>
+
+    <circle class="neuron-input" cx="150" cy="370" r="20" />
+    <text x="150" y="375" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">X₅</text>
+    <text x="230" y="375" class="tiny-text">VPN used (0/1)</text>
+  </g>
+
+  <!-- Hidden Layer -->
+  <g id="hidden-layer">
+    <text x="520" y="145" class="text" text-anchor="middle" font-weight="bold">Hidden Layer</text>
+    <text x="520" y="160" class="tiny-text" text-anchor="middle">(Pattern Detection)</text>
+
+    <circle class="neuron" cx="480" cy="200" r="20" />
+    <text x="480" y="205" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">H₁</text>
+
+    <circle class="neuron" cx="520" cy="240" r="20" />
+    <text x="520" y="245" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">H₂</text>
+
+    <circle class="neuron" cx="560" cy="280" r="20" />
+    <text x="560" y="285" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">H₃</text>
+
+    <circle class="neuron" cx="520" cy="320" r="20" />
+    <text x="520" y="325" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">H₄</text>
+
+    <circle class="neuron" cx="480" cy="360" r="20" />
+    <text x="480" y="365" class="small-text" text-anchor="middle" fill="#fff" font-weight="bold">H₅</text>
+  </g>
+
+  <!-- Output Layer -->
+  <g id="output-layer">
+    <text x="800" y="145" class="text" text-anchor="middle" font-weight="bold">Output</text>
+
+    <circle class="neuron-output" cx="800" cy="280" r="25" />
+    <text x="800" y="285" class="text" text-anchor="middle" fill="#fff" font-weight="bold">Ŷ</text>
+    <text x="900" y="285" class="tiny-text">Prediction: 0=Normal, 1=Suspicious</text>
+  </g>
+
+  <!-- Connections (just a few to show weights) -->
+  <line x1="170" y1="170" x2="460" y2="200" class="arrow" opacity="0.3" />
+  <line x1="170" y1="220" x2="460" y2="200" class="arrow" opacity="0.3" />
+  <line x1="170" y1="270" x2="500" y2="240" class="arrow" opacity="0.3" />
+  <line x1="170" y1="320" x2="540" y2="280" class="arrow-highlight" opacity="0.6" />
+  <text x="350" y="295" class="tiny-text" fill="#e74c3c" font-weight="bold">Weight (W)</text>
+  <line x1="170" y1="370" x2="500" y2="320" class="arrow" opacity="0.3" />
+
+  <line x1="500" y1="200" x2="775" y2="270" class="arrow" opacity="0.3" />
+  <line x1="540" y1="240" x2="775" y2="275" class="arrow" opacity="0.3" />
+  <line x1="580" y1="280" x2="775" y2="280" class="arrow" opacity="0.3" />
+  <line x1="540" y1="320" x2="775" y2="285" class="arrow" opacity="0.3" />
+  <line x1="500" y1="360" x2="775" y2="290" class="arrow" opacity="0.3" />
+
+  <!-- Example calculation -->
+  <rect class="box" x="940" y="130" width="420" height="270" rx="8" />
+  <text x="1150" y="160" class="heading" text-anchor="middle">What Happens Inside?</text>
+
+  <text x="960" y="185" class="small-text" font-weight="bold">Step 1: Weighted Sum</text>
+  <text x="960" y="205" class="tiny-text">Each neuron multiplies inputs by weights:</text>
+  <text x="970" y="225" class="code">H₁ = X₁×W₁ + X₂×W₂ + ... + X₅×W₅ + bias</text>
+  <text x="970" y="245" class="tiny-text">Example: (2×0.5) + (5000×0.8) + (1×2.1) + (3×1.5) + (1×1.2)</text>
+
+  <text x="960" y="275" class="small-text" font-weight="bold">Step 2: Activation Function</text>
+  <text x="960" y="295" class="tiny-text">Apply non-linearity (ReLU, Sigmoid, etc.):</text>
+  <text x="970" y="315" class="code">H₁ = ReLU(weighted_sum) = max(0, weighted_sum)</text>
+  <text x="970" y="335" class="tiny-text">This introduces "decision-making" capability</text>
+
+  <text x="960" y="365" class="small-text" font-weight="bold">Step 3: Pass to Next Layer</text>
+  <text x="960" y="385" class="tiny-text">Repeat process until final output:</text>
+  <text x="970" y="405" class="code">Ŷ = Sigmoid(H₁×W + H₂×W + ... + bias)</text>
+
+  <!-- Section 2: The Learning Process -->
+  <text x="700" y="450" class="heading" text-anchor="middle">PART 2: THE LEARNING PROCESS (Training Loop)</text>
+
+  <!-- Forward Pass -->
+  <rect class="box-forward" x="50" y="470" width="280" height="180" rx="8" />
+  <text x="190" y="500" class="text" text-anchor="middle" font-weight="bold">① FORWARD PASS</text>
+  <text x="190" y="520" class="small-text" text-anchor="middle">(Make a Prediction)</text>
+
+  <text x="70" y="550" class="tiny-text">Input: Login at 2 AM, 5000 km away,</text>
+  <text x="70" y="566" class="tiny-text">new device, 3 failed attempts, VPN used</text>
+
+  <text x="70" y="590" class="small-text" font-weight="bold">Network predicts:</text>
+  <text x="70" y="610" class="code">Ŷ = 0.73 (73% suspicious)</text>
+
+  <text x="70" y="635" class="small-text" font-weight="bold">Actual truth:</text>
+  <text x="70" y="655" class="code">Y = 1.0 (100% - it WAS an attack!)</text>
+
+  <!-- Calculate Loss -->
+  <rect class="box-step" x="360" y="470" width="280" height="180" rx="8" />
+  <text x="500" y="500" class="text" text-anchor="middle" font-weight="bold">② CALCULATE LOSS</text>
+  <text x="500" y="520" class="small-text" text-anchor="middle">(How Wrong Are We?)</text>
+
+  <text x="380" y="550" class="tiny-text">Loss function measures error:</text>
+  <text x="380" y="570" class="code">Loss = (Y - Ŷ)²</text>
+  <text x="380" y="590" class="code">Loss = (1.0 - 0.73)²</text>
+  <text x="380" y="610" class="code">Loss = 0.0729</text>
+
+  <text x="380" y="635" class="small-text" font-weight="bold">Goal: Minimize this!</text>
+
+  <!-- Backward Pass -->
+  <rect class="box-backward" x="670" y="470" width="280" height="180" rx="8" />
+  <text x="810" y="500" class="text" text-anchor="middle" font-weight="bold">③ BACKWARD PASS</text>
+  <text x="810" y="520" class="small-text" text-anchor="middle">(Find What to Change)</text>
+
+  <text x="690" y="550" class="tiny-text">Calculate gradients (derivatives):</text>
+  <text x="690" y="570" class="code">∂Loss/∂W = ?</text>
+
+  <text x="690" y="595" class="small-text">"How much does each weight</text>
+  <text x="690" y="613" class="small-text">contribute to the error?"</text>
+
+  <text x="690" y="638" class="tiny-text">PyTorch does this automatically!</text>
+
+  <!-- Update Weights -->
+  <rect class="box-update" x="980" y="470" width="280" height="180" rx="8" />
+  <text x="1120" y="500" class="text" text-anchor="middle" font-weight="bold">④ UPDATE WEIGHTS</text>
+  <text x="1120" y="520" class="small-text" text-anchor="middle">(Improve the Model)</text>
+
+  <text x="1000" y="550" class="tiny-text">Adjust weights in right direction:</text>
+  <text x="1000" y="570" class="code">W_new = W_old - learning_rate × gradient</text>
+
+  <text x="1000" y="595" class="small-text">Example:</text>
+  <text x="1000" y="615" class="code">W = 0.5 - 0.01 × (-0.27)</text>
+  <text x="1000" y="635" class="code">W = 0.5027 (slightly increased)</text>
+
+  <!-- Flow arrows -->
+  <path class="arrow-data" d="M 330 560 L 350 560" />
+  <path class="arrow-data" d="M 640 560 L 660 560" />
+  <path class="arrow-data" d="M 950 560 L 970 560" />
+  <path class="arrow-highlight" d="M 1120 660 Q 1120 710, 190 710 Q 190 680, 190 660" stroke-dasharray="5,5" />
+  <text x="650" y="730" class="small-text" text-anchor="middle" fill="#e74c3c" font-weight="bold">Repeat 1000s of times with different examples!</text>
+
+  <!-- Section 3: Why It Works -->
+  <rect class="box" x="50" y="760" width="620" height="220" rx="8" />
+  <text x="360" y="790" class="heading" text-anchor="middle">WHY THIS WORKS: The Magic of Gradient Descent</text>
+
+  <text x="70" y="820" class="text" font-weight="bold">Imagine you're blindfolded on a hill:</text>
+  <text x="70" y="840" class="small-text">• Goal: Get to the lowest point (minimum error)</text>
+  <text x="70" y="858" class="small-text">• You can only feel the slope under your feet</text>
+  <text x="70" y="876" class="small-text">• Strategy: Take small steps downhill (opposite of gradient)</text>
+  <text x="70" y="894" class="small-text">• Eventually, you reach the bottom (minimum loss)</text>
+
+  <text x="70" y="920" class="text" font-weight="bold">In neural networks:</text>
+  <text x="70" y="940" class="small-text">• Hill = Loss function (error landscape)</text>
+  <text x="70" y="958" class="small-text">• Your position = Current weight values</text>
+  <text x="70" y="976" class="small-text">• Slope = Gradient (calculated by backpropagation)</text>
+
+  <!-- Section 4: Key Insights -->
+  <rect class="box-forward" x="700" y="760" width="650" height="220" rx="8" />
+  <text x="1025" y="790" class="heading" text-anchor="middle">KEY INSIGHTS</text>
+
+  <g transform="translate(720, 805)">
+    <circle cx="8" cy="0" r="5" fill="#e74c3c" />
+    <text x="20" y="5" class="small-text" font-weight="bold">Weights are learned, not programmed</text>
+    <text x="20" y="22" class="tiny-text">You provide examples, the network figures out the rules</text>
+  </g>
+
+  <g transform="translate(720, 850)">
+    <circle cx="8" cy="0" r="5" fill="#3498db" />
+    <text x="20" y="5" class="small-text" font-weight="bold">More data = Better learning</text>
+    <text x="20" y="22" class="tiny-text">1000 examples → Good, 1,000,000 examples → Excellent</text>
+  </g>
+
+  <g transform="translate(720, 895)">
+    <circle cx="8" cy="0" r="5" fill="#16a085" />
+    <text x="20" y="5" class="small-text" font-weight="bold">Training is slow, prediction is fast</text>
+    <text x="20" y="22" class="tiny-text">Train once (hours/days), use forever (milliseconds)</text>
+  </g>
+
+  <g transform="translate(720, 940)">
+    <circle cx="8" cy="0" r="5" fill="#f39c12" />
+    <text x="20" y="5" class="small-text" font-weight="bold">Hyperparameters matter</text>
+    <text x="20" y="22" class="tiny-text">Learning rate, layers, neurons - these you must configure</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="700" y="995" class="small-text" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+    "Learning = Adjusting millions of weights to minimize prediction errors through repeated examples"
+  </text>
+</svg>

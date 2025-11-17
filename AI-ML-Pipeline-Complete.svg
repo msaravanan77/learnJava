@@ -1,0 +1,332 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1100">
+  <defs>
+    <style>
+      .title { font: bold 32px sans-serif; fill: #1a1a1a; }
+      .subtitle { font: bold 18px sans-serif; fill: #2c3e50; }
+      .heading { font: bold 16px sans-serif; fill: #34495e; }
+      .text { font: 14px sans-serif; fill: #555; }
+      .small-text { font: 12px sans-serif; fill: #666; }
+      .tiny-text { font: 10px sans-serif; fill: #777; }
+      .code { font: 11px 'Courier New', monospace; fill: #e74c3c; }
+      .box { fill: #fff; stroke: #3498db; stroke-width: 2; }
+      .box-phase { fill: #ecf0f1; stroke: #7f8c8d; stroke-width: 2; }
+      .box-data { fill: #e8f4f8; stroke: #3498db; stroke-width: 2; }
+      .box-train { fill: #fef5e7; stroke: #f39c12; stroke-width: 2; }
+      .box-eval { fill: #ebf5fb; stroke: #2980b9; stroke-width: 2; }
+      .box-deploy { fill: #e8f6f3; stroke: #16a085; stroke-width: 2; }
+      .box-monitor { fill: #fdecea; stroke: #e74c3c; stroke-width: 2; }
+      .arrow { fill: none; stroke: #7f8c8d; stroke-width: 3; marker-end: url(#arrowhead); }
+      .arrow-back { fill: none; stroke: #e74c3c; stroke-width: 2; marker-end: url(#arrowhead-back); stroke-dasharray: 5,5; }
+      .gradient-bg { fill: url(#grad1); }
+      .warning { fill: #fff3cd; stroke: #ffc107; stroke-width: 2; }
+      .success { fill: #d4edda; stroke: #28a745; stroke-width: 2; }
+    </style>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:1" />
+    </linearGradient>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+      <polygon points="0 0, 12 3, 0 6" fill="#7f8c8d" />
+    </marker>
+    <marker id="arrowhead-back" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect class="gradient-bg" width="1400" height="1100" />
+
+  <!-- Title -->
+  <text x="700" y="35" class="title" text-anchor="middle">The Complete ML Pipeline: From Raw Data to Production</text>
+  <text x="700" y="58" class="subtitle" text-anchor="middle">A Practical Guide to Building, Training, and Deploying Machine Learning Systems</text>
+
+  <!-- Main Pipeline Flow -->
+  <text x="700" y="90" class="heading" text-anchor="middle">THE 6-PHASE ML LIFECYCLE</text>
+
+  <!-- Phase 1: Data Collection -->
+  <rect class="box-data" x="50" y="110" width="200" height="140" rx="8" />
+  <text x="150" y="135" class="text" text-anchor="middle" font-weight="bold">① DATA COLLECTION</text>
+
+  <text x="70" y="160" class="small-text" font-weight="bold">Sources:</text>
+  <text x="70" y="178" class="tiny-text">✓ Databases (SQL, NoSQL)</text>
+  <text x="70" y="194" class="tiny-text">✓ APIs (REST, GraphQL)</text>
+  <text x="70" y="210" class="tiny-text">✓ Logs & Files (CSV, JSON)</text>
+  <text x="70" y="226" class="tiny-text">✓ Real-time streams</text>
+
+  <text x="70" y="245" class="tiny-text" fill="#e74c3c">⚠ Need: 1000s-millions of examples</text>
+
+  <!-- Arrow 1 -->
+  <path class="arrow" d="M 255 180 L 285 180" />
+
+  <!-- Phase 2: Data Preprocessing -->
+  <rect class="box-data" x="290" y="110" width="200" height="140" rx="8" />
+  <text x="390" y="135" class="text" text-anchor="middle" font-weight="bold">② PREPROCESSING</text>
+
+  <text x="310" y="160" class="small-text" font-weight="bold">Clean & Transform:</text>
+  <text x="310" y="178" class="tiny-text">✓ Handle missing values</text>
+  <text x="310" y="194" class="tiny-text">✓ Normalize/standardize</text>
+  <text x="310" y="210" class="tiny-text">✓ Remove outliers</text>
+  <text x="310" y="226" class="tiny-text">✓ Feature engineering</text>
+
+  <text x="310" y="245" class="tiny-text" fill="#2980b9">💡 80% of work happens here!</text>
+
+  <!-- Arrow 2 -->
+  <path class="arrow" d="M 495 180 L 525 180" />
+
+  <!-- Phase 3: Split Data -->
+  <rect class="box-data" x="530" y="110" width="200" height="140" rx="8" />
+  <text x="630" y="135" class="text" text-anchor="middle" font-weight="bold">③ SPLIT DATA</text>
+
+  <rect fill="#3498db" x="555" y="155" width="140" height="18" rx="3" opacity="0.7" />
+  <text x="625" y="168" class="tiny-text" text-anchor="middle" fill="#fff" font-weight="bold">Training (70%)</text>
+
+  <rect fill="#f39c12" x="555" y="180" width="60" height="18" rx="3" opacity="0.7" />
+  <text x="585" y="193" class="tiny-text" text-anchor="middle" fill="#fff" font-weight="bold">Valid (15%)</text>
+
+  <rect fill="#16a085" x="555" y="205" width="60" height="18" rx="3" opacity="0.7" />
+  <text x="585" y="218" class="tiny-text" text-anchor="middle" fill="#fff" font-weight="bold">Test (15%)</text>
+
+  <text x="550" y="240" class="tiny-text" fill="#7f8c8d">Never use test data for training!</text>
+
+  <!-- Arrow 3 -->
+  <path class="arrow" d="M 735 180 L 765 180" />
+
+  <!-- Phase 4: Model Training -->
+  <rect class="box-train" x="770" y="110" width="200" height="140" rx="8" />
+  <text x="870" y="135" class="text" text-anchor="middle" font-weight="bold">④ TRAIN MODEL</text>
+
+  <text x="790" y="160" class="small-text" font-weight="bold">Process:</text>
+  <text x="790" y="178" class="tiny-text">1. Initialize random weights</text>
+  <text x="790" y="194" class="tiny-text">2. Forward pass → predictions</text>
+  <text x="790" y="210" class="tiny-text">3. Calculate loss</text>
+  <text x="790" y="226" class="tiny-text">4. Backward pass → gradients</text>
+  <text x="790" y="242" class="tiny-text">5. Update weights → repeat!</text>
+
+  <!-- Arrow 4 -->
+  <path class="arrow" d="M 975 180 L 1005 180" />
+
+  <!-- Phase 5: Evaluation -->
+  <rect class="box-eval" x="1010" y="110" width="180" height="140" rx="8" />
+  <text x="1100" y="135" class="text" text-anchor="middle" font-weight="bold">⑤ EVALUATE</text>
+
+  <text x="1030" y="160" class="small-text" font-weight="bold">Metrics:</text>
+  <text x="1030" y="178" class="tiny-text">✓ Accuracy</text>
+  <text x="1030" y="194" class="tiny-text">✓ Precision/Recall</text>
+  <text x="1030" y="210" class="tiny-text">✓ F1-Score</text>
+  <text x="1030" y="226" class="tiny-text">✓ Confusion Matrix</text>
+
+  <text x="1030" y="245" class="tiny-text" fill="#16a085">Use test set!</text>
+
+  <!-- Feedback arrow -->
+  <path class="arrow-back" d="M 1100 260 Q 1100 290, 870 290 Q 870 260, 870 250" />
+  <text x="950" y="310" class="tiny-text" fill="#e74c3c">If accuracy low → adjust model & retrain</text>
+
+  <!-- Phase 6: Deployment -->
+  <rect class="box-deploy" x="1200" y="110" width="150" height="140" rx="8" />
+  <text x="1275" y="135" class="text" text-anchor="middle" font-weight="bold">⑥ DEPLOY</text>
+
+  <text x="1220" y="165" class="tiny-text">✓ Save model</text>
+  <text x="1220" y="183" class="tiny-text">✓ Create API</text>
+  <text x="1220" y="201" class="tiny-text">✓ Containerize</text>
+  <text x="1220" y="219" class="tiny-text">✓ Monitor</text>
+  <text x="1220" y="237" class="tiny-text">✓ Versioning</text>
+
+  <!-- Real-World Example -->
+  <text x="700" y="310" class="heading" text-anchor="middle">REAL-WORLD EXAMPLE: Login Anomaly Detector</text>
+
+  <!-- Example boxes showing each phase with actual data -->
+  <g id="example">
+    <!-- Data Collection Example -->
+    <rect class="box" x="50" y="330" width="260" height="180" rx="6" />
+    <text x="180" y="355" class="text" text-anchor="middle" font-weight="bold">Phase 1 Output</text>
+    <rect fill="#f8f9fa" x="65" y="365" width="230" height="135" rx="4" />
+    <text x="75" y="385" class="code">user_id, hour, distance, device,</text>
+    <text x="75" y="403" class="code">failed_attempts, vpn, label</text>
+    <text x="75" y="421" class="code">101, 14, 5, 0, 0, 0, normal</text>
+    <text x="75" y="439" class="code">102, 2, 5000, 1, 5, 1, attack</text>
+    <text x="75" y="457" class="code">103, 9, 10, 0, 1, 0, normal</text>
+    <text x="75" y="475" class="code">...</text>
+    <text x="75" y="493" class="tiny-text" fill="#16a085">Collected 100,000 login attempts</text>
+
+    <!-- Preprocessing Example -->
+    <rect class="box" x="330" y="330" width="260" height="180" rx="6" />
+    <text x="460" y="355" class="text" text-anchor="middle" font-weight="bold">Phase 2 Output</text>
+    <rect fill="#f8f9fa" x="345" y="365" width="230" height="135" rx="4" />
+    <text x="355" y="385" class="code">Normalized features:</text>
+    <text x="355" y="403" class="code">hour: 14 → 0.58 (scaled 0-1)</text>
+    <text x="355" y="421" class="code">distance: 5 → 0.001</text>
+    <text x="355" y="439" class="code">device: 0 → 0 (binary)</text>
+    <text x="355" y="457" class="code">...</text>
+    <text x="355" y="475" class="tiny-text">+ Added features:</text>
+    <text x="355" y="493" class="tiny-text" fill="#2980b9">is_business_hours, weekend, etc.</text>
+
+    <!-- Split Example -->
+    <rect class="box" x="610" y="330" width="260" height="180" rx="6" />
+    <text x="740" y="355" class="text" text-anchor="middle" font-weight="bold">Phase 3 Output</text>
+    <rect fill="#f8f9fa" x="625" y="365" width="230" height="135" rx="4" />
+    <text x="635" y="385" class="small-text" font-weight="bold">Training Set:</text>
+    <text x="635" y="403" class="tiny-text">70,000 examples → Learn patterns</text>
+    <text x="635" y="425" class="small-text" font-weight="bold">Validation Set:</text>
+    <text x="635" y="443" class="tiny-text">15,000 examples → Tune model</text>
+    <text x="635" y="465" class="small-text" font-weight="bold">Test Set:</text>
+    <text x="635" y="483" class="tiny-text">15,000 examples → Final evaluation</text>
+    <text x="635" y="501" class="tiny-text" fill="#e74c3c">⚠ Keep test set untouched!</text>
+
+    <!-- Training Example -->
+    <rect class="box" x="890" y="330" width="260" height="180" rx="6" />
+    <text x="1020" y="355" class="text" text-anchor="middle" font-weight="bold">Phase 4 Output</text>
+    <rect fill="#f8f9fa" x="905" y="365" width="230" height="135" rx="4" />
+    <text x="915" y="385" class="code">Epoch 1: Loss=0.693 Acc=52%</text>
+    <text x="915" y="403" class="code">Epoch 50: Loss=0.245 Acc=89%</text>
+    <text x="915" y="421" class="code">Epoch 100: Loss=0.112 Acc=94%</text>
+    <text x="915" y="439" class="code">Epoch 150: Loss=0.087 Acc=96%</text>
+    <text x="915" y="457" class="code">...</text>
+    <text x="915" y="475" class="code">Epoch 500: Loss=0.042 Acc=98%</text>
+    <text x="915" y="493" class="tiny-text" fill="#16a085">✓ Model converged!</text>
+
+    <!-- Evaluation Example -->
+    <rect class="box" x="1170" y="330" width="180" height="180" rx="6" />
+    <text x="1260" y="355" class="text" text-anchor="middle" font-weight="bold">Phase 5 Output</text>
+    <rect fill="#f8f9fa" x="1185" y="365" width="150" height="135" rx="4" />
+    <text x="1195" y="385" class="small-text" font-weight="bold">Test Results:</text>
+    <text x="1195" y="405" class="tiny-text">Accuracy: 97.5%</text>
+    <text x="1195" y="423" class="tiny-text">Precision: 96.2%</text>
+    <text x="1195" y="441" class="tiny-text">Recall: 98.1%</text>
+    <text x="1195" y="459" class="tiny-text">F1-Score: 97.1%</text>
+    <text x="1195" y="477" class="code">Confusion Matrix:</text>
+    <text x="1195" y="493" class="tiny-text">True Pos: 1471</text>
+    <text x="1195" y="505" class="tiny-text">False Pos: 57</text>
+  </g>
+
+  <!-- Common Pitfalls -->
+  <text x="700" y="550" class="heading" text-anchor="middle">COMMON PITFALLS & HOW TO AVOID THEM</text>
+
+  <g id="pitfalls">
+    <!-- Pitfall 1 -->
+    <rect class="warning" x="50" y="570" width="310" height="90" rx="6" />
+    <text x="65" y="595" class="text" font-weight="bold">❌ Data Leakage</text>
+    <text x="65" y="615" class="small-text">Problem: Test data leaks into training</text>
+    <text x="65" y="632" class="small-text">Result: False high accuracy, fails in production</text>
+    <text x="65" y="650" class="small-text" fill="#16a085" font-weight="bold">✓ Solution: Strict train/val/test separation</text>
+
+    <!-- Pitfall 2 -->
+    <rect class="warning" x="380" y="570" width="310" height="90" rx="6" />
+    <text x="395" y="595" class="text" font-weight="bold">❌ Overfitting</text>
+    <text x="395" y="615" class="small-text">Problem: Model memorizes training data</text>
+    <text x="395" y="632" class="small-text">Result: Great on training, poor on new data</text>
+    <text x="395" y="650" class="small-text" fill="#16a085" font-weight="bold">✓ Solution: Dropout, regularization, more data</text>
+
+    <!-- Pitfall 3 -->
+    <rect class="warning" x="710" y="570" width="310" height="90" rx="6" />
+    <text x="725" y="595" class="text" font-weight="bold">❌ Imbalanced Data</text>
+    <text x="725" y="615" class="small-text">Problem: 99% normal, 1% attacks</text>
+    <text x="725" y="632" class="small-text">Result: Model always predicts "normal"</text>
+    <text x="725" y="650" class="small-text" fill="#16a085" font-weight="bold">✓ Solution: Resampling, class weights, SMOTE</text>
+
+    <!-- Pitfall 4 -->
+    <rect class="warning" x="1040" y="570" width="310" height="90" rx="6" />
+    <text x="1055" y="595" class="text" font-weight="bold">❌ Wrong Metric</text>
+    <text x="1055" y="615" class="small-text">Problem: Using accuracy for imbalanced data</text>
+    <text x="1055" y="632" class="small-text">Result: Misleading performance numbers</text>
+    <text x="1055" y="650" class="small-text" fill="#16a085" font-weight="bold">✓ Solution: F1-score, precision/recall, AUC-ROC</text>
+  </g>
+
+  <!-- Production Deployment -->
+  <text x="700" y="700" class="heading" text-anchor="middle">PRODUCTION DEPLOYMENT CHECKLIST</text>
+
+  <g id="deployment">
+    <!-- Left column -->
+    <rect class="success" x="50" y="720" width="400" height="340" rx="8" />
+    <text x="250" y="750" class="text" text-anchor="middle" font-weight="bold">Before Deployment</text>
+
+    <g transform="translate(70, 765)">
+      <circle cx="8" cy="0" r="5" fill="#28a745" />
+      <text x="20" y="5" class="small-text" font-weight="bold">1. Model Validation</text>
+      <text x="20" y="22" class="tiny-text">✓ Test on unseen data</text>
+      <text x="20" y="37" class="tiny-text">✓ Check edge cases</text>
+      <text x="20" y="52" class="tiny-text">✓ Verify no data leakage</text>
+    </g>
+
+    <g transform="translate(70, 835)">
+      <circle cx="8" cy="0" r="5" fill="#28a745" />
+      <text x="20" y="5" class="small-text" font-weight="bold">2. Model Serialization</text>
+      <text x="20" y="22" class="tiny-text">✓ Save model: torch.save(model, 'model.pth')</text>
+      <text x="20" y="37" class="tiny-text">✓ Save preprocessing pipeline</text>
+      <text x="20" y="52" class="tiny-text">✓ Version control (MLflow, DVC)</text>
+    </g>
+
+    <g transform="translate(70, 905)">
+      <circle cx="8" cy="0" r="5" fill="#28a745" />
+      <text x="20" y="5" class="small-text" font-weight="bold">3. API Creation</text>
+      <text x="20" y="22" class="tiny-text">✓ REST API (Flask, FastAPI)</text>
+      <text x="20" y="37" class="tiny-text">✓ Input validation</text>
+      <text x="20" y="52" class="tiny-text">✓ Error handling</text>
+    </g>
+
+    <g transform="translate(70, 975)">
+      <circle cx="8" cy="0" r="5" fill="#28a745" />
+      <text x="20" y="5" class="small-text" font-weight="bold">4. Containerization</text>
+      <text x="20" y="22" class="tiny-text">✓ Docker image with dependencies</text>
+      <text x="20" y="37" class="tiny-text">✓ Keep image small (&lt;1GB if possible)</text>
+    </g>
+
+    <!-- Right column -->
+    <rect class="success" x="470" y="720" width="880" height="340" rx="8" />
+    <text x="910" y="750" class="text" text-anchor="middle" font-weight="bold">After Deployment (Monitoring & Maintenance)</text>
+
+    <g transform="translate(490, 765)">
+      <circle cx="8" cy="0" r="5" fill="#ffc107" />
+      <text x="20" y="5" class="small-text" font-weight="bold">5. Performance Monitoring</text>
+      <text x="20" y="22" class="tiny-text">✓ Track prediction latency (should be &lt;100ms)</text>
+      <text x="20" y="37" class="tiny-text">✓ Monitor throughput (requests/second)</text>
+      <text x="20" y="52" class="tiny-text">✓ Watch memory usage</text>
+    </g>
+
+    <g transform="translate(490, 835)">
+      <circle cx="8" cy="0" r="5" fill="#ffc107" />
+      <text x="20" y="5" class="small-text" font-weight="bold">6. Model Drift Detection</text>
+      <text x="20" y="22" class="tiny-text">✓ Track accuracy over time</text>
+      <text x="20" y="37" class="tiny-text">✓ Compare input distribution (data drift)</text>
+      <text x="20" y="52" class="tiny-text">✓ Alert when performance degrades &gt;5%</text>
+    </g>
+
+    <g transform="translate(490, 905)">
+      <circle cx="8" cy="0" r="5" fill="#ffc107" />
+      <text x="20" y="5" class="small-text" font-weight="bold">7. Retraining Strategy</text>
+      <text x="20" y="22" class="tiny-text">✓ Schedule periodic retraining (weekly/monthly)</text>
+      <text x="20" y="37" class="tiny-text">✓ Retrain when drift detected</text>
+      <text x="20" y="52" class="tiny-text">✓ A/B test new model vs old model</text>
+    </g>
+
+    <g transform="translate(490, 975)">
+      <circle cx="8" cy="0" r="5" fill="#ffc107" />
+      <text x="20" y="5" class="small-text" font-weight="bold">8. Logging & Debugging</text>
+      <text x="20" y="22" class="tiny-text">✓ Log all predictions (input + output + confidence)</text>
+      <text x="20" y="37" class="tiny-text">✓ Flag low-confidence predictions for review</text>
+      <text x="20" y="52" class="tiny-text">✓ Collect feedback for continuous improvement</text>
+    </g>
+
+    <!-- Code example -->
+    <rect fill="#f8f9fa" x="790" y="765" width="540" height="270" rx="6" stroke="#7f8c8d" stroke-width="1" />
+    <text x="805" y="785" class="small-text" font-weight="bold">Example: Simple Deployment Code</text>
+    <text x="805" y="808" class="code">from fastapi import FastAPI</text>
+    <text x="805" y="826" class="code">import torch</text>
+    <text x="805" y="844" class="code"></text>
+    <text x="805" y="862" class="code">app = FastAPI()</text>
+    <text x="805" y="880" class="code">model = torch.load('login_detector.pth')</text>
+    <text x="805" y="898" class="code">model.eval()  # Set to inference mode</text>
+    <text x="805" y="916" class="code"></text>
+    <text x="805" y="934" class="code">@app.post("/predict")</text>
+    <text x="805" y="952" class="code">def predict(login_data: dict):</text>
+    <text x="805" y="970" class="code">    # Preprocess input</text>
+    <text x="805" y="988" class="code">    features = preprocess(login_data)</text>
+    <text x="805" y="1006" class="code">    # Make prediction</text>
+    <text x="805" y="1024" class="code">    with torch.no_grad():</text>
+    <text x="805" y="1042" class="code">        score = model(features).item()</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="700" y="1090" class="small-text" text-anchor="middle" fill="#7f8c8d" font-style="italic">
+    "A model is only as good as the data it's trained on and how well it's maintained in production"
+  </text>
+</svg>

@@ -83,16 +83,33 @@ python3 day1_tensor_basics.py
 - **MCP** (Model Context Protocol): Integrate AI with your systems
 - Build: Custom documentation assistant for your codebase
 
-## 🎨 The Big Picture
+## 🎨 The Big Picture - Visual Learning Guide
 
-**Open `AI-Fundamentals-Architecture.svg` in your browser** to see the complete visual guide.
+We've created **3 professional architecture diagrams** that serve as your visual roadmap. Open these SVG files in any browser:
 
-This diagram shows:
+### 1. AI-Fundamentals-Architecture.svg (Foundation)
+**The 30,000-foot view** - Start here!
 - Traditional programming vs AI/ML
-- What tensors are
-- How PyTorch fits in
+- What tensors are and why they matter
+- The complete AI/ML stack
 - Real-world applications
-- Your learning path
+- Your 4-week learning path
+
+### 2. AI-Neural-Networks-Learning.svg (Deep Dive)
+**How learning actually works**
+- Visual neural network structure
+- Forward pass (prediction)
+- Backward pass (learning)
+- Weight updates through gradient descent
+- Why training works
+
+### 3. AI-ML-Pipeline-Complete.svg (Production)
+**From data to deployment**
+- The complete 6-phase ML lifecycle
+- Real-world example with actual code
+- Common pitfalls and solutions
+- Production deployment checklist
+- Monitoring and maintenance
 
 ## 🏃 Getting Started TODAY
 
