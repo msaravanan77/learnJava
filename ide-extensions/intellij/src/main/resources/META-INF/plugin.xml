@@ -1,0 +1,45 @@
+<idea-plugin>
+    <id>com.workspace.intelligence</id>
+    <name>Workspace Intelligence</name>
+    <vendor email="support@workspace-intelligence.com" url="https://workspace-intelligence.com">Workspace Intelligence</vendor>
+
+    <description><![CDATA[
+    AI-powered code completion and chat for your workspace.<br>
+    <ul>
+        <li>Semantic code search</li>
+        <li>AI-powered code completion</li>
+        <li>Chat with your codebase</li>
+        <li>Code explanation</li>
+    </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable instance="com.workspace.intelligence.settings.AppSettingsConfigurable"/>
+        <applicationService serviceImplementation="com.workspace.intelligence.settings.AppSettingsState"/>
+        <completion.contributor language="JAVA" implementationClass="com.workspace.intelligence.completion.AICompletionContributor"/>
+    </extensions>
+
+    <actions>
+        <action id="workspace.intelligence.search"
+                class="com.workspace.intelligence.actions.SearchCodeAction"
+                text="Search Code Semantically"
+                description="Search codebase using AI">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        <action id="workspace.intelligence.chat"
+                class="com.workspace.intelligence.actions.ChatAction"
+                text="Chat with Codebase"
+                description="Ask questions about your code">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+        <action id="workspace.intelligence.explain"
+                class="com.workspace.intelligence.actions.ExplainCodeAction"
+                text="Explain Selected Code"
+                description="Get AI explanation of selected code">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>

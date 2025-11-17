@@ -1,0 +1,76 @@
+{
+  "name": "workspace-intelligence-vscode",
+  "displayName": "Workspace Intelligence",
+  "description": "AI-powered code completion and chat for your workspace",
+  "version": "0.1.0",
+  "publisher": "workspace-intelligence",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "workspace-intelligence.searchCode",
+        "title": "Search Code Semantically"
+      },
+      {
+        "command": "workspace-intelligence.chatWithCodebase",
+        "title": "Chat with Codebase"
+      },
+      {
+        "command": "workspace-intelligence.explainCode",
+        "title": "Explain Selected Code"
+      },
+      {
+        "command": "workspace-intelligence.indexWorkspace",
+        "title": "Index Workspace"
+      }
+    ],
+    "configuration": {
+      "title": "Workspace Intelligence",
+      "properties": {
+        "workspaceIntelligence.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8080",
+          "description": "API Gateway URL"
+        },
+        "workspaceIntelligence.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for authentication"
+        },
+        "workspaceIntelligence.enableAutoCompletion": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered auto-completion"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

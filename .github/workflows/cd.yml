@@ -1,0 +1,118 @@
+name: CD - Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*.*.*'
+
+env:
+  AWS_REGION: us-east-1
+  EKS_CLUSTER_NAME: workspace-intelligence-cluster
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Images
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service: [indexing-service, embedding-service, search-service, context-engine, llm-service, api-gateway]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd services/${{ matrix.service }}
+          docker build -t $ECR_REGISTRY/workspace-intelligence/${{ matrix.service }}:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/workspace-intelligence/${{ matrix.service }}:$IMAGE_TAG \
+                     $ECR_REGISTRY/workspace-intelligence/${{ matrix.service }}:latest
+          docker push $ECR_REGISTRY/workspace-intelligence/${{ matrix.service }}:$IMAGE_TAG
+          docker push $ECR_REGISTRY/workspace-intelligence/${{ matrix.service }}:latest
+
+  deploy-to-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+      - name: Deploy to Kubernetes (Staging)
+        run: |
+          kubectl apply -k infrastructure/kubernetes/overlays/staging/
+          kubectl rollout status deployment/api-gateway -n workspace-intelligence-staging
+          kubectl rollout status deployment/search-service -n workspace-intelligence-staging
+
+      - name: Run smoke tests
+        run: |
+          API_ENDPOINT=$(kubectl get svc api-gateway -n workspace-intelligence-staging -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          curl -f http://$API_ENDPOINT/health || exit 1
+
+  deploy-to-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: deploy-to-staging
+    environment: production
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }} --region ${{ env.AWS_REGION }}
+
+      - name: Deploy to Kubernetes (Production)
+        run: |
+          kubectl apply -k infrastructure/kubernetes/overlays/prod/
+          kubectl rollout status deployment/api-gateway -n workspace-intelligence
+          kubectl rollout status deployment/search-service -n workspace-intelligence
+          kubectl rollout status deployment/context-engine -n workspace-intelligence
+          kubectl rollout status deployment/llm-service -n workspace-intelligence
+
+      - name: Run health checks
+        run: |
+          API_ENDPOINT=$(kubectl get svc api-gateway -n workspace-intelligence -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          curl -f http://$API_ENDPOINT/health || exit 1
+          curl -f http://$API_ENDPOINT/api/v1/status || exit 1
+
+      - name: Notify deployment success
+        run: |
+          echo "Deployment to production completed successfully!"
+          echo "Version: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
