@@ -1,0 +1,38 @@
+# Week 5: Advanced Transformers & Modern AI Applications
+# ======================================================
+
+# Core deep learning
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Hugging Face ecosystem (Day 1-5)
+transformers>=4.35.0
+datasets>=2.14.0
+tokenizers>=0.14.0
+
+# Efficient fine-tuning (Day 4)
+peft>=0.6.0  # LoRA and other PEFT methods
+bitsandbytes>=0.41.0  # Quantization
+accelerate>=0.24.0  # Training acceleration
+
+# Vector databases and embeddings (Day 3)
+faiss-cpu>=1.7.4  # Or faiss-gpu for GPU
+sentence-transformers>=2.2.2
+
+# Web frameworks (Day 5)
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+websockets>=12.0  # For streaming responses
+
+# Utilities
+numpy>=1.24.0
+pandas>=2.0.0
+tqdm>=4.66.0
+scikit-learn>=1.3.0
+
+# Optional: Advanced features
+# langchain>=0.0.300  # For advanced RAG
+# chromadb>=0.4.0  # Alternative vector DB
+# openai>=1.0.0  # For GPT API comparisons
+# anthropic>=0.5.0  # For Claude API

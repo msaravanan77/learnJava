@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800">
+  <rect fill="#fafafa" width="1400" height="800"/>
+
+  <text x="700" y="40" style="font: bold 32px sans-serif; fill: #1a1a1a;" text-anchor="middle">Transfer Learning Pipeline</text>
+  <text x="700" y="70" style="font: 16px sans-serif; fill: #666;" text-anchor="middle">Pre-training → Fine-tuning: The modern AI workflow</text>
+
+  <!-- Stage 1: Pre-training -->
+  <g transform="translate(50, 120)">
+    <rect fill="#e3f2fd" x="0" y="0" width="380" height="550" rx="10" stroke="#2196f3" stroke-width="3"/>
+    <text x="190" y="40" style="font: bold 18px sans-serif; fill: #1976d2;" text-anchor="middle">STAGE 1: PRE-TRAINING</text>
+
+    <rect fill="#fff" x="20" y="60" width="340" height="80" rx="6" stroke="#64b5f6" stroke-width="2"/>
+    <text x="190" y="85" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Massive Dataset</text>
+    <text x="40" y="110" style="font: 10px sans-serif;">• Books, Wikipedia, websites</text>
+    <text x="40" y="128" style="font: 10px sans-serif;">• 300B+ tokens (GPT-3)</text>
+
+    <rect fill="#fff9c4" x="20" y="160" width="340" height="100" rx="6" stroke="#fbc02d" stroke-width="2"/>
+    <text x="190" y="185" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Training Task</text>
+    <text x="40" y="210" style="font: 10px sans-serif;">BERT: Masked Language Modeling</text>
+    <text x="40" y="228" style="font: 10px sans-serif;">GPT: Next Token Prediction</text>
+    <text x="40" y="246" style="font: 10px sans-serif;">T5: Text-to-Text</text>
+
+    <rect fill="#c8e6c9" x="20" y="280" width="340" height="140" rx="6" stroke="#4caf50" stroke-width="2"/>
+    <text x="190" y="305" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Result: Pre-trained Model</text>
+    <text x="40" y="330" style="font: 10px sans-serif;">✓ Learned grammar & syntax</text>
+    <text x="40" y="348" style="font: 10px sans-serif;">✓ Learned word meanings</text>
+    <text x="40" y="366" style="font: 10px sans-serif;">✓ Learned world knowledge</text>
+    <text x="40" y="384" style="font: 10px sans-serif;">✓ 110M-175B parameters</text>
+    <text x="40" y="402" style="font: 10px sans-serif;">✓ General understanding</text>
+
+    <rect fill="#ffebee" x="20" y="440" width="340" height="90" rx="6" stroke="#f44336" stroke-width="2"/>
+    <text x="190" y="465" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Cost</text>
+    <text x="40" y="488" style="font: 10px sans-serif;">Time: Weeks to months</text>
+    <text x="40" y="506" style="font: 10px sans-serif;">Hardware: 100s-1000s of GPUs</text>
+    <text x="40" y="524" style="font: 10px sans-serif;">Money: $1M-$10M+</text>
+  </g>
+
+  <!-- Arrow -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#f9a825"/>
+    </marker>
+  </defs>
+  <path d="M 450 390 L 570 390" stroke="#f9a825" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="510" y="375" style="font: 11px sans-serif; fill: #f57f17; font-weight: bold;" text-anchor="middle">Download</text>
+  <text x="510" y="415" style="font: 9px sans-serif; fill: #f57f17;" text-anchor="middle">Hugging Face Hub</text>
+
+  <!-- Stage 2: Fine-tuning -->
+  <g transform="translate(590, 120)">
+    <rect fill="#f3e5f5" x="0" y="0" width="380" height="550" rx="10" stroke="#9c27b0" stroke-width="3"/>
+    <text x="190" y="40" style="font: bold 18px sans-serif; fill: #7b1fa2;" text-anchor="middle">STAGE 2: FINE-TUNING</text>
+
+    <rect fill="#fff" x="20" y="60" width="340" height="80" rx="6" stroke="#ba68c8" stroke-width="2"/>
+    <text x="190" y="85" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Your Specific Dataset</text>
+    <text x="40" y="110" style="font: 10px sans-serif;">• Movie reviews (sentiment)</text>
+    <text x="40" y="128" style="font: 10px sans-serif;">• 1K-100K examples</text>
+
+    <rect fill="#fff9c4" x="20" y="160" width="340" height="100" rx="6" stroke="#fbc02d" stroke-width="2"/>
+    <text x="190" y="185" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Training Task</text>
+    <text x="40" y="210" style="font: 10px sans-serif;">Classification (sentiment, NER)</text>
+    <text x="40" y="228" style="font: 10px sans-serif;">Question Answering</text>
+    <text x="40" y="246" style="font: 10px sans-serif;">Instruction Following</text>
+
+    <rect fill="#c8e6c9" x="20" y="280" width="340" height="140" rx="6" stroke="#4caf50" stroke-width="2"/>
+    <text x="190" y="305" style="font: 13px sans-serif; font-weight: bold;" text-anchor="middle">Result: Fine-tuned Model</text>
+    <text x="40" y="330" style="font: 10px sans-serif;">✓ Specialized for your task</text>
+    <text x="40" y="348" style="font: 10px sans-serif;">✓ High accuracy (90%+)</text>
+    <text x="40" y="366" style="font: 10px sans-serif;">✓ Same model size</text>
+    <text x="40" y="384" style="font: 10px sans-serif;">✓ Domain-specific</text>
+    <text x="40" y="402" style="font: 10px sans-serif;">✓ Production-ready</text>
+
+    <rect fill="#e8f5e9" x="20" y="440" width="340" height="90" rx="6" stroke="#4caf50" stroke-width="2"/>
+    <text x="190" y="465" style="font: 12px sans-serif; font-weight: bold; fill: #2e7d32;" text-anchor="middle">Cost (Much Lower!)</text>
+    <text x="40" y="488" style="font: 10px sans-serif;">Time: Minutes to hours</text>
+    <text x="40" y="506" style="font: 10px sans-serif;">Hardware: 1 GPU (or CPU)</text>
+    <text x="40" y="524" style="font: 10px sans-serif;">Money: $0-$100</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 990 390 L 1070 390" stroke="#4caf50" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="1030" y="375" style="font: 11px sans-serif; fill: #2e7d32; font-weight: bold;" text-anchor="middle">Deploy</text>
+
+  <!-- Stage 3: Production -->
+  <g transform="translate(1090, 120)">
+    <rect fill="#fff3e0" x="0" y="0" width="260" height="550" rx="10" stroke="#f9a825" stroke-width="3"/>
+    <text x="130" y="40" style="font: bold 16px sans-serif; fill: #f57f17;" text-anchor="middle">PRODUCTION</text>
+
+    <rect fill="#fff" x="20" y="60" width="220" height="100" rx="6" stroke="#ffb74d" stroke-width="2"/>
+    <text x="130" y="85" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Serve Model</text>
+    <text x="35" y="108" style="font: 9px sans-serif;">• FastAPI / TorchServe</text>
+    <text x="35" y="126" style="font: 9px sans-serif;">• REST API endpoints</text>
+    <text x="35" y="144" style="font: 9px sans-serif;">• Handle requests</text>
+
+    <rect fill="#fff" x="20" y="180" width="220" height="100" rx="6" stroke="#ffb74d" stroke-width="2"/>
+    <text x="130" y="205" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Monitor</text>
+    <text x="35" y="228" style="font: 9px sans-serif;">• Track accuracy</text>
+    <text x="35" y="246" style="font: 9px sans-serif;">• Latency monitoring</text>
+    <text x="35" y="264" style="font: 9px sans-serif;">• Error logging</text>
+
+    <rect fill="#fff" x="20" y="300" width="220" height="100" rx="6" stroke="#ffb74d" stroke-width="2"/>
+    <text x="130" y="325" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Update</text>
+    <text x="35" y="348" style="font: 9px sans-serif;">• Collect user data</text>
+    <text x="35" y="366" style="font: 9px sans-serif;">• Re-fine-tune</text>
+    <text x="35" y="384" style="font: 9px sans-serif;">• Continuous improvement</text>
+
+    <rect fill="#c8e6c9" x="20" y="420" width="220" height="110" rx="6" stroke="#4caf50" stroke-width="2"/>
+    <text x="130" y="445" style="font: 11px sans-serif; font-weight: bold; fill: #2e7d32;" text-anchor="middle">Benefits</text>
+    <text x="35" y="468" style="font: 9px sans-serif;">✓ Fast inference</text>
+    <text x="35" y="486" style="font: 9px sans-serif;">✓ High accuracy</text>
+    <text x="35" y="504" style="font: 9px sans-serif;">✓ Cost effective</text>
+    <text x="35" y="522" style="font: 9px sans-serif;">✓ Scalable</text>
+  </g>
+
+  <!-- Bottom comparison -->
+  <rect fill="#e3f2fd" x="50" y="695" width="1300" height="90" rx="8" stroke="#2196f3" stroke-width="2"/>
+  <text x="700" y="725" style="font: bold 14px sans-serif; fill: #1976d2;" text-anchor="middle">🔑 KEY INSIGHT: Transfer Learning</text>
+  <text x="700" y="750" style="font: 11px sans-serif;" text-anchor="middle">Instead of training from scratch (weeks + $millions), download pre-trained model and fine-tune (hours + $10s)</text>
+  <text x="700" y="772" style="font: 11px sans-serif; fill: #2e7d32; font-weight: bold;" text-anchor="middle">This is how ALL modern AI applications work: ChatGPT, BERT, Claude, GPT-4, etc.</text>
+</svg>

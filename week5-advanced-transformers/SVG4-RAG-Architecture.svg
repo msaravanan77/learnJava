@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <rect fill="#fafafa" width="1400" height="900"/>
+
+  <text x="700" y="40" style="font: bold 32px sans-serif; fill: #1a1a1a;" text-anchor="middle">RAG (Retrieval Augmented Generation) Architecture</text>
+  <text x="700" y="70" style="font: 16px sans-serif; fill: #666;" text-anchor="middle">Combine retrieval + generation for knowledge-grounded AI</text>
+
+  <!-- Step 1: User Question -->
+  <g transform="translate(50, 120)">
+    <rect fill="#e3f2fd" x="0" y="0" width="300" height="100" rx="8" stroke="#2196f3" stroke-width="3"/>
+    <text x="150" y="30" style="font: bold 16px sans-serif; fill: #1976d2;" text-anchor="middle">1. USER QUESTION</text>
+    <rect fill="#fff" x="20" y="45" width="260" height="45" rx="4" stroke="#64b5f6" stroke-width="2"/>
+    <text x="150" y="73" style="font: 12px sans-serif;" text-anchor="middle">"What is LoRA in AI?"</text>
+  </g>
+
+  <!-- Step 2: Embed Question -->
+  <g transform="translate(50, 260)">
+    <rect fill="#fff3e0" x="0" y="0" width="300" height="120" rx="8" stroke="#f9a825" stroke-width="3"/>
+    <text x="150" y="30" style="font: bold 16px sans-serif; fill: #f57f17;" text-anchor="middle">2. EMBED QUESTION</text>
+    <rect fill="#fff9c4" x="20" y="45" width="260" height="65" rx="4" stroke="#fbc02d" stroke-width="2"/>
+    <text x="150" y="68" style="font: 11px sans-serif;" text-anchor="middle">Embedding Model</text>
+    <text x="150" y="85" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">(BERT, Sentence-BERT)</text>
+    <text x="150" y="102" style="font: 9px monospace; fill: #f57f17;" text-anchor="middle">[0.2, -0.5, 0.8, ..., 0.1] (768-dim)</text>
+  </g>
+
+  <!-- Step 3: Vector Search -->
+  <g transform="translate(50, 420)">
+    <rect fill="#e8f5e9" x="0" y="0" width="300" height="200" rx="8" stroke="#4caf50" stroke-width="3"/>
+    <text x="150" y="30" style="font: bold 16px sans-serif; fill: #2e7d32;" text-anchor="middle">3. VECTOR SEARCH</text>
+
+    <rect fill="#c8e6c9" x="20" y="45" width="260" height="50" rx="4" stroke="#66bb6a" stroke-width="2"/>
+    <text x="150" y="75" style="font: 11px sans-serif;" text-anchor="middle">Vector Database (FAISS/ChromaDB)</text>
+
+    <rect fill="#fff" x="20" y="105" width="260" height="85" rx="4" stroke="#81c784" stroke-width="2"/>
+    <text x="150" y="125" style="font: 10px sans-serif; font-weight: bold;" text-anchor="middle">Top-k Similar Documents:</text>
+    <text x="40" y="145" style="font: 9px sans-serif;">1. LoRA paper (similarity: 0.94)</text>
+    <text x="40" y="162" style="font: 9px sans-serif;">2. PEFT guide (similarity: 0.89)</text>
+    <text x="40" y="179" style="font: 9px sans-serif;">3. Fine-tuning docs (similarity: 0.82)</text>
+  </g>
+
+  <!-- Knowledge Base -->
+  <g transform="translate(450, 120)">
+    <rect fill="#f3e5f5" x="0" y="0" width="450" height="500" rx="8" stroke="#9c27b0" stroke-width="3"/>
+    <text x="225" y="30" style="font: bold 18px sans-serif; fill: #7b1fa2;" text-anchor="middle">KNOWLEDGE BASE</text>
+
+    <rect fill="#e1bee7" x="20" y="50" width="410" height="80" rx="6" stroke="#ba68c8" stroke-width="2"/>
+    <text x="225" y="75" style="font: 12px sans-serif; font-weight: bold;" text-anchor="middle">Documents (Pre-processed)</text>
+    <text x="40" y="95" style="font: 10px sans-serif;">• Technical papers (PDF)</text>
+    <text x="40" y="113" style="font: 10px sans-serif;">• Documentation (Markdown, HTML)</text>
+
+    <text x="225" y="155" style="font: 11px sans-serif; font-weight: bold; fill: #7b1fa2;" text-anchor="middle">↓ Chunk & Embed ↓</text>
+
+    <rect fill="#fff" x="20" y="170" width="410" height="160" rx="6" stroke="#ce93d8" stroke-width="2"/>
+    <text x="225" y="195" style="font: 11px sans-serif; font-weight: bold;" text-anchor="middle">Vector Index</text>
+
+    <g transform="translate(40, 210)">
+      <rect fill="#e1bee7" x="0" y="0" width="370" height="35" rx="4" stroke="#9c27b0"/>
+      <text x="10" y="23" style="font: 9px sans-serif;">Chunk 1: "LoRA is Low-Rank Adaptation..." [0.1, 0.3, ...]</text>
+    </g>
+
+    <g transform="translate(40, 250)">
+      <rect fill="#e1bee7" x="0" y="0" width="370" height="35" rx="4" stroke="#9c27b0"/>
+      <text x="10" y="23" style="font: 9px sans-serif;">Chunk 2: "PEFT methods reduce..." [0.5, -0.2, ...]</text>
+    </g>
+
+    <g transform="translate(40, 290)">
+      <rect fill="#e1bee7" x="0" y="0" width="370" height="35" rx="4" stroke="#9c27b0"/>
+      <text x="10" y="23" style="font: 9px sans-serif;">Chunk 3: "Fine-tuning updates all..." [-0.3, 0.7, ...]</text>
+    </g>
+
+    <text x="225" y="360" style="font: 10px sans-serif; fill: #7b1fa2;" text-anchor="middle">Millions of document chunks indexed</text>
+    <text x="225" y="378" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Fast similarity search (cosine distance)</text>
+
+    <rect fill="#fff3e0" x="20" y="400" width="410" height="80" rx="6" stroke="#f9a825" stroke-width="2"/>
+    <text x="225" y="425" style="font: 11px sans-serif; font-weight: bold;" text-anchor="middle">Benefits</text>
+    <text x="40" y="445" style="font: 9px sans-serif;">✓ Up-to-date knowledge (add new docs anytime)</text>
+    <text x="40" y="462" style="font: 9px sans-serif;">✓ Semantic search (meaning-based, not keywords)</text>
+    <text x="40" y="479" style="font: 9px sans-serif;">✓ Scalable (billions of documents)</text>
+  </g>
+
+  <!-- Step 4: Augment Prompt -->
+  <g transform="translate(970, 120)">
+    <rect fill="#ffebee" x="0" y="0" width="380" height="180" rx="8" stroke="#f44336" stroke-width="3"/>
+    <text x="190" y="30" style="font: bold 16px sans-serif; fill: #c62828;" text-anchor="middle">4. AUGMENT PROMPT</text>
+
+    <rect fill="#fff" x="20" y="45" width="340" height="125" rx="4" stroke="#ef5350" stroke-width="2"/>
+    <text x="190" y="65" style="font: 10px sans-serif; font-weight: bold;" text-anchor="middle">Combine Context + Question:</text>
+
+    <rect fill="#ffe0b2" x="30" y="75" width="320" height="85" rx="4" stroke="#f9a825"/>
+    <text x="40" y="92" style="font: 9px monospace;">Context: "LoRA is Low-Rank Adaptation,</text>
+    <text x="40" y="107" style="font: 9px monospace;">a PEFT method that adds trainable</text>
+    <text x="40" y="122" style="font: 9px monospace;">rank decomposition matrices..."</text>
+    <text x="40" y="140" style="font: 9px monospace;">Question: "What is LoRA in AI?"</text>
+    <text x="40" y="155" style="font: 9px monospace;">Answer:</text>
+  </g>
+
+  <!-- Step 5: Generate Answer -->
+  <g transform="translate(970, 340)">
+    <rect fill="#e1f5fe" x="0" y="0" width="380" height="180" rx="8" stroke="#0288d1" stroke-width="3"/>
+    <text x="190" y="30" style="font: bold 16px sans-serif; fill: #01579b;" text-anchor="middle">5. GENERATE ANSWER</text>
+
+    <rect fill="#b3e5fc" x="20" y="45" width="340" height="60" rx="4" stroke="#29b6f6" stroke-width="2"/>
+    <text x="190" y="68" style="font: 11px sans-serif;" text-anchor="middle">LLM (GPT, Claude, LLaMA)</text>
+    <text x="190" y="88" style="font: 9px sans-serif; fill: #666;" text-anchor="middle">Uses context to generate accurate answer</text>
+
+    <rect fill="#fff" x="20" y="115" width="340" height="55" rx="4" stroke="#4fc3f7" stroke-width="2"/>
+    <text x="30" y="135" style="font: 10px sans-serif; font-weight: bold;">Answer:</text>
+    <text x="30" y="152" style="font: 9px sans-serif;">"LoRA (Low-Rank Adaptation) is a parameter-</text>
+    <text x="30" y="166" style="font: 9px sans-serif;">efficient fine-tuning method that..."</text>
+  </g>
+
+  <!-- Step 6: Return to User -->
+  <g transform="translate(970, 560)">
+    <rect fill="#c8e6c9" x="0" y="0" width="380" height="60" rx="8" stroke="#4caf50" stroke-width="3"/>
+    <text x="190" y="25" style="font: bold 14px sans-serif; fill: #2e7d32;" text-anchor="middle">6. RETURN TO USER</text>
+    <text x="190" y="48" style="font: 10px sans-serif;" text-anchor="middle">✓ Accurate, grounded answer with sources</text>
+  </g>
+
+  <!-- Arrows -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <path d="M 200 220 L 200 260" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 200 380 L 200 420" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 350 520 L 480 380" stroke="#9c27b0" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="400" y="440" style="font: 10px sans-serif; fill: #7b1fa2; font-weight: bold;">Retrieve</text>
+
+  <path d="M 900 200 L 970 200" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 1160 300 L 1160 340" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 1160 520 L 1160 560" stroke="#333" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <!-- Bottom explanation -->
+  <rect fill="#fff3e0" x="50" y="660" width="1300" height="220" rx="8" stroke="#f9a825" stroke-width="2"/>
+  <text x="700" y="695" style="font: bold 16px sans-serif; fill: #f57f17;" text-anchor="middle">🔑 WHY RAG IS POWERFUL</text>
+
+  <g transform="translate(80, 715)">
+    <text x="0" y="0" style="font: 12px sans-serif; font-weight: bold; fill: #2e7d32;">✓ Advantages:</text>
+    <text x="20" y="20" style="font: 10px sans-serif;">• Up-to-date: Add new docs without retraining</text>
+    <text x="20" y="38" style="font: 10px sans-serif;">• Accurate: Grounded in actual documents</text>
+    <text x="20" y="56" style="font: 10px sans-serif;">• Transparent: Can cite sources</text>
+    <text x="20" y="74" style="font: 10px sans-serif;">• Cost-effective: No model retraining</text>
+    <text x="20" y="92" style="font: 10px sans-serif;">• Domain-specific: Works with your data</text>
+  </g>
+
+  <g transform="translate(480, 715)">
+    <text x="0" y="0" style="font: 12px sans-serif; font-weight: bold; fill: #c62828;">🎯 Use Cases:</text>
+    <text x="20" y="20" style="font: 10px sans-serif;">• Customer support chatbots</text>
+    <text x="20" y="38" style="font: 10px sans-serif;">• Document Q&A systems</text>
+    <text x="20" y="56" style="font: 10px sans-serif;">• Research assistants</text>
+    <text x="20" y="74" style="font: 10px sans-serif;">• Internal knowledge bases</text>
+    <text x="20" y="92" style="font: 10px sans-serif;">• Legal/medical document search</text>
+  </g>
+
+  <g transform="translate(880, 715)">
+    <text x="0" y="0" style="font: 12px sans-serif; font-weight: bold; fill: #1976d2;">🏢 Who Uses RAG:</text>
+    <text x="20" y="20" style="font: 10px sans-serif;">• ChatGPT (with browsing/plugins)</text>
+    <text x="20" y="38" style="font: 10px sans-serif;">• Perplexity AI</text>
+    <text x="20" y="56" style="font: 10px sans-serif;">• Microsoft Copilot</text>
+    <text x="20" y="74" style="font: 10px sans-serif;">• Google Bard (Search Grounding)</text>
+    <text x="20" y="92" style="font: 10px sans-serif;">• Most enterprise AI chatbots</text>
+  </g>
+
+  <text x="700" y="860" style="font: 11px sans-serif; fill: #666; font-style: italic;" text-anchor="middle">RAG = Retrieval (vector search) + Augmented (add context) + Generation (LLM answer)</text>
+</svg>
