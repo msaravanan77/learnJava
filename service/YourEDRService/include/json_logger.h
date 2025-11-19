@@ -41,9 +41,11 @@ private:
     std::string ConvertEventToJson(const void* eventData, size_t eventSize);
     std::string ConvertFileEventToJson(const EDR_FILE_EVENT* fileEvent);
     std::string ConvertProcessEventToJson(const EDR_PROCESS_CREATE_EVENT* processEvent);
+    std::string ConvertNetworkEventToJson(const EDR_NETWORK_EVENT* networkEvent);
     std::wstring GetCurrentTimestamp();
     std::string WideToUtf8(const std::wstring& wstr);
     std::string FormatTimestamp(const LARGE_INTEGER& timestamp);
+    std::string FormatIPAddress(const UCHAR* address, UCHAR addressFamily);
 };
 
 } // namespace YourEDR

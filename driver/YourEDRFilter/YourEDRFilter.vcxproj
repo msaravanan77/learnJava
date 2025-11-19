@@ -65,7 +65,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(KernelBufferOverflowLib);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib;$(DDK_LIB_PATH)FltMgr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfLdr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfDriverEntry.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(KernelBufferOverflowLib);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib;$(DDK_LIB_PATH)FltMgr.lib;$(DDK_LIB_PATH)fwpkclnt.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfLdr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfDriverEntry.lib</AdditionalDependencies>
     </Link>
     <Inf>
       <TimeStamp>1.0.0.1</TimeStamp>
@@ -82,7 +82,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)common\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(KernelBufferOverflowLib);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib;$(DDK_LIB_PATH)FltMgr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfLdr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfDriverEntry.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(KernelBufferOverflowLib);$(DDK_LIB_PATH)ntoskrnl.lib;$(DDK_LIB_PATH)hal.lib;$(DDK_LIB_PATH)wmilib.lib;$(DDK_LIB_PATH)FltMgr.lib;$(DDK_LIB_PATH)fwpkclnt.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfLdr.lib;$(KMDF_LIB_PATH)$(KMDF_VER)\WdfDriverEntry.lib</AdditionalDependencies>
     </Link>
     <Inf>
       <TimeStamp>1.0.0.1</TimeStamp>
@@ -96,6 +96,7 @@
     <ClCompile Include="src\filter_operations.c" />
     <ClCompile Include="src\communication.c" />
     <ClCompile Include="src\event_logger.c" />
+    <ClCompile Include="src\network_monitor.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\driver.h" />

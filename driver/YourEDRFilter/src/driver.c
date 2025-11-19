@@ -91,8 +91,8 @@ DriverEntry(
     //
 
     g_GlobalData.Config.EnableFileMonitoring = TRUE;
-    g_GlobalData.Config.EnableProcessMonitoring = FALSE;  // Phase 2
-    g_GlobalData.Config.EnableNetworkMonitoring = FALSE;  // Phase 2
+    g_GlobalData.Config.EnableProcessMonitoring = FALSE;  // Future Phase
+    g_GlobalData.Config.EnableNetworkMonitoring = TRUE;   // Phase 2 - NOW ENABLED
     g_GlobalData.Config.MaxEventsPerSecond = 10000;
     g_GlobalData.Config.ExcludedPathCount = 0;
 
@@ -135,6 +135,19 @@ DriverEntry(
     }
 
     //
+    // Initialize network monitoring (WFP) - Phase 2
+    //
+
+    if (g_GlobalData.Config.EnableNetworkMonitoring) {
+        status = InitializeNetworkMonitoring(g_GlobalData.DeviceObject);
+        if (!NT_SUCCESS(status)) {
+            YOUREDR_LOG_WARNING("Failed to initialize network monitoring: 0x%08X (continuing without network monitoring)", status);
+            g_GlobalData.Config.EnableNetworkMonitoring = FALSE;
+            // Don't fail driver load if WFP fails, just disable network monitoring
+        }
+    }
+
+    //
     // Start filtering I/O
     //
 
@@ -163,6 +176,12 @@ YourEDRUnload(
     UNREFERENCED_PARAMETER(Flags);
 
     YOUREDR_LOG_INFO("YourEDR Driver Unloading");
+
+    //
+    // Cleanup network monitoring (WFP) - Phase 2
+    //
+
+    CleanupNetworkMonitoring();
 
     //
     // Delete communication device

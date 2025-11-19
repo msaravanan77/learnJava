@@ -78,12 +78,16 @@ typedef struct _EDR_NETWORK_EVENT {
     EDR_EVENT_HEADER Header;
     UCHAR Protocol;                     // IPPROTO_TCP (6), IPPROTO_UDP (17)
     UCHAR Direction;                    // 0=outbound, 1=inbound
+    UCHAR AddressFamily;                // AF_INET (2) or AF_INET6 (23)
+    UCHAR Reserved;                     // Padding for alignment
     USHORT LocalPort;
     USHORT RemotePort;
     UCHAR LocalAddress[16];             // IPv6 format (IPv4 mapped)
     UCHAR RemoteAddress[16];            // IPv6 format (IPv4 mapped)
     ULONGLONG BytesSent;
     ULONGLONG BytesReceived;
+    ULONG ConnectionId;                 // Unique connection identifier
+    WCHAR ProcessName[64];              // Process name (optional, for user context)
 } EDR_NETWORK_EVENT, *PEDR_NETWORK_EVENT;
 
 // Image load event (Phase 2)
@@ -104,7 +108,9 @@ typedef struct _EDR_THREAD_CREATE_EVENT {
 } EDR_THREAD_CREATE_EVENT, *PEDR_THREAD_CREATE_EVENT;
 
 // Maximum event size (for buffer allocation)
-#define EDR_MAX_EVENT_SIZE sizeof(EDR_PROCESS_CREATE_EVENT)
+#define EDR_MAX_EVENT_SIZE \
+    ((sizeof(EDR_PROCESS_CREATE_EVENT) > sizeof(EDR_NETWORK_EVENT)) ? \
+     sizeof(EDR_PROCESS_CREATE_EVENT) : sizeof(EDR_NETWORK_EVENT))
 
 // Event validation macros
 #define EDR_IS_VALID_EVENT_TYPE(type) ((type) > EventTypeNone && (type) < EventTypeMax)

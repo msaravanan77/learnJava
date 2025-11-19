@@ -159,6 +159,44 @@ VOID GetCurrentTimestamp(
 );
 
 //
+// Function declarations from network_monitor.c
+//
+
+NTSTATUS InitializeNetworkMonitoring(
+    _In_ PDEVICE_OBJECT DeviceObject
+);
+
+VOID CleanupNetworkMonitoring(VOID);
+
+//
+// WFP Callout GUIDs (must be unique for each driver)
+//
+
+// {8B5E5F01-1234-4567-89AB-0123456789AB}
+DEFINE_GUID(
+    YOUREDR_CALLOUT_CONNECT_V4_GUID,
+    0x8b5e5f01, 0x1234, 0x4567, 0x89, 0xab, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab
+);
+
+// {8B5E5F02-1234-4567-89AB-0123456789AB}
+DEFINE_GUID(
+    YOUREDR_CALLOUT_CONNECT_V6_GUID,
+    0x8b5e5f02, 0x1234, 0x4567, 0x89, 0xab, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab
+);
+
+// {8B5E5F03-1234-4567-89AB-0123456789AB}
+DEFINE_GUID(
+    YOUREDR_CALLOUT_ACCEPT_V4_GUID,
+    0x8b5e5f03, 0x1234, 0x4567, 0x89, 0xab, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab
+);
+
+// {8B5E5F04-1234-4567-89AB-0123456789AB}
+DEFINE_GUID(
+    YOUREDR_CALLOUT_ACCEPT_V6_GUID,
+    0x8b5e5f04, 0x1234, 0x4567, 0x89, 0xab, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab
+);
+
+//
 // Helper macros
 //
 
