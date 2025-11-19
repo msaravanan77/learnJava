@@ -1,0 +1,60 @@
+{
+  "$schema": "./config_schema.json",
+  "version": "1.0.0",
+  "driver": {
+    "enabled": true,
+    "monitoring": {
+      "file": {
+        "enabled": true,
+        "operations": ["create", "write", "delete", "rename"],
+        "excludedPaths": [
+          "C:\\Windows\\System32\\",
+          "C:\\Windows\\SysWOW64\\",
+          "C:\\Program Files\\Windows Defender\\",
+          "C:\\ProgramData\\Microsoft\\Windows Defender\\"
+        ],
+        "excludedExtensions": [".tmp", ".log", ".etl"],
+        "maxEventsPerSecond": 10000
+      },
+      "process": {
+        "enabled": false,
+        "captureCommandLine": true,
+        "captureEnvironment": false,
+        "excludedProcesses": ["csrss.exe", "smss.exe", "wininit.exe"]
+      },
+      "network": {
+        "enabled": false,
+        "captureLocalConnections": false,
+        "excludedPorts": [135, 139, 445]
+      }
+    }
+  },
+  "service": {
+    "logging": {
+      "enabled": true,
+      "directory": "C:\\ProgramData\\YourEDR\\Logs",
+      "format": "jsonl",
+      "rotation": {
+        "enabled": true,
+        "maxFileSizeMB": 100,
+        "maxFiles": 10,
+        "compressionEnabled": false
+      },
+      "retention": {
+        "enabled": true,
+        "retentionDays": 7
+      }
+    },
+    "performance": {
+      "pollingIntervalMs": 100,
+      "batchSize": 100,
+      "workerThreads": 2
+    }
+  },
+  "telemetry": {
+    "enabled": false,
+    "endpoint": "",
+    "apiKey": "",
+    "sendIntervalSeconds": 300
+  }
+}

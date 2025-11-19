@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "description": "YourEDR Filter Rules - Phase 1",
+  "rules": {
+    "pathExclusions": [
+      {
+        "path": "C:\\Windows\\System32\\",
+        "reason": "Exclude system directory to reduce noise",
+        "enabled": true
+      },
+      {
+        "path": "C:\\Windows\\SysWOW64\\",
+        "reason": "Exclude 32-bit system directory",
+        "enabled": true
+      },
+      {
+        "path": "C:\\Windows\\WinSxS\\",
+        "reason": "Exclude Windows component store",
+        "enabled": true
+      },
+      {
+        "path": "C:\\Program Files\\Windows Defender\\",
+        "reason": "Exclude Windows Defender to avoid conflicts",
+        "enabled": true
+      },
+      {
+        "path": "C:\\ProgramData\\Microsoft\\Windows Defender\\",
+        "reason": "Exclude Windows Defender data directory",
+        "enabled": true
+      },
+      {
+        "path": "C:\\$Recycle.Bin\\",
+        "reason": "Exclude recycle bin",
+        "enabled": true
+      },
+      {
+        "path": "C:\\ProgramData\\YourEDR\\Logs\\",
+        "reason": "Exclude own log directory to prevent recursion",
+        "enabled": true
+      }
+    ],
+    "extensionExclusions": [
+      {
+        "extension": ".tmp",
+        "reason": "Temporary files generate too much noise",
+        "enabled": true
+      },
+      {
+        "extension": ".log",
+        "reason": "Log files change frequently",
+        "enabled": true
+      },
+      {
+        "extension": ".etl",
+        "reason": "Windows event trace logs",
+        "enabled": true
+      },
+      {
+        "extension": ".regtrans-ms",
+        "reason": "Registry transaction logs",
+        "enabled": true
+      }
+    ],
+    "processExclusions": [
+      {
+        "processName": "csrss.exe",
+        "reason": "Critical system process",
+        "enabled": true
+      },
+      {
+        "processName": "smss.exe",
+        "reason": "Session Manager Subsystem",
+        "enabled": true
+      },
+      {
+        "processName": "wininit.exe",
+        "reason": "Windows Initialization",
+        "enabled": true
+      },
+      {
+        "processName": "services.exe",
+        "reason": "Service Control Manager - generates high volume",
+        "enabled": false
+      }
+    ]
+  }
+}

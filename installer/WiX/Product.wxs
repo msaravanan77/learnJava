@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <?define ProductVersion="1.0.0.0" ?>
+  <?define ProductName="YourEDR" ?>
+  <?define Manufacturer="YourCompany" ?>
+  <?define UpgradeCode="12345678-1234-1234-1234-123456789012" ?>
+
+  <Product Id="*"
+           Name="$(var.ProductName)"
+           Language="1033"
+           Version="$(var.ProductVersion)"
+           Manufacturer="$(var.Manufacturer)"
+           UpgradeCode="$(var.UpgradeCode)">
+
+    <Package InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Platform="x64"
+             Description="YourEDR - Endpoint Detection and Response System"
+             Comments="Phase 1: File System Monitoring"
+             Manufacturer="$(var.Manufacturer)" />
+
+    <!-- Major upgrade configuration -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                  AllowSameVersionUpgrades="yes"
+                  Schedule="afterInstallInitialize" />
+
+    <!-- Embedded cabinet -->
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Properties -->
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon" />
+    <Property Id="ARPURLINFOABOUT" Value="https://yourcompany.com" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+    <!-- Icon -->
+    <Icon Id="ProductIcon" SourceFile="$(var.SolutionDir)installer\assets\icon.ico" />
+
+    <!-- Installation directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <!-- Program Files -->
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="YourEDR">
+          <Directory Id="BinFolder" Name="bin" />
+          <Directory Id="DriversFolder" Name="drivers" />
+          <Directory Id="ConfigFolder" Name="config" />
+        </Directory>
+      </Directory>
+
+      <!-- ProgramData -->
+      <Directory Id="CommonAppDataFolder">
+        <Directory Id="AppDataFolder" Name="YourEDR">
+          <Directory Id="LogsFolder" Name="Logs" />
+          <Directory Id="DataFolder" Name="Data" />
+        </Directory>
+      </Directory>
+
+      <!-- System32 for drivers -->
+      <Directory Id="System64Folder">
+        <Directory Id="DriversSystemFolder" Name="drivers" />
+      </Directory>
+
+    </Directory>
+
+    <!-- Feature definition -->
+    <Feature Id="ProductFeature"
+             Title="YourEDR Core"
+             Description="Core EDR functionality including driver and service"
+             Level="1"
+             ConfigurableDirectory="INSTALLFOLDER"
+             AllowAdvertise="no"
+             Display="expand">
+
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="DriverComponents" />
+      <ComponentGroupRef Id="ConfigComponents" />
+      <ComponentRef Id="CreateLogDirectory" />
+      <ComponentRef Id="CreateDataDirectory" />
+
+    </Feature>
+
+    <!-- Custom actions -->
+    <CustomAction Id="InstallDriver"
+                  FileKey="YourEDRFilterSys"
+                  ExeCommand='rundll32.exe setupapi,InstallHinfSection DefaultInstall 132 "[#YourEDRFilterInf]"'
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check" />
+
+    <CustomAction Id="UninstallDriver"
+                  FileKey="YourEDRFilterSys"
+                  ExeCommand='rundll32.exe setupapi,InstallHinfSection DefaultUninstall 132 "[#YourEDRFilterInf]"'
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <CustomAction Id="StartDriver"
+                  Directory="INSTALLFOLDER"
+                  ExeCommand='fltmc.exe load YourEDRFilter'
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <CustomAction Id="StopDriver"
+                  Directory="INSTALLFOLDER"
+                  ExeCommand='fltmc.exe unload YourEDRFilter'
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <CustomAction Id="InstallService"
+                  FileKey="YourEDRServiceExe"
+                  ExeCommand="install"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="check" />
+
+    <CustomAction Id="UninstallService"
+                  FileKey="YourEDRServiceExe"
+                  ExeCommand="uninstall"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <CustomAction Id="StartService"
+                  FileKey="YourEDRServiceExe"
+                  ExeCommand="start"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <CustomAction Id="StopService"
+                  FileKey="YourEDRServiceExe"
+                  ExeCommand="stop"
+                  Execute="deferred"
+                  Impersonate="no"
+                  Return="ignore" />
+
+    <!-- Installation sequence -->
+    <InstallExecuteSequence>
+      <!-- Stop service and driver before uninstall -->
+      <Custom Action="StopService" Before="UninstallService">REMOVE="ALL"</Custom>
+      <Custom Action="UninstallService" Before="StopDriver">REMOVE="ALL"</Custom>
+      <Custom Action="StopDriver" Before="UninstallDriver">REMOVE="ALL"</Custom>
+      <Custom Action="UninstallDriver" Before="RemoveFiles">REMOVE="ALL"</Custom>
+
+      <!-- Install driver and service after files are installed -->
+      <Custom Action="InstallDriver" After="InstallFiles">NOT REMOVE</Custom>
+      <Custom Action="StartDriver" After="InstallDriver">NOT REMOVE</Custom>
+      <Custom Action="InstallService" After="StartDriver">NOT REMOVE</Custom>
+      <Custom Action="StartService" After="InstallService">NOT REMOVE</Custom>
+    </InstallExecuteSequence>
+
+    <!-- UI -->
+    <UIRef Id="CustomUI" />
+
+  </Product>
+</Wix>

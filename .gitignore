@@ -1,0 +1,64 @@
+# Build outputs
+bin/
+obj/
+*.sys
+*.exe
+*.dll
+*.pdb
+*.lib
+*.exp
+*.obj
+*.ilk
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# Driver specific
+*.cat
+*.inf.bak
+
+# WiX
+*.wixobj
+*.wixpdb
+*.msi
+
+# Logs
+*.log
+*.jsonl
+
+# Test certificates
+*.pfx
+*.cer
+
+# Temporary files
+*.tmp
+*~
+
+# Installation output
+installer/output/*.msi
+installer/output/*.log
+installer/obj/
+
+# Build intermediates
+driver/*/bin/
+driver/*/obj/
+service/*/bin/
+service/*/obj/
+
+# OS specific
+Thumbs.db
+.DS_Store
+
+# Documentation build
+docs/**/*.html
+docs/**/*.pdf
+
+# Backup files
+*.bak
+*.backup

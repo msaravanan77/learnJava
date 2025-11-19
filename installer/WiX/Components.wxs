@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+
+    <!-- Product components (service executable, etc.) -->
+    <ComponentGroup Id="ProductComponents" Directory="BinFolder">
+
+      <Component Id="YourEDRServiceComponent" Guid="A1B2C3D4-E5F6-7890-ABCD-EF1234567890" Win64="yes">
+        <File Id="YourEDRServiceExe"
+              Name="YourEDRService.exe"
+              Source="$(var.SolutionDir)service\YourEDRService\bin\$(var.Configuration)\YourEDRService.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="YourEDRServicePDB" Guid="B2C3D4E5-F678-90AB-CDEF-123456789012" Win64="yes">
+        <File Id="YourEDRServicePdb"
+              Name="YourEDRService.pdb"
+              Source="$(var.SolutionDir)service\YourEDRService\bin\$(var.Configuration)\YourEDRService.pdb"
+              KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <!-- Driver components -->
+    <ComponentGroup Id="DriverComponents" Directory="DriversFolder">
+
+      <Component Id="YourEDRFilterComponent" Guid="C3D4E5F6-7890-ABCD-EF12-3456789012AB" Win64="yes">
+        <File Id="YourEDRFilterSys"
+              Name="YourEDRFilter.sys"
+              Source="$(var.SolutionDir)driver\YourEDRFilter\bin\$(var.Configuration)\YourEDRFilter.sys"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="YourEDRFilterINF" Guid="D4E5F678-90AB-CDEF-1234-56789012ABCD" Win64="yes">
+        <File Id="YourEDRFilterInf"
+              Name="YourEDRFilter.inf"
+              Source="$(var.SolutionDir)driver\YourEDRFilter\YourEDRFilter.inf"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="YourEDRFilterCAT" Guid="E5F67890-ABCD-EF12-3456-789012ABCDEF" Win64="yes">
+        <File Id="YourEDRFilterCat"
+              Name="YourEDRFilter.cat"
+              Source="$(var.SolutionDir)driver\YourEDRFilter\bin\$(var.Configuration)\YourEDRFilter.cat"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="YourEDRFilterPDB" Guid="F6789012-ABCD-EF12-3456-789012ABCDEF" Win64="yes">
+        <File Id="YourEDRFilterPdb"
+              Name="YourEDRFilter.pdb"
+              Source="$(var.SolutionDir)driver\YourEDRFilter\bin\$(var.Configuration)\YourEDRFilter.pdb"
+              KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <!-- Configuration files -->
+    <ComponentGroup Id="ConfigComponents" Directory="ConfigFolder">
+
+      <Component Id="DefaultConfigComponent" Guid="12345678-90AB-CDEF-1234-56789012ABCD" Win64="yes">
+        <File Id="DefaultConfigJson"
+              Name="default_config.json"
+              Source="$(var.SolutionDir)config\default_config.json"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="FilterRulesComponent" Guid="23456789-0ABC-DEF1-2345-6789012ABCDE" Win64="yes">
+        <File Id="FilterRulesJson"
+              Name="filter_rules.json"
+              Source="$(var.SolutionDir)installer\config\filter_rules.json"
+              KeyPath="yes" />
+      </Component>
+
+    </ComponentGroup>
+
+    <!-- Create log directory -->
+    <DirectoryRef Id="LogsFolder">
+      <Component Id="CreateLogDirectory" Guid="34567890-ABCD-EF12-3456-789012ABCDEF" Win64="yes">
+        <CreateFolder>
+          <Permission User="Everyone" GenericAll="yes" />
+        </CreateFolder>
+        <RemoveFolder Id="RemoveLogsFolder" On="uninstall" />
+        <RegistryValue Root="HKLM"
+                       Key="Software\YourCompany\YourEDR"
+                       Name="LogDirectory"
+                       Type="string"
+                       Value="[LogsFolder]"
+                       KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Create data directory -->
+    <DirectoryRef Id="DataFolder">
+      <Component Id="CreateDataDirectory" Guid="45678901-BCDE-F123-4567-89012ABCDEFG" Win64="yes">
+        <CreateFolder>
+          <Permission User="Everyone" GenericAll="yes" />
+        </CreateFolder>
+        <RemoveFolder Id="RemoveDataFolder" On="uninstall" />
+        <RegistryValue Root="HKLM"
+                       Key="Software\YourCompany\YourEDR"
+                       Name="DataDirectory"
+                       Type="string"
+                       Value="[DataFolder]"
+                       KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Registry entries -->
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="RegistryEntries" Guid="56789012-CDEF-1234-5678-9012ABCDEFGH" Win64="yes">
+        <RegistryKey Root="HKLM" Key="Software\YourCompany\YourEDR">
+          <RegistryValue Name="InstallDirectory" Type="string" Value="[INSTALLFOLDER]" KeyPath="yes" />
+          <RegistryValue Name="Version" Type="string" Value="$(var.ProductVersion)" />
+          <RegistryValue Name="InstalledDate" Type="string" Value="[Date]" />
+        </RegistryKey>
+      </Component>
+    </DirectoryRef>
+
+  </Fragment>
+</Wix>
