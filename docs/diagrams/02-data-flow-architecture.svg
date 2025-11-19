@@ -1,0 +1,419 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100">
+  <!-- Title -->
+  <text x="800" y="35" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#2C3E50">
+    Windows EDR - Event Data Flow Architecture
+  </text>
+  <text x="800" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">
+    End-to-End Event Lifecycle: Capture → Process → Store
+  </text>
+
+  <!-- Event Sources -->
+  <rect x="50" y="100" width="250" height="380" fill="#ECF0F1" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="175" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Event Sources
+  </text>
+
+  <!-- User Application -->
+  <rect x="80" y="150" width="190" height="60" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="175" y="175" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    User Applications
+  </text>
+  <text x="175" y="192" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    CreateFile(), CreateProcess(),
+  </text>
+  <text x="175" y="205" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    connect(), send(), etc.
+  </text>
+
+  <!-- System Services -->
+  <rect x="80" y="230" width="190" height="60" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="175" y="255" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    System Services
+  </text>
+  <text x="175" y="272" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    svchost.exe, lsass.exe,
+  </text>
+  <text x="175" y="285" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    services.exe
+  </text>
+
+  <!-- Scheduled Tasks -->
+  <rect x="80" y="310" width="190" height="60" fill="#E67E22" stroke="#D35400" stroke-width="2" rx="5"/>
+  <text x="175" y="335" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Scheduled Tasks
+  </text>
+  <text x="175" y="352" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    Background jobs,
+  </text>
+  <text x="175" y="365" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    automated processes
+  </text>
+
+  <!-- Malware -->
+  <rect x="80" y="390" width="190" height="60" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="5"/>
+  <text x="175" y="415" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Potentially Malicious
+  </text>
+  <text x="175" y="432" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    Ransomware, trojans,
+  </text>
+  <text x="175" y="445" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    suspicious activity
+  </text>
+
+  <!-- Kernel Interception -->
+  <rect x="350" y="100" width="300" height="380" fill="#FFE6E6" stroke="#C0392B" stroke-width="3" rx="8"/>
+  <text x="500" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#C0392B">
+    Kernel Interception Layer
+  </text>
+
+  <!-- Filter Manager -->
+  <rect x="380" y="160" width="240" height="90" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="5"/>
+  <text x="500" y="185" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Filter Manager (FltMgr)
+  </text>
+  <text x="500" y="202" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    IRP_MJ_CREATE
+  </text>
+  <text x="500" y="217" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    IRP_MJ_WRITE
+  </text>
+  <text x="500" y="232" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    IRP_MJ_SET_INFORMATION
+  </text>
+  <text x="500" y="245" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    ↓ File System Events
+  </text>
+
+  <!-- Process Callbacks -->
+  <rect x="380" y="270" width="240" height="70" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="500" y="292" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Process/Thread Callbacks
+  </text>
+  <text x="500" y="307" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    PsSetCreateProcessNotify
+  </text>
+  <text x="500" y="322" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    PsSetLoadImageNotify
+  </text>
+  <text x="500" y="335" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    ↓ Process/DLL Events
+  </text>
+
+  <!-- WFP -->
+  <rect x="380" y="360" width="240" height="70" fill="#16A085" stroke="#138D75" stroke-width="2" rx="5"/>
+  <text x="500" y="382" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    WFP Callout Engine
+  </text>
+  <text x="500" y="397" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    ALE_AUTH_CONNECT_V4/V6
+  </text>
+  <text x="500" y="412" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    FWPS Classify
+  </text>
+  <text x="500" y="425" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    ↓ Network Events
+  </text>
+
+  <!-- Event Processing -->
+  <rect x="700" y="100" width="300" height="380" fill="#E8F4F8" stroke="#2980B9" stroke-width="3" rx="8"/>
+  <text x="850" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2980B9">
+    Event Processing Pipeline
+  </text>
+
+  <!-- Filtering -->
+  <rect x="730" y="160" width="240" height="70" fill="#F39C12" stroke="#E67E22" stroke-width="2" rx="5"/>
+  <text x="850" y="182" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    1. Filtering &amp; Validation
+  </text>
+  <text x="850" y="197" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Path exclusions
+  </text>
+  <text x="850" y="212" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Process whitelisting
+  </text>
+  <text x="850" y="225" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    60% events dropped
+  </text>
+
+  <!-- Metadata -->
+  <rect x="730" y="250" width="240" height="70" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="850" y="272" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    2. Metadata Extraction
+  </text>
+  <text x="850" y="287" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Timestamps, PIDs
+  </text>
+  <text x="850" y="302" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Paths, IPs, ports
+  </text>
+  <text x="850" y="315" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    &lt;10μs per event
+  </text>
+
+  <!-- Queuing -->
+  <rect x="730" y="340" width="240" height="70" fill="#2ECC71" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="850" y="362" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    3. Ring Buffer Queuing
+  </text>
+  <text x="850" y="377" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Lock-free SPSC
+  </text>
+  <text x="850" y="392" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • 2MB circular buffer
+  </text>
+  <text x="850" y="405" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    &lt;1μs write latency
+  </text>
+
+  <!-- User-Mode Processing -->
+  <rect x="1050" y="100" width="300" height="380" fill="#FFFACD" stroke="#F39C12" stroke-width="3" rx="8"/>
+  <text x="1200" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#D35400">
+    User-Mode Service
+  </text>
+
+  <!-- IOCTL -->
+  <rect x="1080" y="160" width="240" height="60" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="1200" y="182" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    4. IOCTL Retrieval
+  </text>
+  <text x="1200" y="197" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    FilterSendMessage()
+  </text>
+  <text x="1200" y="212" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Batch: 100 events/call
+  </text>
+
+  <!-- Enrichment -->
+  <rect x="1080" y="240" width="240" height="60" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="1200" y="262" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    5. Data Enrichment
+  </text>
+  <text x="1200" y="277" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    PID→Process name
+  </text>
+  <text x="1200" y="292" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Context correlation
+  </text>
+
+  <!-- JSON -->
+  <rect x="1080" y="320" width="240" height="60" fill="#16A085" stroke="#138D75" stroke-width="2" rx="5"/>
+  <text x="1200" y="342" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    6. JSON Serialization
+  </text>
+  <text x="1200" y="357" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    nlohmann::json
+  </text>
+  <text x="1200" y="372" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Schema validation
+  </text>
+
+  <!-- File Write -->
+  <rect x="1080" y="400" width="240" height="60" fill="#E67E22" stroke="#D35400" stroke-width="2" rx="5"/>
+  <text x="1200" y="422" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    7. File Write (JSONL)
+  </text>
+  <text x="1200" y="437" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    Buffered I/O
+  </text>
+  <text x="1200" y="452" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Rotation: 100MB or 1hr
+  </text>
+
+  <!-- Storage & Output -->
+  <rect x="1400" y="100" width="180" height="380" fill="#D5F5E3" stroke="#27AE60" stroke-width="3" rx="8"/>
+  <text x="1490" y="130" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#27AE60">
+    Storage
+  </text>
+
+  <!-- Disk -->
+  <rect x="1420" y="180" width="140" height="80" fill="#2ECC71" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="1490" y="205" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Local Disk
+  </text>
+  <text x="1490" y="222" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    C:\ProgramData\
+  </text>
+  <text x="1490" y="237" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    YourEDR\Logs\
+  </text>
+  <text x="1490" y="252" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    events_*.jsonl
+  </text>
+
+  <!-- Cloud (Future) -->
+  <rect x="1420" y="280" width="140" height="80" fill="#AED6F1" stroke="#5DADE2" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="1490" y="305" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#2874A6">
+    Cloud (Phase 2)
+  </text>
+  <text x="1490" y="322" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2874A6">
+    HTTPS/gRPC
+  </text>
+  <text x="1490" y="337" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2874A6">
+    TLS 1.3
+  </text>
+  <text x="1490" y="352" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#2874A6">
+    Future Phase
+  </text>
+
+  <!-- SIEM (Future) -->
+  <rect x="1420" y="380" width="140" height="80" fill="#FADBD8" stroke="#EC7063" stroke-width="2" rx="5" stroke-dasharray="5,5"/>
+  <text x="1490" y="405" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#C0392B">
+    SIEM Integration
+  </text>
+  <text x="1490" y="422" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#C0392B">
+    Splunk, ELK,
+  </text>
+  <text x="1490" y="437" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#C0392B">
+    Azure Sentinel
+  </text>
+  <text x="1490" y="452" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#C0392B">
+    Future Phase
+  </text>
+
+  <!-- Arrows -->
+  <path d="M 300 290 L 380 290" stroke="#34495E" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 650 290 L 730 290" stroke="#34495E" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 1000 290 L 1080 290" stroke="#34495E" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+  <path d="M 1350 290 L 1420 290" stroke="#34495E" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Event Flow Metrics -->
+  <rect x="50" y="520" width="1530" height="180" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="815" y="550" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Performance Metrics &amp; Event Statistics
+  </text>
+
+  <rect x="80" y="570" width="350" height="110" fill="#E8F4F8" stroke="#3498DB" stroke-width="2" rx="5"/>
+  <text x="255" y="595" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#2980B9">
+    Latency Budget (Typical Workload)
+  </text>
+  <text x="100" y="615" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Kernel callback execution: &lt;10μs
+  </text>
+  <text x="100" y="632" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Ring buffer write: &lt;1μs
+  </text>
+  <text x="100" y="649" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • IOCTL roundtrip: &lt;100μs
+  </text>
+  <text x="100" y="666" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • End-to-end (event→disk): &lt;2ms
+  </text>
+
+  <rect x="460" y="570" width="350" height="110" fill="#FFFACD" stroke="#F39C12" stroke-width="2" rx="5"/>
+  <text x="635" y="595" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#D35400">
+    Throughput Capacity
+  </text>
+  <text x="480" y="615" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Normal load: 1,000 events/sec
+  </text>
+  <text x="480" y="632" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Peak load: 5,000 events/sec
+  </text>
+  <text x="480" y="649" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Stress test: 10,000+ events/sec
+  </text>
+  <text x="480" y="666" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • JSON write: 1-10 MB/sec
+  </text>
+
+  <rect x="840" y="570" width="350" height="110" fill="#D5F5E3" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="1015" y="595" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#27AE60">
+    Resource Usage (Target)
+  </text>
+  <text x="860" y="615" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • CPU: &lt;2% avg, &lt;5% peak
+  </text>
+  <text x="860" y="632" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Kernel memory: &lt;50MB NPP
+  </text>
+  <text x="860" y="649" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • User memory: &lt;200MB WS
+  </text>
+  <text x="860" y="666" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Disk I/O: &lt;10 MB/sec
+  </text>
+
+  <rect x="1220" y="570" width="350" height="110" fill="#FFE6E6" stroke="#E74C3C" stroke-width="2" rx="5"/>
+  <text x="1395" y="595" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#C0392B">
+    Reliability Metrics
+  </text>
+  <text x="1240" y="615" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Uptime target: 99.9%
+  </text>
+  <text x="1240" y="632" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Event loss rate: &lt;0.1%
+  </text>
+  <text x="1240" y="649" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Crash rate: &lt;0.01%
+  </text>
+  <text x="1240" y="666" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    • Auto-recovery: &lt;10 seconds
+  </text>
+
+  <!-- Event Types -->
+  <rect x="50" y="730" width="1530" height="340" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="815" y="760" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Event Schema Examples (JSON Output)
+  </text>
+
+  <!-- Process Event -->
+  <rect x="80" y="780" width="460" height="270" fill="#E8F4F8" stroke="#3498DB" stroke-width="2" rx="5"/>
+  <text x="310" y="805" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#2980B9">
+    Process Creation Event
+  </text>
+  <text x="100" y="830" font-family="Consolas, monospace" font-size="10" fill="#34495E">{</text>
+  <text x="120" y="848" font-family="Consolas, monospace" font-size="10" fill="#34495E">"event_type": "process_create",</text>
+  <text x="120" y="866" font-family="Consolas, monospace" font-size="10" fill="#34495E">"timestamp": 133450821234567890,</text>
+  <text x="120" y="884" font-family="Consolas, monospace" font-size="10" fill="#34495E">"process_id": 1234,</text>
+  <text x="120" y="902" font-family="Consolas, monospace" font-size="10" fill="#34495E">"parent_process_id": 5678,</text>
+  <text x="120" y="920" font-family="Consolas, monospace" font-size="10" fill="#34495E">"image_path": "C:\\Windows\\System32\\cmd.exe",</text>
+  <text x="120" y="938" font-family="Consolas, monospace" font-size="10" fill="#34495E">"command_line": "cmd.exe /c malware.bat",</text>
+  <text x="120" y="956" font-family="Consolas, monospace" font-size="10" fill="#34495E">"user": "DOMAIN\\user",</text>
+  <text x="120" y="974" font-family="Consolas, monospace" font-size="10" fill="#34495E">"session_id": 1,</text>
+  <text x="120" y="992" font-family="Consolas, monospace" font-size="10" fill="#34495E">"integrity_level": "medium",</text>
+  <text x="120" y="1010" font-family="Consolas, monospace" font-size="10" fill="#34495E">"sha256": "abc123...def789"</text>
+  <text x="100" y="1028" font-family="Consolas, monospace" font-size="10" fill="#34495E">}</text>
+
+  <!-- File Event -->
+  <rect x="570" y="780" width="460" height="270" fill="#FFFACD" stroke="#F39C12" stroke-width="2" rx="5"/>
+  <text x="800" y="805" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#D35400">
+    File Operation Event
+  </text>
+  <text x="590" y="830" font-family="Consolas, monospace" font-size="10" fill="#34495E">{</text>
+  <text x="610" y="848" font-family="Consolas, monospace" font-size="10" fill="#34495E">"event_type": "file_create",</text>
+  <text x="610" y="866" font-family="Consolas, monospace" font-size="10" fill="#34495E">"timestamp": 133450821234567890,</text>
+  <text x="610" y="884" font-family="Consolas, monospace" font-size="10" fill="#34495E">"process_id": 1234,</text>
+  <text x="610" y="902" font-family="Consolas, monospace" font-size="10" fill="#34495E">"file_path": "C:\\Users\\victim\\ransom.txt",</text>
+  <text x="610" y="920" font-family="Consolas, monospace" font-size="10" fill="#34495E">"desired_access": "GENERIC_WRITE",</text>
+  <text x="610" y="938" font-family="Consolas, monospace" font-size="10" fill="#34495E">"create_disposition": "CREATE_ALWAYS",</text>
+  <text x="610" y="956" font-family="Consolas, monospace" font-size="10" fill="#34495E">"file_size": 4096,</text>
+  <text x="610" y="974" font-family="Consolas, monospace" font-size="10" fill="#34495E">"creation_time": 133450821234567890,</text>
+  <text x="610" y="992" font-family="Consolas, monospace" font-size="10" fill="#34495E">"process_name": "cmd.exe"</text>
+  <text x="590" y="1010" font-family="Consolas, monospace" font-size="10" fill="#34495E">}</text>
+
+  <!-- Network Event -->
+  <rect x="1060" y="780" width="500" height="270" fill="#D5F5E3" stroke="#16A085" stroke-width="2" rx="5"/>
+  <text x="1310" y="805" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#138D75">
+    Network Connection Event
+  </text>
+  <text x="1080" y="830" font-family="Consolas, monospace" font-size="10" fill="#34495E">{</text>
+  <text x="1100" y="848" font-family="Consolas, monospace" font-size="10" fill="#34495E">"event_type": "network_connect",</text>
+  <text x="1100" y="866" font-family="Consolas, monospace" font-size="10" fill="#34495E">"timestamp": 133450821234567890,</text>
+  <text x="1100" y="884" font-family="Consolas, monospace" font-size="10" fill="#34495E">"process_id": 1234,</text>
+  <text x="1100" y="902" font-family="Consolas, monospace" font-size="10" fill="#34495E">"protocol": "TCP",</text>
+  <text x="1100" y="920" font-family="Consolas, monospace" font-size="10" fill="#34495E">"local_address": "192.168.1.100",</text>
+  <text x="1100" y="938" font-family="Consolas, monospace" font-size="10" fill="#34495E">"local_port": 49152,</text>
+  <text x="1100" y="956" font-family="Consolas, monospace" font-size="10" fill="#34495E">"remote_address": "45.142.212.61",</text>
+  <text x="1100" y="974" font-family="Consolas, monospace" font-size="10" fill="#34495E">"remote_port": 443,</text>
+  <text x="1100" y="992" font-family="Consolas, monospace" font-size="10" fill="#34495E">"direction": "outbound",</text>
+  <text x="1100" y="1010" font-family="Consolas, monospace" font-size="10" fill="#34495E">"process_name": "powershell.exe"</text>
+  <text x="1080" y="1028" font-family="Consolas, monospace" font-size="10" fill="#34495E">}</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+      <polygon points="0 0, 12 3, 0 6" fill="#34495E"/>
+    </marker>
+  </defs>
+</svg>

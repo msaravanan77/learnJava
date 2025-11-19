@@ -1,0 +1,388 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <!-- Title -->
+  <text x="700" y="35" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#2C3E50">
+    Windows EDR - Deployment Architecture
+  </text>
+  <text x="700" y="60" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">
+    Enterprise Deployment Model (Phase 1: On-Premises | Phase 2: Cloud-Connected)
+  </text>
+
+  <!-- Phase 1 - On-Premises -->
+  <rect x="50" y="90" width="620" height="750" fill="#E8F4F8" stroke="#2980B9" stroke-width="3" rx="10"/>
+  <text x="360" y="120" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2980B9">
+    PHASE 1: On-Premises Deployment
+  </text>
+
+  <!-- Endpoints -->
+  <rect x="80" y="150" width="560" height="280" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="360" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Endpoint Devices
+  </text>
+
+  <!-- Workstation 1 -->
+  <rect x="110" y="195" width="240" height="220" fill="#ECF0F1" stroke="#7F8C8D" stroke-width="2" rx="5"/>
+  <text x="230" y="220" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Windows Workstation
+  </text>
+
+  <rect x="130" y="235" width="200" height="50" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="5"/>
+  <text x="230" y="258" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Kernel Driver
+  </text>
+  <text x="230" y="273" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    YourEDRFilter.sys (Ring 0)
+  </text>
+
+  <rect x="130" y="300" width="200" height="50" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="230" y="323" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    EDR Service
+  </text>
+  <text x="230" y="338" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    YourEDRService.exe (Ring 3)
+  </text>
+
+  <rect x="130" y="365" width="200" height="40" fill="#2ECC71" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="230" y="388" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Local Log Storage
+  </text>
+
+  <!-- Workstation 2 -->
+  <rect x="380" y="195" width="240" height="220" fill="#ECF0F1" stroke="#7F8C8D" stroke-width="2" rx="5"/>
+  <text x="500" y="220" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Windows Server
+  </text>
+
+  <rect x="400" y="235" width="200" height="50" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="5"/>
+  <text x="500" y="258" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Kernel Driver
+  </text>
+  <text x="500" y="273" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    YourEDRFilter.sys (Ring 0)
+  </text>
+
+  <rect x="400" y="300" width="200" height="50" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="500" y="323" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    EDR Service
+  </text>
+  <text x="500" y="338" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    YourEDRService.exe (Ring 3)
+  </text>
+
+  <rect x="400" y="365" width="200" height="40" fill="#2ECC71" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="500" y="388" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Local Log Storage
+  </text>
+
+  <!-- Management Server -->
+  <rect x="80" y="460" width="560" height="150" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="360" y="485" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Management Infrastructure
+  </text>
+
+  <rect x="110" y="505" width="160" height="85" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="190" y="525" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Group Policy
+  </text>
+  <text x="190" y="545" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Driver deployment
+  </text>
+  <text x="190" y="560" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Configuration mgmt
+  </text>
+  <text x="190" y="575" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Policy enforcement
+  </text>
+
+  <rect x="290" y="505" width="160" height="85" fill="#E67E22" stroke="#D35400" stroke-width="2" rx="5"/>
+  <text x="370" y="525" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Log Collector
+  </text>
+  <text x="370" y="545" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Centralized storage
+  </text>
+  <text x="370" y="560" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Log aggregation
+  </text>
+  <text x="370" y="575" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • File share / SMB
+  </text>
+
+  <rect x="470" y="505" width="160" height="85" fill="#16A085" stroke="#138D75" stroke-width="2" rx="5"/>
+  <text x="550" y="525" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Admin Console
+  </text>
+  <text x="550" y="545" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • PowerShell mgmt
+  </text>
+  <text x="550" y="560" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Health monitoring
+  </text>
+  <text x="550" y="575" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Query interface
+  </text>
+
+  <!-- Analysis -->
+  <rect x="80" y="640" width="560" height="180" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="360" y="665" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Analysis &amp; Reporting
+  </text>
+
+  <rect x="110" y="685" width="160" height="115" fill="#F39C12" stroke="#E67E22" stroke-width="2" rx="5"/>
+  <text x="190" y="708" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    On-Prem SIEM
+  </text>
+  <text x="190" y="728" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Splunk Enterprise
+  </text>
+  <text x="190" y="743" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    ELK Stack
+  </text>
+  <text x="190" y="758" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    QRadar
+  </text>
+  <text x="190" y="773" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Ingest JSONL logs
+  </text>
+  <text x="190" y="788" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Correlation rules
+  </text>
+
+  <rect x="290" y="685" width="160" height="115" fill="#C0392B" stroke="#A93226" stroke-width="2" rx="5"/>
+  <text x="370" y="708" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Threat Intelligence
+  </text>
+  <text x="370" y="728" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    IOC matching
+  </text>
+  <text x="370" y="743" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    YARA rules
+  </text>
+  <text x="370" y="758" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Hash databases
+  </text>
+  <text x="370" y="773" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Behavioral analysis
+  </text>
+  <text x="370" y="788" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Alerting engine
+  </text>
+
+  <rect x="470" y="685" width="160" height="115" fill="#8E44AD" stroke="#7D3C98" stroke-width="2" rx="5"/>
+  <text x="550" y="708" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    SOC Dashboard
+  </text>
+  <text x="550" y="728" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Real-time alerts
+  </text>
+  <text x="550" y="743" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Incident response
+  </text>
+  <text x="550" y="758" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Forensics
+  </text>
+  <text x="550" y="773" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Compliance reports
+  </text>
+  <text x="550" y="788" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    Audit logs
+  </text>
+
+  <!-- Phase 2 - Cloud-Connected -->
+  <rect x="730" y="90" width="620" height="750" fill="#FFFACD" stroke="#F39C12" stroke-width="3" rx="10"/>
+  <text x="1040" y="120" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#D35400">
+    PHASE 2: Cloud-Connected (Future)
+  </text>
+
+  <!-- Cloud Infrastructure -->
+  <rect x="760" y="150" width="560" height="480" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="1040" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#34495E">
+    Cloud Backend (Azure / AWS / GCP)
+  </text>
+
+  <!-- Ingestion -->
+  <rect x="790" y="195" width="240" height="90" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="910" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Ingestion Layer
+  </text>
+  <text x="910" y="240" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • HTTPS / gRPC endpoints
+  </text>
+  <text x="910" y="255" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • TLS 1.3 encryption
+  </text>
+  <text x="910" y="270" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Load balancing
+  </text>
+
+  <!-- Stream Processing -->
+  <rect x="1060" y="195" width="240" height="90" fill="#2ECC71" stroke="#27AE60" stroke-width="2" rx="5"/>
+  <text x="1180" y="220" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Stream Processing
+  </text>
+  <text x="1180" y="240" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Kafka / Event Hub
+  </text>
+  <text x="1180" y="255" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Real-time pipeline
+  </text>
+  <text x="1180" y="270" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Event enrichment
+  </text>
+
+  <!-- Storage -->
+  <rect x="790" y="305" width="240" height="90" fill="#E67E22" stroke="#D35400" stroke-width="2" rx="5"/>
+  <text x="910" y="330" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Data Lake Storage
+  </text>
+  <text x="910" y="350" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Azure Blob / S3
+  </text>
+  <text x="910" y="365" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Hot/Cold tiers
+  </text>
+  <text x="910" y="380" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Long-term retention
+  </text>
+
+  <!-- Analytics -->
+  <rect x="1060" y="305" width="240" height="90" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="1180" y="330" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Analytics Engine
+  </text>
+  <text x="1180" y="350" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Databricks / Synapse
+  </text>
+  <text x="1180" y="365" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • ML threat detection
+  </text>
+  <text x="1180" y="380" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Behavioral analytics
+  </text>
+
+  <!-- Threat Intel -->
+  <rect x="790" y="415" width="240" height="90" fill="#E74C3C" stroke="#C0392B" stroke-width="2" rx="5"/>
+  <text x="910" y="440" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Threat Intelligence
+  </text>
+  <text x="910" y="460" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • VirusTotal integration
+  </text>
+  <text x="910" y="475" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • MITRE ATT&amp;CK
+  </text>
+  <text x="910" y="490" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • IOC feeds
+  </text>
+
+  <!-- API -->
+  <rect x="1060" y="415" width="240" height="90" fill="#16A085" stroke="#138D75" stroke-width="2" rx="5"/>
+  <text x="1180" y="440" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Management API
+  </text>
+  <text x="1180" y="460" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • RESTful API
+  </text>
+  <text x="1180" y="475" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Agent management
+  </text>
+  <text x="1180" y="490" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • Policy deployment
+  </text>
+
+  <!-- Database -->
+  <rect x="790" y="525" width="510" height="85" fill="#95A5A6" stroke="#7F8C8D" stroke-width="2" rx="5"/>
+  <text x="1045" y="550" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Time-Series Database
+  </text>
+  <text x="1045" y="570" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    InfluxDB / TimescaleDB / Azure Data Explorer
+  </text>
+  <text x="1045" y="585" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#FFFFFF">
+    • High-speed queries • Event correlation • Historical analysis
+  </text>
+
+  <!-- User Interfaces -->
+  <rect x="760" y="660" width="560" height="160" fill="#FFFFFF" stroke="#34495E" stroke-width="2" rx="8"/>
+  <text x="1040" y="685" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#34495E">
+    User Interfaces &amp; Integrations
+  </text>
+
+  <rect x="790" y="705" width="160" height="95" fill="#3498DB" stroke="#2980B9" stroke-width="2" rx="5"/>
+  <text x="870" y="728" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Web Portal
+  </text>
+  <text x="870" y="748" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Dashboard
+  </text>
+  <text x="870" y="763" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Alert management
+  </text>
+  <text x="870" y="778" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Reporting
+  </text>
+  <text x="870" y="793" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • User admin
+  </text>
+
+  <rect x="970" y="705" width="160" height="95" fill="#E67E22" stroke="#D35400" stroke-width="2" rx="5"/>
+  <text x="1050" y="728" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Mobile App
+  </text>
+  <text x="1050" y="748" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • iOS / Android
+  </text>
+  <text x="1050" y="763" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Push notifications
+  </text>
+  <text x="1050" y="778" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Incident response
+  </text>
+  <text x="1050" y="793" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Quick actions
+  </text>
+
+  <rect x="1150" y="705" width="160" height="95" fill="#9B59B6" stroke="#8E44AD" stroke-width="2" rx="5"/>
+  <text x="1230" y="728" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Integrations
+  </text>
+  <text x="1230" y="748" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Slack / Teams
+  </text>
+  <text x="1230" y="763" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Jira / ServiceNow
+  </text>
+  <text x="1230" y="778" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • SOAR platforms
+  </text>
+  <text x="1230" y="793" font-family="Arial, sans-serif" font-size="9" text-anchor="middle" fill="#FFFFFF">
+    • Webhooks
+  </text>
+
+  <!-- Arrows between phases -->
+  <path d="M 230 405 L 230 450 L 360 450 L 360 640" stroke="#34495E" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 500 405 L 500 450 L 360 450 L 360 640" stroke="#34495E" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <text x="685" y="300" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#E67E22">
+    Phase 2 →
+  </text>
+  <text x="685" y="320" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#D35400">
+    Migration
+  </text>
+  <path d="M 670 330 L 760 240" stroke="#E67E22" stroke-width="3" fill="none" marker-end="url(#arrowhead2)"/>
+
+  <!-- Legend -->
+  <rect x="50" y="860" width="1300" height="30" fill="#FFFFFF" stroke="#34495E" stroke-width="1" rx="3"/>
+  <text x="70" y="880" font-family="Arial, sans-serif" font-size="11" fill="#34495E">
+    <tspan font-weight="bold">Deployment Models:</tspan> GPO + File Share (Phase 1) | HTTPS/gRPC + Cloud Backend (Phase 2) | Hybrid (Both Supported)
+  </text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495E"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="12" markerHeight="12" refX="10" refY="3" orient="auto">
+      <polygon points="0 0, 12 3, 0 6" fill="#E67E22"/>
+    </marker>
+  </defs>
+</svg>
