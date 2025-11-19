@@ -1,0 +1,443 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1800">
+  <defs>
+    <style>
+      .title { font: bold 24px sans-serif; fill: #2c3e50; }
+      .subtitle { font: 16px sans-serif; fill: #7f8c8d; }
+      .section-title { font: bold 18px sans-serif; fill: #34495e; }
+      .layer-title { font: bold 14px sans-serif; fill: #2c3e50; }
+      .component { fill: #ecf0f1; stroke: #34495e; stroke-width: 2; }
+      .kernel { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .user { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .storage { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .sdk { fill: #95a5a6; stroke: #7f8c8d; stroke-width: 2; }
+      .arrow { fill: none; stroke: #34495e; stroke-width: 2; marker-end: url(#arrowhead); }
+      .data-arrow { fill: none; stroke: #e67e22; stroke-width: 3; marker-end: url(#data-arrowhead); }
+      .code-ref { font: 11px monospace; fill: #e74c3c; font-weight: bold; }
+      .func-name { font: 12px monospace; fill: #16a085; font-weight: bold; }
+      .file-name { font: 10px monospace; fill: #8e44ad; }
+      .line-ref { font: 10px monospace; fill: #d35400; }
+      .text { font: 12px sans-serif; fill: #2c3e50; }
+      .small-text { font: 10px sans-serif; fill: #7f8c8d; }
+      .note { font: 11px sans-serif; fill: #e67e22; font-style: italic; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e" />
+    </marker>
+    <marker id="data-arrowhead" markerWidth="12" markerHeight="12" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#e67e22" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="35" text-anchor="middle" class="title">Phase 1 Data Flow - Code Reference Map</text>
+  <text x="700" y="60" text-anchor="middle" class="subtitle">Actual Implementation with File/Function/Line References</text>
+
+  <!-- Legend -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="20" height="15" class="kernel"/>
+    <text x="25" y="12" class="small-text">Kernel Mode (Ring 0)</text>
+
+    <rect x="150" y="0" width="20" height="15" class="user"/>
+    <text x="175" y="12" class="small-text">User Mode (Ring 3)</text>
+
+    <rect x="300" y="0" width="20" height="15" class="sdk"/>
+    <text x="325" y="12" class="small-text">Windows SDK/API</text>
+
+    <rect x="450" y="0" width="20" height="15" class="storage"/>
+    <text x="475" y="12" class="small-text">File System</text>
+
+    <line x1="600" y1="7" x2="640" y2="7" class="data-arrow"/>
+    <text x="645" y="12" class="small-text">Event Data Flow</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- LAYER 1: Application Layer -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 120)">
+    <text x="0" y="0" class="section-title">1. Application Layer (User Space)</text>
+
+    <rect x="20" y="10" width="200" height="60" class="component"/>
+    <text x="120" y="30" text-anchor="middle" class="layer-title">User Application</text>
+    <text x="120" y="48" text-anchor="middle" class="text">CreateFile(), WriteFile()</text>
+    <text x="120" y="63" text-anchor="middle" class="note">(Any Windows application)</text>
+  </g>
+
+  <!-- Arrow down -->
+  <line x1="170" y1="195" x2="170" y2="225" class="data-arrow"/>
+  <text x="180" y="215" class="small-text">System Call</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 2: Windows Kernel -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 230)">
+    <text x="0" y="0" class="section-title">2. Windows Kernel (NT Kernel)</text>
+
+    <rect x="20" y="10" width="250" height="80" class="sdk"/>
+    <text x="145" y="30" text-anchor="middle" class="layer-title">NT I/O Manager</text>
+    <text x="145" y="48" text-anchor="middle" class="text">IRP_MJ_CREATE</text>
+    <text x="145" y="63" text-anchor="middle" class="text">IRP_MJ_WRITE</text>
+    <text x="145" y="78" text-anchor="middle" class="text">IRP_MJ_SET_INFORMATION</text>
+    <text x="145" y="93" text-anchor="middle" class="note">(Windows SDK - ntoskrnl.exe)</text>
+  </g>
+
+  <!-- Arrow down -->
+  <line x1="170" y1="330" x2="170" y2="365" class="data-arrow"/>
+  <text x="180" y="350" class="small-text">IRP Dispatch</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 3: Filter Manager -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 370)">
+    <text x="0" y="0" class="section-title">3. Filter Manager</text>
+
+    <rect x="20" y="10" width="250" height="65" class="sdk"/>
+    <text x="145" y="30" text-anchor="middle" class="layer-title">FltMgr.sys</text>
+    <text x="145" y="48" text-anchor="middle" class="text">FltRegisterFilter()</text>
+    <text x="145" y="63" text-anchor="middle" class="text">FltStartFiltering()</text>
+    <text x="145" y="78" text-anchor="middle" class="note">(Windows SDK Component)</text>
+
+    <!-- Code reference for registration -->
+    <text x="300" y="35" class="file-name">📄 driver.c</text>
+    <text x="300" y="50" class="func-name">DriverEntry()</text>
+    <text x="300" y="65" class="line-ref">Lines: 89-96, 113-121</text>
+  </g>
+
+  <!-- Arrow down -->
+  <line x1="170" y1="450" x2="170" y2="485" class="data-arrow"/>
+  <text x="180" y="470" class="small-text">Pre-Operation Callback</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 4: Our Mini-Filter Driver -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 490)">
+    <text x="0" y="0" class="section-title">4. YourEDR Mini-Filter Driver (Altitude 325100)</text>
+
+    <!-- Main driver box -->
+    <rect x="20" y="10" width="580" height="280" class="kernel"/>
+    <text x="310" y="30" text-anchor="middle" class="layer-title">YourEDRFilter.sys</text>
+
+    <!-- Filter Operations -->
+    <g transform="translate(40, 45)">
+      <rect x="0" y="0" width="260" height="220" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+      <text x="130" y="20" text-anchor="middle" class="func-name">Filter Operations</text>
+
+      <!-- PreCreateOperation -->
+      <g transform="translate(10, 35)">
+        <rect x="0" y="0" width="240" height="55" fill="#ffe5e5" stroke="#e74c3c" stroke-width="1"/>
+        <text x="5" y="15" class="func-name">PreCreateOperation()</text>
+        <text x="5" y="28" class="file-name">📄 filter_operations.c</text>
+        <text x="5" y="40" class="line-ref">Lines: 73-162</text>
+        <text x="5" y="52" class="small-text">Captures: Create events</text>
+      </g>
+
+      <!-- PreWriteOperation -->
+      <g transform="translate(10, 95)">
+        <rect x="0" y="0" width="240" height="55" fill="#ffe5e5" stroke="#e74c3c" stroke-width="1"/>
+        <text x="5" y="15" class="func-name">PreWriteOperation()</text>
+        <text x="5" y="28" class="file-name">📄 filter_operations.c</text>
+        <text x="5" y="40" class="line-ref">Lines: 167-228</text>
+        <text x="5" y="52" class="small-text">Captures: Write events</text>
+      </g>
+
+      <!-- PreSetInformationOperation -->
+      <g transform="translate(10, 155)">
+        <rect x="0" y="0" width="240" height="55" fill="#ffe5e5" stroke="#e74c3c" stroke-width="1"/>
+        <text x="5" y="15" class="func-name">PreSetInformationOperation()</text>
+        <text x="5" y="28" class="file-name">📄 filter_operations.c</text>
+        <text x="5" y="40" class="line-ref">Lines: 233-329</text>
+        <text x="5" y="52" class="small-text">Captures: Delete/Rename</text>
+      </g>
+    </g>
+
+    <!-- Event Logger / Ring Buffer -->
+    <g transform="translate(320, 45)">
+      <rect x="0" y="0" width="260" height="220" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+      <text x="130" y="20" text-anchor="middle" class="func-name">Event Logger (Ring Buffer)</text>
+
+      <!-- QueueEvent -->
+      <g transform="translate(10, 35)">
+        <rect x="0" y="0" width="240" height="70" fill="#fff4e5" stroke="#f39c12" stroke-width="1"/>
+        <text x="5" y="15" class="func-name">QueueEvent()</text>
+        <text x="5" y="28" class="file-name">📄 event_logger.c</text>
+        <text x="5" y="40" class="line-ref">Lines: 113-210</text>
+        <text x="5" y="52" class="small-text">Buffer: 2MB ring buffer</text>
+        <text x="5" y="64" class="small-text">Lock: KSPIN_LOCK (line 141)</text>
+      </g>
+
+      <!-- DequeueEvent -->
+      <g transform="translate(10, 110)">
+        <rect x="0" y="0" width="240" height="70" fill="#fff4e5" stroke="#f39c12" stroke-width="1"/>
+        <text x="5" y="15" class="func-name">DequeueEvent()</text>
+        <text x="5" y="28" class="file-name">📄 event_logger.c</text>
+        <text x="5" y="40" class="line-ref">Lines: 215-303</text>
+        <text x="5" y="52" class="small-text">Read offset: line 253</text>
+        <text x="5" y="64" class="small-text">Wrap handling: lines 265-275</text>
+      </g>
+
+      <!-- Ring buffer stats -->
+      <text x="10" y="195" class="small-text">• TotalEventsQueued: line 194</text>
+      <text x="10" y="208" class="small-text">• TotalEventsDropped: line 157</text>
+    </g>
+
+    <!-- Data structure references -->
+    <text x="30" y="280" class="file-name">📄 Event Structures: common/include/event_structures.h</text>
+    <text x="30" y="293" class="small-text">• EDR_FILE_EVENT (lines 54-67) • EDR_EVENT_HEADER (lines 37-49)</text>
+  </g>
+
+  <!-- Arrow from Filter to Ring Buffer -->
+  <line x1="310" y1="580" x2="420" y2="580" class="data-arrow"/>
+  <text x="340" y="573" class="small-text">Event Data</text>
+
+  <!-- Arrow down from ring buffer -->
+  <line x1="480" y1="785" x2="480" y2="825" class="data-arrow"/>
+  <text x="490" y="810" class="small-text">IOCTL Request</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 5: Communication Layer (IOCTL) -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 830)">
+    <text x="0" y="0" class="section-title">5. Kernel-User Communication (IOCTL)</text>
+
+    <rect x="20" y="10" width="560" height="140" class="kernel"/>
+    <text x="310" y="30" text-anchor="middle" class="layer-title">IOCTL Device Interface</text>
+
+    <!-- Device creation -->
+    <g transform="translate(40, 45)">
+      <rect x="0" y="0" width="250" height="95" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+      <text x="125" y="20" text-anchor="middle" class="func-name">CreateCommunicationDevice()</text>
+      <text x="10" y="38" class="file-name">📄 communication.c : Lines 31-84</text>
+      <text x="10" y="53" class="small-text">Device: \Device\YourEDRFilter</text>
+      <text x="10" y="66" class="small-text">Symlink: \DosDevices\YourEDRFilter</text>
+      <text x="10" y="79" class="line-ref">IoCreateDevice: line 47-55</text>
+      <text x="10" y="92" class="line-ref">IoCreateSymbolicLink: line 60-66</text>
+    </g>
+
+    <!-- IOCTL dispatcher -->
+    <g transform="translate(310, 45)">
+      <rect x="0" y="0" width="250" height="95" fill="#fff" stroke="#c0392b" stroke-width="1"/>
+      <text x="125" y="20" text-anchor="middle" class="func-name">DeviceIoControl()</text>
+      <text x="10" y="38" class="file-name">📄 communication.c : Lines 133-245</text>
+      <text x="10" y="53" class="small-text">GET_VERSION: lines 115-130</text>
+      <text x="10" y="66" class="small-text">GET_EVENT: lines 132-156</text>
+      <text x="10" y="79" class="small-text">SET_CONFIG: lines 158-185</text>
+      <text x="10" y="92" class="small-text">GET_STATS: lines 187-217</text>
+    </g>
+
+    <!-- IOCTL codes reference -->
+    <text x="30" y="165" class="file-name">📄 IOCTL Codes: common/include/ioctl_codes.h (lines 27-37)</text>
+  </g>
+
+  <!-- Border between kernel and user mode -->
+  <line x1="50" y1="1010" x2="1350" y2="1010" stroke="#e67e22" stroke-width="4" stroke-dasharray="10,5"/>
+  <text x="700" y="1025" text-anchor="middle" class="note" font-size="14px">===== KERNEL/USER MODE BOUNDARY (Ring 0 → Ring 3) =====</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 6: User-Mode Service -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 1050)">
+    <text x="0" y="0" class="section-title">6. YourEDR Windows Service (User Mode)</text>
+
+    <rect x="20" y="10" width="580" height="320" class="user"/>
+    <text x="310" y="30" text-anchor="middle" class="layer-title">YourEDRService.exe</text>
+
+    <!-- Service Main -->
+    <g transform="translate(40, 45)">
+      <rect x="0" y="0" width="260" height="85" fill="#fff" stroke="#2980b9" stroke-width="1"/>
+      <text x="130" y="20" text-anchor="middle" class="func-name">Service Lifecycle</text>
+      <text x="10" y="38" class="file-name">📄 main.cpp</text>
+      <text x="10" y="51" class="func-name">ServiceMain() : Lines 49-100</text>
+      <text x="10" y="64" class="func-name">ServiceCtrlHandler() : Lines 15-47</text>
+      <text x="10" y="77" class="line-ref">Registration: lines 220-225</text>
+    </g>
+
+    <!-- Driver Communicator -->
+    <g transform="translate(40, 140)">
+      <rect x="0" y="0" width="260" height="160" fill="#fff" stroke="#2980b9" stroke-width="1"/>
+      <text x="130" y="20" text-anchor="middle" class="func-name">Driver Communicator</text>
+      <text x="10" y="38" class="file-name">📄 driver_communicator.cpp</text>
+
+      <text x="10" y="56" class="func-name">Connect()</text>
+      <text x="10" y="69" class="line-ref">Lines: 24-45 | CreateFileW()</text>
+
+      <text x="10" y="87" class="func-name">GetEvent()</text>
+      <text x="10" y="100" class="line-ref">Lines: 48-58 | IOCTL call</text>
+
+      <text x="10" y="118" class="func-name">SendIoctl()</text>
+      <text x="10" y="131" class="line-ref">Lines: 108-138 | DeviceIoControl()</text>
+
+      <text x="10" y="149" class="small-text">Device: \\.\YourEDRFilter</text>
+    </g>
+
+    <!-- JSON Logger -->
+    <g transform="translate(320, 45)">
+      <rect x="0" y="0" width="260" height="255" fill="#fff" stroke="#2980b9" stroke-width="1"/>
+      <text x="130" y="20" text-anchor="middle" class="func-name">JSON Logger</text>
+      <text x="10" y="38" class="file-name">📄 json_logger.cpp</text>
+
+      <text x="10" y="56" class="func-name">Initialize()</text>
+      <text x="10" y="69" class="line-ref">Lines: 24-39</text>
+
+      <text x="10" y="87" class="func-name">LogEvent()</text>
+      <text x="10" y="100" class="line-ref">Lines: 41-72</text>
+
+      <text x="10" y="118" class="func-name">ConvertFileEventToJson()</text>
+      <text x="10" y="131" class="line-ref">Lines: 129-161</text>
+
+      <text x="10" y="149" class="func-name">OpenNewLogFile()</text>
+      <text x="10" y="162" class="line-ref">Lines: 74-92</text>
+
+      <text x="10" y="180" class="small-text">Format: JSONL (JSON Lines)</text>
+      <text x="10" y="193" class="small-text">Rotation: 100MB per file</text>
+      <text x="10" y="206" class="small-text">File naming: lines 77-78</text>
+      <text x="10" y="219" class="small-text">UTF-8 encoding: lines 188-204</text>
+      <text x="10" y="232" class="small-text">Timestamp format: lines 206-220</text>
+    </g>
+
+    <!-- Worker thread -->
+    <text x="30" y="320" class="file-name">📄 Polling Loop: service.cpp : WorkerThreadMain() (Lines 149-173)</text>
+  </g>
+
+  <!-- Arrow from communicator to logger -->
+  <line x1="310" y1="1230" x2="420" y2="1230" class="data-arrow"/>
+  <text x="340" y="1223" class="small-text">Event Data</text>
+
+  <!-- Arrow down to file system -->
+  <line x1="480" y1="1390" x2="480" y2="1430" class="data-arrow"/>
+  <text x="490" y="1415" class="small-text">Write JSON</text>
+
+  <!-- ======================================== -->
+  <!-- LAYER 7: File System Storage -->
+  <!-- ======================================== -->
+  <g transform="translate(50, 1435)">
+    <text x="0" y="0" class="section-title">7. Log File Storage</text>
+
+    <rect x="20" y="10" width="560" height="120" class="storage"/>
+    <text x="310" y="30" text-anchor="middle" class="layer-title">C:\ProgramData\YourEDR\Logs\</text>
+
+    <text x="40" y="55" class="text" font-weight="bold">events_20251119_143052.jsonl</text>
+    <text x="40" y="75" class="small-text">{"eventType":"FileCreate","timestamp":"2025-11-19T14:30:52.123Z",</text>
+    <text x="40" y="90" class="small-text"> "processId":4567,"threadId":8901,"filePath":"C:\\test.txt",</text>
+    <text x="40" y="105" class="small-text"> "desiredAccess":"0x120089","fileSize":0}</text>
+
+    <text x="40" y="125" class="note">Log file creation: json_logger.cpp:77-92</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- Performance Metrics Box -->
+  <!-- ======================================== -->
+  <g transform="translate(680, 490)">
+    <rect x="0" y="0" width="670" height="260" fill="#fff9e5" stroke="#f39c12" stroke-width="2"/>
+    <text x="335" y="25" text-anchor="middle" class="section-title">Performance Characteristics</text>
+
+    <!-- Latency -->
+    <text x="15" y="50" class="text" font-weight="bold">Event Capture Latency:</text>
+    <text x="25" y="68" class="small-text">• Filter callback → QueueEvent: &lt;10 μs</text>
+    <text x="25" y="82" class="small-text">• Location: filter_operations.c:158</text>
+
+    <text x="15" y="105" class="text" font-weight="bold">Ring Buffer Operations:</text>
+    <text x="25" y="123" class="small-text">• Size: 2 MB (RING_BUFFER_SIZE: driver.h:28)</text>
+    <text x="25" y="137" class="small-text">• Capacity: ~3,000 events (2MB / 680 bytes)</text>
+    <text x="25" y="151" class="small-text">• Spinlock acquisition: event_logger.c:141</text>
+    <text x="25" y="165" class="small-text">• Drop tracking: event_logger.c:157 (TotalEventsDropped)</text>
+
+    <text x="15" y="188" class="text" font-weight="bold">Service Processing:</text>
+    <text x="25" y="206" class="small-text">• Polling interval: 100ms (service.cpp:144, line 169)</text>
+    <text x="25" y="220" class="small-text">• Event buffer: 4KB (service.cpp:144)</text>
+    <text x="25" y="234" class="small-text">• JSON write: &lt;1ms typical (json_logger.cpp:61-63)</text>
+    <text x="25" y="248" class="small-text">• File rotation: 100MB threshold (json_logger.cpp:18, 48)</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- Configuration Box -->
+  <!-- ======================================== -->
+  <g transform="translate(680, 770)">
+    <rect x="0" y="0" width="670" height="200" fill="#e8f5e9" stroke="#27ae60" stroke-width="2"/>
+    <text x="335" y="25" text-anchor="middle" class="section-title">Configuration Files</text>
+
+    <text x="15" y="50" class="text" font-weight="bold">default_config.json</text>
+    <text x="25" y="68" class="file-name">config/default_config.json</text>
+    <text x="25" y="82" class="small-text">• File monitoring: enabled=true (line 7)</text>
+    <text x="25" y="96" class="small-text">• Process monitoring: enabled=false (line 13 - Phase 2)</text>
+    <text x="25" y="110" class="small-text">• Network monitoring: enabled=false (line 18 - Phase 2)</text>
+    <text x="25" y="124" class="small-text">• Max events/sec: 10000 (line 11)</text>
+
+    <text x="15" y="147" class="text" font-weight="bold">filter_rules.json</text>
+    <text x="25" y="165" class="file-name">installer/config/filter_rules.json</text>
+    <text x="25" y="179" class="small-text">• Path exclusions: lines 5-31</text>
+    <text x="25" y="193" class="small-text">• Extension exclusions: lines 32-48</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- Code Statistics Box -->
+  <!-- ======================================== -->
+  <g transform="translate(680, 990)">
+    <rect x="0" y="0" width="670" height="180" fill="#f3e5f5" stroke="#8e44ad" stroke-width="2"/>
+    <text x="335" y="25" text-anchor="middle" class="section-title">Code Statistics</text>
+
+    <text x="15" y="50" class="text" font-weight="bold">Kernel Driver (C):</text>
+    <text x="25" y="68" class="small-text">• driver.c: 195 lines (DriverEntry, lifecycle)</text>
+    <text x="25" y="82" class="small-text">• filter_operations.c: 329 lines (Pre-op callbacks)</text>
+    <text x="25" y="96" class="small-text">• communication.c: 245 lines (IOCTL handlers)</text>
+    <text x="25" y="110" class="small-text">• event_logger.c: 308 lines (Ring buffer)</text>
+    <text x="25" y="124" class="small-text">Total: 1,308 lines</text>
+
+    <text x="360" y="50" class="text" font-weight="bold">User-Mode Service (C++):</text>
+    <text x="370" y="68" class="small-text">• main.cpp: 232 lines (Service entry)</text>
+    <text x="370" y="82" class="small-text">• service.cpp: 173 lines (Lifecycle)</text>
+    <text x="370" y="96" class="small-text">• driver_communicator.cpp: 138 lines</text>
+    <text x="370" y="110" class="small-text">• json_logger.cpp: 230 lines</text>
+    <text x="370" y="124" class="small-text">Total: 858 lines</text>
+
+    <text x="15" y="150" class="text" font-weight="bold">Common Headers:</text>
+    <text x="25" y="168" class="small-text">• event_structures.h: 123 lines | ioctl_codes.h: 108 lines</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- Testing Box -->
+  <!-- ======================================== -->
+  <g transform="translate(680, 1190)">
+    <rect x="0" y="0" width="670" height="150" fill="#fce4ec" stroke="#c2185b" stroke-width="2"/>
+    <text x="335" y="25" text-anchor="middle" class="section-title">Testing and Verification</text>
+
+    <text x="15" y="50" class="text" font-weight="bold">Driver Status:</text>
+    <text x="25" y="68" class="small-text" font-family="monospace">fltmc filters | findstr YourEDR</text>
+    <text x="25" y="82" class="small-text">Expected: YourEDRFilter      325100    3    0</text>
+
+    <text x="15" y="105" class="text" font-weight="bold">Service Status:</text>
+    <text x="25" y="123" class="small-text" font-family="monospace">sc query YourEDRService</text>
+    <text x="25" y="137" class="small-text">Expected: STATE: RUNNING</text>
+
+    <text x="360" y="50" class="text" font-weight="bold">Generate Test Event:</text>
+    <text x="370" y="68" class="small-text" font-family="monospace">echo "test" &gt; C:\test.txt</text>
+    <text x="370" y="82" class="small-text">→ Triggers: PreCreateOperation (filter_operations.c:73)</text>
+
+    <text x="360" y="105" class="text" font-weight="bold">View Logs:</text>
+    <text x="370" y="123" class="small-text" font-family="monospace">Get-Content C:\ProgramData\YourEDR\Logs\*.jsonl</text>
+  </g>
+
+  <!-- ======================================== -->
+  <!-- Important Notes -->
+  <!-- ======================================== -->
+  <g transform="translate(680, 1360)">
+    <rect x="0" y="0" width="670" height="195" fill="#ffebee" stroke="#d32f2f" stroke-width="2"/>
+    <text x="335" y="25" text-anchor="middle" class="section-title">⚠️ Phase 1 Limitations</text>
+
+    <text x="15" y="50" class="text" font-weight="bold">NOT Implemented:</text>
+    <text x="25" y="68" class="small-text">❌ Process monitoring (structures defined, callbacks not registered)</text>
+    <text x="35" y="82" class="file-name">• EnableProcessMonitoring = FALSE (driver.c:74)</text>
+
+    <text x="25" y="100" class="small-text">❌ Network monitoring (structures defined, no WFP code)</text>
+    <text x="35" y="114" class="file-name">• EnableNetworkMonitoring = FALSE (driver.c:75)</text>
+
+    <text x="25" y="132" class="small-text">❌ Session ID capture (field exists but set to 0)</text>
+    <text x="35" y="146" class="file-name">• fileEvent.Header.SessionId = 0 (filter_operations.c:106)</text>
+
+    <text x="25" y="164" class="small-text">❌ Cloud telemetry (config exists but not implemented)</text>
+    <text x="35" y="178" class="file-name">• config/default_config.json: telemetry.enabled = false</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="700" y="1780" text-anchor="middle" class="subtitle">
+    Complete Implementation Reference: docs/architecture/07-phase1-implementation-reference.md
+  </text>
+</svg>
