@@ -133,6 +133,8 @@ const FLT_REGISTRATION FilterRegistration = {
 
 ### Filter Altitude
 
+**⚠️ IMPORTANT**: Filter Altitude is a concept **specific to Mini-Filter drivers** (file system monitoring). Network monitoring uses WFP, which has a different ordering mechanism (layers, sublayers, weights). See [Network Monitoring Architecture](network-monitoring.md#wfp-ordering-mechanism) for WFP ordering.
+
 **Altitude**: `325100`
 **Range**: FSFilter Activity Monitor (300000-309999)
 
@@ -141,6 +143,28 @@ The altitude determines the filter's position in the filter stack. Activity moni
 **Altitude Definition**:
 - Header: `driver/YourEDRFilter/include/driver.h:31`
 - INF file: `driver/YourEDRFilter/YourEDRFilter.inf:70`
+
+**Altitude Categories** (for context):
+
+| Range | Category | Purpose | Example Products |
+|-------|----------|---------|------------------|
+| 420000-429999 | FSFilter Top | Runs first | PatchGuard, ELAM |
+| 400000-409999 | FSFilter Anti-Virus | Virus scanning | Windows Defender, McAfee |
+| 380000-389999 | FSFilter Replication | File replication | DFS |
+| 360000-369999 | FSFilter Continuous Backup | Backup monitoring | Windows Backup |
+| 340000-349999 | FSFilter Content Screener | Content filtering | File screens |
+| **320000-329999** | **FSFilter Activity Monitor** | **Monitoring/Logging** | **YourEDR (325100)** |
+| 300000-309999 | FSFilter Undelete | File recovery | Recycle bin |
+| 280000-289999 | FSFilter Encryption | Encryption | BitLocker |
+| 260000-269999 | FSFilter Compression | Compression | NTFS compression |
+| 240000-249999 | FSFilter HSM | Hierarchical Storage | Remote Storage |
+| Lower ranges | Various | ... | ... |
+
+**Why 325100 for Activity Monitor?**
+- We want to see the **final** result of file operations after security checks
+- Anti-virus filters (400000+) run before us, so we see post-scan operations
+- Encryption filters (280000) run before us, so we see encrypted file paths
+- This is the standard range for monitoring/logging/auditing tools
 
 ### Operation Callbacks
 

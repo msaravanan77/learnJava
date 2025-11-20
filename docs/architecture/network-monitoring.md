@@ -160,6 +160,46 @@ We use **Application Layer Enforcement (ALE)** layers for connection monitoring:
 - **Post-authorization**: Fires after Windows Firewall has approved the connection
 - **Connection-level granularity**: One event per connection, not per packet
 
+### WFP Ordering Mechanism
+
+**⚠️ IMPORTANT**: WFP does **NOT** use "Filter Altitudes" like Mini-Filter drivers. WFP has its own ordering system:
+
+| Concept | Description | Our Configuration |
+|---------|-------------|-------------------|
+| **Layer** | Pre-defined filtering point in network stack | ALE_AUTH_CONNECT, ALE_AUTH_RECV_ACCEPT |
+| **Sublayer** | Optional grouping within a layer | Default sublayer (NULL) |
+| **Weight** | Determines filter execution order within layer | `FWP_EMPTY_WEIGHT` (don't affect order) |
+| **Action** | What the filter does | `FWP_ACTION_CALLOUT_INSPECTION` (inspect only) |
+
+#### Key Differences from Mini-Filter Altitudes
+
+| Aspect | Mini-Filter (File System) | WFP (Network) |
+|--------|--------------------------|---------------|
+| **Ordering System** | Filter Altitude (e.g., 325100) | Layer + Sublayer + Weight |
+| **Range** | 20000-429999 (various categories) | Pre-defined layers (no numeric range) |
+| **Framework** | Filter Manager (FltMgr.sys) | WFP Engine (BFE service) |
+| **Registration** | `FltRegisterFilter()` | `FwpmCalloutAdd0()` + `FwpmFilterAdd0()` |
+| **Our Value** | Altitude: 325100 (Activity Monitor) | Weight: FWP_EMPTY_WEIGHT (default order) |
+
+**Why `FWP_EMPTY_WEIGHT`?**
+- We're **inspecting only** (not modifying or blocking traffic)
+- We don't need to run before/after other filters
+- Default order is sufficient for monitoring purposes
+
+**If we needed specific ordering**:
+```c
+// To run BEFORE most filters (higher weight)
+filter.weight.type = FWP_UINT64;
+filter.weight.uint64 = 0xFFFFFFFFFFFFFFFF;  // Maximum weight
+
+// To run AFTER most filters (lower weight)
+filter.weight.type = FWP_UINT64;
+filter.weight.uint64 = 0x0000000000000001;  // Minimum weight
+
+// Our choice: Default (don't care about order)
+filter.weight.type = FWP_EMPTY;  // FWP_EMPTY_WEIGHT
+```
+
 ### WFP Callout Registration
 
 #### Initialization Sequence
