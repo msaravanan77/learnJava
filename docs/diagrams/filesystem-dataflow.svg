@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <defs>
+    <style>
+      .box { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+      .step-box { fill: #fff9c4; stroke: #f57f17; stroke-width: 2; }
+      .data-box { fill: #e1f5fe; stroke: #0288d1; stroke-width: 2; }
+      .text { font-family: 'Courier New', monospace; font-size: 12px; fill: #000; }
+      .title-text { font-family: Arial, sans-serif; font-size: 16px; fill: #000; font-weight: bold; }
+      .arrow { stroke: #d32f2f; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .label-text { font-family: Arial, sans-serif; font-size: 11px; fill: #d32f2f; font-weight: bold; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#d32f2f" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text class="title-text" x="450" y="25" text-anchor="middle">File System Event Data Flow - CreateFile("C:\test.txt") Example</text>
+
+  <!-- Step 1: Application -->
+  <rect class="box" x="50" y="50" width="200" height="60" rx="5"/>
+  <text class="text" x="150" y="75" text-anchor="middle" font-weight="bold">Application</text>
+  <text class="text" x="150" y="92" text-anchor="middle">CreateFile("C:\test.txt",</text>
+  <text class="text" x="150" y="105" text-anchor="middle">  GENERIC_WRITE, ...)</text>
+
+  <!-- Arrow 1 -->
+  <path class="arrow" d="M 150 110 L 150 150"/>
+  <text class="label-text" x="160" y="135">IRP_MJ_CREATE</text>
+
+  <!-- Step 2: PreCreateOperation -->
+  <rect class="step-box" x="50" y="150" width="200" height="80" rx="5"/>
+  <text class="text" x="150" y="170" text-anchor="middle" font-weight="bold">PreCreateOperation()</text>
+  <text class="text" x="60" y="190" text-anchor="start">1. Get file name</text>
+  <text class="text" x="60" y="205" text-anchor="start">2. Check exclusions</text>
+  <text class="text" x="60" y="220" text-anchor="start">3. Build event structure</text>
+
+  <!-- Data Structure -->
+  <rect class="data-box" x="280" y="150" width="300" height="130" rx="5"/>
+  <text class="text" x="430" y="170" text-anchor="middle" font-weight="bold">EDR_FILE_EVENT</text>
+  <text class="text" x="290" y="190" text-anchor="start">EventType: FileCreate</text>
+  <text class="text" x="290" y="205" text-anchor="start">Timestamp: 132...456</text>
+  <text class="text" x="290" y="220" text-anchor="start">ProcessId: 4567</text>
+  <text class="text" x="290" y="235" text-anchor="start">FilePath: "C:\test.txt"</text>
+  <text class="text" x="290" y="250" text-anchor="start">DesiredAccess: 0x40000000</text>
+  <text class="text" x="290" y="265" text-anchor="start">FileSize: 0</text>
+
+  <!-- Arrow 2 -->
+  <path class="arrow" d="M 150 230 L 150 300"/>
+  <text class="label-text" x="160" y="270">QueueEvent()</text>
+
+  <!-- Step 3: Ring Buffer -->
+  <rect class="step-box" x="50" y="300" width="530" height="80" rx="5"/>
+  <text class="text" x="315" y="320" text-anchor="middle" font-weight="bold">Ring Buffer (2MB Non-Paged Pool)</text>
+  <text class="text" x="60" y="340" text-anchor="start">1. Acquire spinlock</text>
+  <text class="text" x="60" y="355" text-anchor="start">2. Check available space</text>
+  <text class="text" x="60" y="370" text-anchor="start">3. Copy event to buffer</text>
+
+  <text class="text" x="340" y="340" text-anchor="start">4. Update write offset</text>
+  <text class="text" x="340" y="355" text-anchor="start">5. Signal data available</text>
+  <text class="text" x="340" y="370" text-anchor="start">6. Release spinlock</text>
+
+  <!-- Arrow 3 (continues) -->
+  <path class="arrow" d="M 250 340 L 400 340 L 400 400" stroke-dasharray="5,5"/>
+  <text class="label-text" x="270" y="330">IRP continues to NTFS</text>
+
+  <!-- Step 4: NTFS -->
+  <rect class="box" x="300" y="400" width="200" height="50" rx="5"/>
+  <text class="text" x="400" y="425" text-anchor="middle" font-weight="bold">NTFS Driver</text>
+  <text class="text" x="400" y="440" text-anchor="middle">Actually creates the file</text>
+
+  <!-- Parallel: User-Mode Service -->
+  <rect class="box" x="650" y="50" width="220" height="80" rx="5"/>
+  <text class="text" x="760" y="75" text-anchor="middle" font-weight="bold">YourEDRService</text>
+  <text class="text" x="660" y="95" text-anchor="start">Poll every 100ms:</text>
+  <text class="text" x="660" y="110" text-anchor="start">GetEvent() via IOCTL</text>
+  <text class="text" x="660" y="125" text-anchor="start">→ IOCTL_YOUREDR_GET_EVENT</text>
+
+  <!-- Arrow 4 (IOCTL) -->
+  <path class="arrow" d="M 580 340 L 650 340 L 650 130" stroke-dasharray="5,5"/>
+  <text class="label-text" x="610" y="240">IOCTL</text>
+
+  <!-- Step 5: DequeueEvent -->
+  <rect class="step-box" x="650" y="160" width="220" height="80" rx="5"/>
+  <text class="text" x="760" y="180" text-anchor="middle" font-weight="bold">DequeueEvent()</text>
+  <text class="text" x="660" y="200" text-anchor="start">1. Acquire spinlock</text>
+  <text class="text" x="660" y="215" text-anchor="start">2. Read from buffer</text>
+  <text class="text" x="660" y="230" text-anchor="start">3. Update read offset</text>
+
+  <!-- Arrow 5 -->
+  <path class="arrow" d="M 760 240 L 760 270"/>
+
+  <!-- Step 6: JSON Conversion -->
+  <rect class="step-box" x="650" y="270" width="220" height="80" rx="5"/>
+  <text class="text" x="760" y="290" text-anchor="middle" font-weight="bold">ConvertFileEventToJson()</text>
+  <text class="text" x="660" y="310" text-anchor="start">Build JSON string:</text>
+  <text class="text" x="660" y="325" text-anchor="start">• Format timestamp</text>
+  <text class="text" x="660" y="340" text-anchor="start">• Convert path to UTF-8</text>
+
+  <!-- Arrow 6 -->
+  <path class="arrow" d="M 760 350 L 760 380"/>
+
+  <!-- Step 7: JSON Output -->
+  <rect class="data-box" x="620" y="380" width="280" height="140" rx="5"/>
+  <text class="text" x="760" y="400" text-anchor="middle" font-weight="bold">JSON Output</text>
+  <text class="text" x="630" y="420" text-anchor="start" font-size="10">{</text>
+  <text class="text" x="640" y="435" text-anchor="start" font-size="10">"eventType":"FileCreate",</text>
+  <text class="text" x="640" y="450" text-anchor="start" font-size="10">"timestamp":"2025-11-19T14:30:52Z",</text>
+  <text class="text" x="640" y="465" text-anchor="start" font-size="10">"processId":4567,</text>
+  <text class="text" x="640" y="480" text-anchor="start" font-size="10">"filePath":"C:\\test.txt",</text>
+  <text class="text" x="640" y="495" text-anchor="start" font-size="10">"desiredAccess":"0x40000000"</text>
+  <text class="text" x="630" y="510" text-anchor="start" font-size="10">}</text>
+
+  <!-- Arrow 7 -->
+  <path class="arrow" d="M 760 520 L 760 550"/>
+
+  <!-- Step 8: Log File -->
+  <rect class="box" x="650" y="550" width="220" height="60" rx="5"/>
+  <text class="text" x="760" y="572" text-anchor="middle" font-weight="bold">Log File</text>
+  <text class="text" x="760" y="590" text-anchor="middle" font-size="10">C:\ProgramData\YourEDR\Logs\</text>
+  <text class="text" x="760" y="602" text-anchor="middle" font-size="10">events_20251119_143052.jsonl</text>
+
+  <!-- Timeline -->
+  <text class="text" x="50" y="650" font-weight="bold">Timing:</text>
+  <text class="text" x="50" y="670" fill="#666">Callback: ~15μs | Ring Buffer: ~5μs | IOCTL: ~100ms poll | JSON: ~50μs | File I/O: ~500μs</text>
+  <text class="text" x="50" y="690" fill="#666" font-weight="bold">Total latency (kernel): &lt;25μs | End-to-end: &lt;200ms (due to polling)</text>
+</svg>

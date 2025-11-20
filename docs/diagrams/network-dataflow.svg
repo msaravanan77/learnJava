@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 720">
+  <defs>
+    <style>
+      .box { fill: #e8f5e9; stroke: #388e3c; stroke-width: 2; }
+      .step-box { fill: #fff9c4; stroke: #f57f17; stroke-width: 2; }
+      .data-box { fill: #e1f5fe; stroke: #0288d1; stroke-width: 2; }
+      .wfp-box { fill: #fce4ec; stroke: #c2185b; stroke-width: 2; }
+      .text { font-family: 'Courier New', monospace; font-size: 11px; fill: #000; }
+      .title-text { font-family: Arial, sans-serif; font-size: 15px; fill: #000; font-weight: bold; }
+      .arrow { stroke: #d32f2f; stroke-width: 2.5; fill: none; marker-end: url(#arrowhead); }
+      .label-text { font-family: Arial, sans-serif; font-size: 10px; fill: #d32f2f; font-weight: bold; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#d32f2f" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text class="title-text" x="475" y="25" text-anchor="middle">Network Event Data Flow - connect("93.184.216.34:80") Example</text>
+
+  <!-- Step 1: Application -->
+  <rect class="box" x="50" y="50" width="180" height="70" rx="5"/>
+  <text class="text" x="140" y="72" text-anchor="middle" font-weight="bold">Application</text>
+  <text class="text" x="140" y="88" text-anchor="middle">socket() → SOCKET</text>
+  <text class="text" x="140" y="103" text-anchor="middle">connect(sock,</text>
+  <text class="text" x="140" y="116" text-anchor="middle">  "93.184.216.34:80")</text>
+
+  <!-- Arrow 1 -->
+  <path class="arrow" d="M 140 120 L 140 160"/>
+  <text class="label-text" x="150" y="145">Winsock → TCP/IP</text>
+
+  <!-- Step 2: WFP Callout -->
+  <rect class="wfp-box" x="30" y="160" width="220" height="100" rx="5"/>
+  <text class="text" x="140" y="180" text-anchor="middle" font-weight="bold">WFP Layer:</text>
+  <text class="text" x="140" y="195" text-anchor="middle">ALE_AUTH_CONNECT_V4</text>
+  <line x1="30" y1="202" x2="250" y2="202" stroke="#c2185b"/>
+  <text class="text" x="40" y="220" text-anchor="start">ConnectV4ClassifyFn()</text>
+  <text class="text" x="40" y="235" text-anchor="start">1. Check protocol</text>
+  <text class="text" x="40" y="250" text-anchor="start">2. Extract metadata</text>
+
+  <!-- Metadata Box -->
+  <rect class="data-box" x="280" y="50" width="300" height="210" rx="5"/>
+  <text class="text" x="430" y="72" text-anchor="middle" font-weight="bold">WFP Metadata Extract</text>
+  <text class="text" x="290" y="92" text-anchor="start">inFixedValues:</text>
+  <text class="text" x="295" y="107" text-anchor="start">• Local IP: 192.168.1.100</text>
+  <text class="text" x="295" y="122" text-anchor="start">• Remote IP: 93.184.216.34</text>
+  <text class="text" x="295" y="137" text-anchor="start">• Local Port: 49152</text>
+  <text class="text" x="295" y="152" text-anchor="start">• Remote Port: 80</text>
+  <text class="text" x="295" y="167" text-anchor="start">• Protocol: IPPROTO_TCP (6)</text>
+  <text class="text" x="290" y="187" text-anchor="start">inMetaValues:</text>
+  <text class="text" x="295" y="202" text-anchor="start">• Process ID: 4567</text>
+  <text class="text" x="295" y="217" text-anchor="start">• Direction: Outbound</text>
+  <text class="text" x="295" y="232" text-anchor="start">• Address Family: AF_INET (2)</text>
+  <text class="text" x="290" y="252" text-anchor="start">Action: FWP_ACTION_PERMIT ✓</text>
+
+  <!-- Arrow 2 -->
+  <path class="arrow" d="M 140 260 L 140 290"/>
+  <text class="label-text" x="150" y="280">CaptureNetworkEvent()</text>
+
+  <!-- Step 3: Capture Function -->
+  <rect class="step-box" x="30" y="290" width="220" height="115" rx="5"/>
+  <text class="text" x="140" y="310" text-anchor="middle" font-weight="bold">CaptureNetworkEvent()</text>
+  <text class="text" x="40" y="330" text-anchor="start">1. Build EDR_NETWORK_EVENT</text>
+  <text class="text" x="40" y="345" text-anchor="start">2. Convert IPv4 → IPv6-mapped</text>
+  <text class="text" x="40" y="360" text-anchor="start">3. Get process name via PID</text>
+  <text class="text" x="40" y="375" text-anchor="start">4. Generate connection ID</text>
+  <text class="text" x="40" y="390" text-anchor="start">5. Call QueueEvent()</text>
+
+  <!-- Event Structure -->
+  <rect class="data-box" x="280" y="290" width="320" height="180" rx="5"/>
+  <text class="text" x="440" y="310" text-anchor="middle" font-weight="bold">EDR_NETWORK_EVENT</text>
+  <text class="text" x="290" y="330" text-anchor="start">EventType: NetworkConnect</text>
+  <text class="text" x="290" y="345" text-anchor="start">ProcessId: 4567</text>
+  <text class="text" x="290" y="360" text-anchor="start">ProcessName: "chrome.exe"</text>
+  <text class="text" x="290" y="375" text-anchor="start">Protocol: 6 (TCP)</text>
+  <text class="text" x="290" y="390" text-anchor="start">Direction: 0 (Outbound)</text>
+  <text class="text" x="290" y="405" text-anchor="start">AddressFamily: 2 (IPv4)</text>
+  <text class="text" x="290" y="420" text-anchor="start">LocalAddr: ::ffff:192.168.1.100</text>
+  <text class="text" x="290" y="435" text-anchor="start">RemoteAddr: ::ffff:93.184.216.34</text>
+  <text class="text" x="290" y="450" text-anchor="start">LocalPort: 49152</text>
+  <text class="text" x="290" y="465" text-anchor="start">RemotePort: 80</text>
+
+  <!-- Arrow 3 -->
+  <path class="arrow" d="M 140 405 L 140 440"/>
+
+  <!-- Ring Buffer -->
+  <rect class="step-box" x="30" y="440" width="570" height="60" rx="5"/>
+  <text class="text" x="315" y="460" text-anchor="middle" font-weight="bold">Ring Buffer (Same as File Events)</text>
+  <text class="text" x="40" y="480" text-anchor="start">QueueEvent() → Spinlock → Copy → Update WriteOffset → Signal</text>
+
+  <!-- Connection continues -->
+  <path class="arrow" d="M 250 205 L 320 205 L 320 530" stroke-dasharray="5,5"/>
+  <text class="label-text" x="260" y="195">Connection continues</text>
+  <rect class="box" x="220" y="530" width="200" height="40" rx="5"/>
+  <text class="text" x="320" y="555" text-anchor="middle" font-weight="bold">TCP Connection Established</text>
+
+  <!-- User-Mode Service -->
+  <rect class="box" x="650" y="50" width="270" height="90" rx="5"/>
+  <text class="text" x="785" y="72" text-anchor="middle" font-weight="bold">YourEDRService (Poll Loop)</text>
+  <text class="text" x="660" y="92" text-anchor="start">while (!stopped) {</text>
+  <text class="text" x="665" y="107" text-anchor="start">GetEvent() → IOCTL_GET_EVENT</text>
+  <text class="text" x="665" y="122" text-anchor="start">if (bytesReturned &gt; 0)</text>
+  <text class="text" x="670" y="135" text-anchor="start">  ProcessEvent()</text>
+
+  <!-- IOCTL Arrow -->
+  <path class="arrow" d="M 600 470 L 650 470 L 650 140" stroke-dasharray="5,5"/>
+  <text class="label-text" x="610" y="300">IOCTL (100ms poll)</text>
+
+  <!-- DequeueEvent -->
+  <rect class="step-box" x="650" y="160" width="270" height="70" rx="5"/>
+  <text class="text" x="785" y="180" text-anchor="middle" font-weight="bold">DequeueEvent()</text>
+  <text class="text" x="660" y="200" text-anchor="start">1. Acquire spinlock</text>
+  <text class="text" x="660" y="215" text-anchor="start">2. Copy event from buffer</text>
+  <text class="text" x="660" y="228" text-anchor="start">3. Update ReadOffset</text>
+
+  <!-- Arrow -->
+  <path class="arrow" d="M 785 230 L 785 260"/>
+
+  <!-- JSON Conversion -->
+  <rect class="step-box" x="650" y="260" width="270" height="85" rx="5"/>
+  <text class="text" x="785" y="280" text-anchor="middle" font-weight="bold">ConvertNetworkEventToJson()</text>
+  <text class="text" x="660" y="300" text-anchor="start">1. Format IP (IPv6-mapped → IPv4)</text>
+  <text class="text" x="660" y="315" text-anchor="start">2. Format timestamp</text>
+  <text class="text" x="660" y="330" text-anchor="start">3. Map protocol/direction to strings</text>
+
+  <!-- Arrow -->
+  <path class="arrow" d="M 785 345 L 785 375"/>
+
+  <!-- JSON Output -->
+  <rect class="data-box" x="630" y="375" width="310" height="160" rx="5"/>
+  <text class="text" x="785" y="395" text-anchor="middle" font-weight="bold">JSON Output</text>
+  <text class="text" x="640" y="415" text-anchor="start" font-size="10">{</text>
+  <text class="text" x="645" y="430" text-anchor="start" font-size="10">"eventType":"NetworkConnect",</text>
+  <text class="text" x="645" y="445" text-anchor="start" font-size="10">"timestamp":"2025-11-19T14:30:52Z",</text>
+  <text class="text" x="645" y="460" text-anchor="start" font-size="10">"processId":4567,</text>
+  <text class="text" x="645" y="475" text-anchor="start" font-size="10">"processName":"chrome.exe",</text>
+  <text class="text" x="645" y="490" text-anchor="start" font-size="10">"protocol":"TCP",</text>
+  <text class="text" x="645" y="505" text-anchor="start" font-size="10">"localAddress":"192.168.1.100",</text>
+  <text class="text" x="645" y="520" text-anchor="start" font-size="10">"remoteAddress":"93.184.216.34:80"</text>
+  <text class="text" x="640" y="530" text-anchor="start" font-size="10">}</text>
+
+  <!-- Arrow to log -->
+  <path class="arrow" d="M 785 535 L 785 565"/>
+
+  <!-- Log File -->
+  <rect class="box" x="650" y="565" width="270" height="55" rx="5"/>
+  <text class="text" x="785" y="590" text-anchor="middle" font-weight="bold">Append to Log File</text>
+  <text class="text" x="785" y="607" text-anchor="middle" font-size="10">events_20251119_143052.jsonl</text>
+
+  <!-- Timeline -->
+  <text class="text" x="50" y="660" font-weight="bold">Timing Breakdown:</text>
+  <text class="text" x="50" y="680" fill="#666">WFP Callout: ~8μs | CaptureEvent: ~12μs | QueueEvent: ~5μs | Total Kernel: &lt;25μs</text>
+  <text class="text" x="50" y="700" fill="#666">User Poll: 100ms avg | DequeueEvent: ~10μs | JSON: ~50μs | File I/O: ~500μs</text>
+</svg>

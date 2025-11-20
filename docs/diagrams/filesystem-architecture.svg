@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <defs>
+    <style>
+      .box { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+      .title-box { fill: #1976d2; stroke: #0d47a1; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 14px; fill: #000; }
+      .title-text { font-family: Arial, sans-serif; font-size: 14px; fill: #fff; font-weight: bold; }
+      .small-text { font-family: Arial, sans-serif; font-size: 11px; fill: #333; }
+      .arrow { stroke: #424242; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .driver-box { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .callback-box { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#424242" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <rect class="title-box" x="10" y="10" width="780" height="40" rx="5"/>
+  <text class="title-text" x="400" y="35" text-anchor="middle">File System Monitoring Architecture - Phase 1</text>
+
+  <!-- Application Layer -->
+  <rect class="box" x="250" y="70" width="300" height="50" rx="5"/>
+  <text class="text" x="400" y="100" text-anchor="middle" font-weight="bold">Application Layer</text>
+  <text class="small-text" x="400" y="115" text-anchor="middle">CreateFile(), WriteFile(), DeleteFile()</text>
+
+  <!-- Arrow to I/O Manager -->
+  <path class="arrow" d="M 400 120 L 400 150"/>
+  <text class="small-text" x="410" y="140" text-anchor="start">IRP</text>
+
+  <!-- I/O Manager -->
+  <rect class="box" x="250" y="150" width="300" height="40" rx="5"/>
+  <text class="text" x="400" y="175" text-anchor="middle" font-weight="bold">Windows I/O Manager</text>
+
+  <!-- Arrow to Filter Manager -->
+  <path class="arrow" d="M 400 190 L 400 220"/>
+
+  <!-- Filter Manager -->
+  <rect class="driver-box" x="200" y="220" width="400" height="280" rx="5"/>
+  <text class="text" x="400" y="245" text-anchor="middle" font-weight="bold">Filter Manager (FltMgr.sys)</text>
+
+  <!-- YourEDR Filter -->
+  <rect class="driver-box" x="220" y="260" width="360" height="220" rx="5"/>
+  <text class="text" x="400" y="280" text-anchor="middle" font-weight="bold">YourEDRFilter (Altitude: 325100)</text>
+
+  <!-- Callbacks -->
+  <rect class="callback-box" x="240" y="295" width="150" height="50" rx="3"/>
+  <text class="small-text" x="315" y="315" text-anchor="middle" font-weight="bold">IRP_MJ_CREATE</text>
+  <text class="small-text" x="315" y="330" text-anchor="middle">PreCreateOperation()</text>
+
+  <rect class="callback-box" x="410" y="295" width="150" height="50" rx="3"/>
+  <text class="small-text" x="485" y="315" text-anchor="middle" font-weight="bold">IRP_MJ_WRITE</text>
+  <text class="small-text" x="485" y="330" text-anchor="middle">PreWriteOperation()</text>
+
+  <rect class="callback-box" x="240" y="360" width="320" height="50" rx="3"/>
+  <text class="small-text" x="400" y="380" text-anchor="middle" font-weight="bold">IRP_MJ_SET_INFORMATION</text>
+  <text class="small-text" x="400" y="395" text-anchor="middle">PreSetInformationOperation() - Delete/Rename</text>
+
+  <!-- Ring Buffer -->
+  <rect class="box" x="240" y="425" width="320" height="40" rx="3"/>
+  <text class="small-text" x="400" y="445" text-anchor="middle" font-weight="bold">Ring Buffer (2MB SPSC Queue)</text>
+  <text class="small-text" x="400" y="460" text-anchor="middle">QueueEvent() → DequeueEvent()</text>
+
+  <!-- Arrow to File System -->
+  <path class="arrow" d="M 400 500 L 400 530"/>
+  <text class="small-text" x="410" y="520" text-anchor="start">Continue IRP</text>
+
+  <!-- File System Driver -->
+  <rect class="box" x="250" y="530" width="300" height="40" rx="5"/>
+  <text class="text" x="400" y="555" text-anchor="middle" font-weight="bold">File System Driver (NTFS, FAT32)</text>
+
+  <!-- Side: User-Mode Service -->
+  <rect class="box" x="630" y="220" width="150" height="180" rx="5"/>
+  <text class="small-text" x="705" y="240" text-anchor="middle" font-weight="bold">User-Mode Service</text>
+  <text class="small-text" x="705" y="260" text-anchor="middle">YourEDRService</text>
+  <line x1="630" y1="270" x2="780" y2="270" stroke="#1976d2" stroke-width="1"/>
+
+  <text class="small-text" x="640" y="290" text-anchor="start">1. Poll via IOCTL</text>
+  <text class="small-text" x="640" y="310" text-anchor="start">2. GetEvent()</text>
+  <text class="small-text" x="640" y="330" text-anchor="start">3. DequeueEvent()</text>
+  <text class="small-text" x="640" y="350" text-anchor="start">4. ConvertToJson()</text>
+  <text class="small-text" x="640" y="370" text-anchor="start">5. Write to .jsonl</text>
+
+  <!-- Arrow from Ring Buffer to Service -->
+  <path class="arrow" d="M 560 445 L 630 445" stroke-dasharray="5,5"/>
+  <text class="small-text" x="575" y="435" text-anchor="start">IOCTL_GET_EVENT</text>
+
+  <!-- Legend -->
+  <text class="small-text" x="20" y="580" font-weight="bold">Performance:</text>
+  <text class="small-text" x="20" y="595" fill="#666">Callback overhead: 10-45 μs | Impact: &lt;0.1% on I/O</text>
+</svg>

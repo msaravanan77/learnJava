@@ -5,8 +5,8 @@
 This repository contains **COMPLETE architecture, documentation, and Phase 1+2 implementation** for a production-grade Windows EDR system.
 
 **What's Complete**:
-- ✅ 15+ comprehensive documents (~90,000 words)
-- ✅ 3 professional SVG architecture diagrams + code reference diagrams
+- ✅ 20+ comprehensive documents (~100,000 words)
+- ✅ 7 professional SVG architecture diagrams (system + subsystem level)
 - ✅ **Phase 1**: File system monitoring (Create, Write, Delete, Rename)
 - ✅ **Phase 2**: Network monitoring (TCP/UDP, IPv4/IPv6, WFP integration)
 - ✅ Complete kernel driver with mini-filter + WFP callouts
@@ -14,8 +14,9 @@ This repository contains **COMPLETE architecture, documentation, and Phase 1+2 i
 - ✅ Visual Studio solution and projects
 - ✅ WiX MSI installer project
 - ✅ Build, signing, and deployment scripts
+- ✅ **Comprehensive test framework** (unit, integration, E2E, stress tests)
 
-**What's Next**: Build, sign, test, and deploy (see [BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md) and [PHASE2_NETWORK_MONITORING.md](docs/PHASE2_NETWORK_MONITORING.md))
+**What's Next**: Build, sign, test, and deploy (see [BUILD_VERIFICATION_GUIDE.md](BUILD_VERIFICATION_GUIDE.md))
 
 📋 **[READ STATUS SUMMARY](docs/STATUS_SUMMARY.md)** ← Start here to understand what's delivered and what comes next
 
@@ -29,7 +30,7 @@ This repository contains **COMPLETE architecture, documentation, and Phase 1+2 i
 
 ---
 
-## 📚 Documentation Structure (14 Documents)
+## 📚 Documentation Structure (20+ Documents)
 
 ### 📁 Architecture Documents (`docs/architecture/`)
 
@@ -37,7 +38,10 @@ This repository contains **COMPLETE architecture, documentation, and Phase 1+2 i
 |----------|-------------|-------|--------|
 | **[01-high-level-architecture.md](docs/architecture/01-high-level-architecture.md)** | System overview, design principles, component hierarchy, technology stack | 35+ | ✅ |
 | **[02-system-components-detail.md](docs/architecture/02-system-components-detail.md)** | Detailed component specifications, performance budgets, interaction protocols | 25+ | ✅ |
+| **[filesystem-monitoring.md](docs/architecture/filesystem-monitoring.md)** | 📂 File system monitoring architecture, mini-filter callbacks, event flow | 40+ | ✅ |
+| **[network-monitoring.md](docs/architecture/network-monitoring.md)** | 🌐 Network monitoring architecture, WFP integration, connection tracking | 45+ | ✅ |
 | **[06-roadmap-phased-plan.md](docs/architecture/06-roadmap-phased-plan.md)** | 20-sprint roadmap, resource allocation ($245K), timeline (24-28 weeks) | 65+ | ✅ |
+| **[07-phase1-implementation-reference.md](docs/architecture/07-phase1-implementation-reference.md)** | Phase 1 code traceability with file/function/line references | 55+ | ✅ |
 
 ### 📁 Technical Documents (`docs/technical/`)
 
@@ -49,6 +53,8 @@ This repository contains **COMPLETE architecture, documentation, and Phase 1+2 i
 | **[04-dependencies-prerequisites.md](docs/technical/04-dependencies-prerequisites.md)** | Environment setup, tools, libraries, signing, costs | 70+ | ✅ |
 | **[05-caveats-challenges-best-practices.md](docs/technical/05-caveats-challenges-best-practices.md)** | ⚠️ CRITICAL: Warnings, pitfalls, security, debugging | 90+ | ✅ |
 | **[06-development-testing-guide.md](docs/technical/06-development-testing-guide.md)** | 🔧 Testing without Microsoft signing (test mode, certs, WinDbg) | 85+ | ✅ |
+| **[PHASE1_FILESYSTEM_MONITORING.md](docs/technical/PHASE1_FILESYSTEM_MONITORING.md)** | 📂 Phase 1 implementation guide, testing, verification | 25+ | ✅ |
+| **[PHASE2_NETWORK_MONITORING.md](docs/technical/PHASE2_NETWORK_MONITORING.md)** | 🌐 Phase 2 implementation guide, WFP details, testing | 30+ | ✅ |
 
 ### 📁 Architecture Diagrams (`docs/diagrams/`)
 
@@ -57,6 +63,18 @@ This repository contains **COMPLETE architecture, documentation, and Phase 1+2 i
 | **[01-high-level-architecture.svg](docs/diagrams/01-high-level-architecture.svg)** | Full system architecture: kernel + user-mode + storage | SVG | ✅ |
 | **[02-data-flow-architecture.svg](docs/diagrams/02-data-flow-architecture.svg)** | Event pipeline, performance metrics, JSON schemas | SVG | ✅ |
 | **[03-deployment-architecture.svg](docs/diagrams/03-deployment-architecture.svg)** | On-premises (Phase 1) and cloud (Phase 2) deployment models | SVG | ✅ |
+| **[filesystem-architecture.svg](docs/diagrams/filesystem-architecture.svg)** | 📂 File system monitoring architecture diagram | SVG | ✅ |
+| **[filesystem-dataflow.svg](docs/diagrams/filesystem-dataflow.svg)** | 📂 File system event data flow diagram | SVG | ✅ |
+| **[network-architecture.svg](docs/diagrams/network-architecture.svg)** | 🌐 Network monitoring WFP architecture diagram | SVG | ✅ |
+| **[network-dataflow.svg](docs/diagrams/network-dataflow.svg)** | 🌐 Network event data flow diagram | SVG | ✅ |
+
+### 📁 Build & Testing Documentation
+
+| Document | Description | Status |
+|----------|-------------|--------|
+| **[BUILD_VERIFICATION_GUIDE.md](BUILD_VERIFICATION_GUIDE.md)** | 🔨 Complete build, installation, and verification guide | ✅ |
+| **[BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md)** | Detailed build instructions and requirements | ✅ |
+| **[TEST_FRAMEWORK.md](docs/TEST_FRAMEWORK.md)** | 🧪 Comprehensive test framework documentation | ✅ |
 
 ### 📁 Project Documentation
 

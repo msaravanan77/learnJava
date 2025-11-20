@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 650">
+  <defs>
+    <style>
+      .box { fill: #e3f2fd; stroke: #1976d2; stroke-width: 2; }
+      .title-box { fill: #1976d2; stroke: #0d47a1; stroke-width: 2; }
+      .wfp-box { fill: #fff3e0; stroke: #f57c00; stroke-width: 2; }
+      .callout-box { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .text { font-family: Arial, sans-serif; font-size: 13px; fill: #000; }
+      .title-text { font-family: Arial, sans-serif; font-size: 14px; fill: #fff; font-weight: bold; }
+      .small-text { font-family: Arial, sans-serif; font-size: 10px; fill: #333; }
+      .arrow { stroke: #424242; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#424242" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <rect class="title-box" x="10" y="10" width="830" height="40" rx="5"/>
+  <text class="title-text" x="425" y="35" text-anchor="middle">Network Monitoring Architecture - Phase 2 (WFP Integration)</text>
+
+  <!-- Application -->
+  <rect class="box" x="300" y="70" width="250" height="50" rx="5"/>
+  <text class="text" x="425" y="97" text-anchor="middle" font-weight="bold">Network Application</text>
+  <text class="small-text" x="425" y="112" text-anchor="middle">connect(), accept(), sendto(), recvfrom()</text>
+
+  <!-- Arrow -->
+  <path class="arrow" d="M 425 120 L 425 150"/>
+
+  <!-- Network Stack -->
+  <rect class="box" x="300" y="150" width="250" height="40" rx="5"/>
+  <text class="text" x="425" y="175" text-anchor="middle" font-weight="bold">Windows Network Stack (AFD.sys, TCP/IP)</text>
+
+  <!-- Arrow -->
+  <path class="arrow" d="M 425 190 L 425 220"/>
+
+  <!-- WFP Engine -->
+  <rect class="wfp-box" x="150" y="220" width="550" height="340" rx="5"/>
+  <text class="text" x="425" y="245" text-anchor="middle" font-weight="bold">Windows Filtering Platform (WFP) Engine</text>
+
+  <!-- Layer 1: Connect V4 -->
+  <rect class="callout-box" x="170" y="260" width="250" height="65" rx="3"/>
+  <text class="small-text" x="295" y="277" text-anchor="middle" font-weight="bold">FWPM_LAYER_ALE_AUTH_CONNECT_V4</text>
+  <text class="small-text" x="295" y="292" text-anchor="middle">Outbound IPv4 (TCP/UDP)</text>
+  <rect class="callout-box" x="180" y="300" width="230" height="20" rx="2" fill="#e1bee7"/>
+  <text class="small-text" x="295" y="313" text-anchor="middle" font-weight="bold">ConnectV4ClassifyFn()</text>
+
+  <!-- Layer 2: Connect V6 -->
+  <rect class="callout-box" x="430" y="260" width="250" height="65" rx="3"/>
+  <text class="small-text" x="555" y="277" text-anchor="middle" font-weight="bold">FWPM_LAYER_ALE_AUTH_CONNECT_V6</text>
+  <text class="small-text" x="555" y="292" text-anchor="middle">Outbound IPv6 (TCP/UDP)</text>
+  <rect class="callout-box" x="440" y="300" width="230" height="20" rx="2" fill="#e1bee7"/>
+  <text class="small-text" x="555" y="313" text-anchor="middle" font-weight="bold">ConnectV6ClassifyFn()</text>
+
+  <!-- Layer 3: Accept V4 -->
+  <rect class="callout-box" x="170" y="335" width="250" height="65" rx="3"/>
+  <text class="small-text" x="295" y="352" text-anchor="middle" font-weight="bold">FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V4</text>
+  <text class="small-text" x="295" y="367" text-anchor="middle">Inbound IPv4 (TCP/UDP)</text>
+  <rect class="callout-box" x="180" y="375" width="230" height="20" rx="2" fill="#e1bee7"/>
+  <text class="small-text" x="295" y="388" text-anchor="middle" font-weight="bold">AcceptV4ClassifyFn()</text>
+
+  <!-- Layer 4: Accept V6 -->
+  <rect class="callout-box" x="430" y="335" width="250" height="65" rx="3"/>
+  <text class="small-text" x="555" y="352" text-anchor="middle" font-weight="bold">FWPM_LAYER_ALE_AUTH_RECV_ACCEPT_V6</text>
+  <text class="small-text" x="555" y="367" text-anchor="middle">Inbound IPv6 (TCP/UDP)</text>
+  <rect class="callout-box" x="440" y="375" width="230" height="20" rx="2" fill="#e1bee7"/>
+  <text class="small-text" x="555" y="388" text-anchor="middle" font-weight="bold">AcceptV6ClassifyFn()</text>
+
+  <!-- Central Capture Function -->
+  <rect class="wfp-box" x="200" y="420" width="450" height="125" rx="5"/>
+  <text class="text" x="425" y="440" text-anchor="middle" font-weight="bold">CaptureNetworkEvent()</text>
+  <text class="small-text" x="210" y="460" text-anchor="start">1. Extract IP addresses (local/remote)</text>
+  <text class="small-text" x="210" y="477" text-anchor="start">2. Extract ports (local/remote)</text>
+  <text class="small-text" x="210" y="494" text-anchor="start">3. Get protocol (TCP=6, UDP=17)</text>
+  <text class="small-text" x="210" y="511" text-anchor="start">4. Get process ID and name</text>
+  <text class="small-text" x="210" y="528" text-anchor="start">5. Generate unique connection ID</text>
+
+  <!-- Arrows from callouts to capture -->
+  <path class="arrow" d="M 295 320 L 295 420" stroke-dasharray="3,3"/>
+  <path class="arrow" d="M 555 320 L 555 420" stroke-dasharray="3,3"/>
+  <path class="arrow" d="M 295 395 L 295 420" stroke-dasharray="3,3"/>
+  <path class="arrow" d="M 555 395 L 555 420" stroke-dasharray="3,3"/>
+
+  <!-- Arrow to Ring Buffer -->
+  <path class="arrow" d="M 425 545 L 425 575"/>
+  <text class="small-text" x="435" y="565" text-anchor="start">QueueEvent()</text>
+
+  <!-- Ring Buffer (shared) -->
+  <rect class="box" x="275" y="575" width="300" height="40" rx="5"/>
+  <text class="text" x="425" y="598" text-anchor="middle" font-weight="bold">Ring Buffer (Shared with File Events)</text>
+
+  <!-- Side: User Service -->
+  <rect class="box" x="20" y="320" width="120" height="140" rx="5"/>
+  <text class="small-text" x="80" y="337" text-anchor="middle" font-weight="bold">User Service</text>
+  <text class="small-text" x="80" y="355" text-anchor="middle">YourEDRService</text>
+  <line x1="20" y1="362" x2="140" y2="362" stroke="#1976d2"/>
+  <text class="small-text" x="25" y="380" text-anchor="start">Poll via IOCTL</text>
+  <text class="small-text" x="25" y="397" text-anchor="start">GetEvent()</text>
+  <text class="small-text" x="25" y="414" text-anchor="start">ConvertToJson()</text>
+  <text class="small-text" x="25" y="431" text-anchor="start">Write to log:</text>
+  <text class="small-text" x="25" y="448" text-anchor="start">events_*.jsonl</text>
+
+  <!-- Arrow from Ring Buffer to Service -->
+  <path class="arrow" d="M 275 595 L 140 595 L 140 430" stroke-dasharray="5,5"/>
+
+  <!-- Legend -->
+  <text class="small-text" x="20" y="625" font-weight="bold">Action: FWP_ACTION_CALLOUT_INSPECTION (non-blocking)</text>
+  <text class="small-text" x="20" y="642" fill="#666">Impact: &lt;10μs per connection | Traffic flows normally</text>
+</svg>
